@@ -22,7 +22,23 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },  {
+    path: 'p-principal',
+    loadChildren: () => import('./pages/p-principal/p-principal.module').then( m => m.PPrincipalPageModule)
   },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'desc-medica',
+    loadChildren: () => import('./pages/desc-medica/desc-medica.module').then( m => m.DescMedicaPageModule)
+  },
+  {
+    path: 'lista-doc',
+    loadChildren: () => import('./pages/lista-doc/lista-doc.module').then( m => m.ListaDocPageModule)
+  },
+
 ];
 
 @NgModule({

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { DescMedicaPageRoutingModule } from './desc-medica-routing.module';
 
-import { LoginPage } from './login.page';
+import { DescMedicaPage } from './desc-medica.page';
 import { ComponentesModule } from 'src/app/componentes/componentes.module';
 
 @NgModule({
@@ -15,8 +15,8 @@ import { ComponentesModule } from 'src/app/componentes/componentes.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule
+    DescMedicaPageRoutingModule
   ],
-  declarations: [LoginPage]
+  declarations: [DescMedicaPage]
 })
-export class LoginPageModule {}
+export class DescMedicaPageModule {}

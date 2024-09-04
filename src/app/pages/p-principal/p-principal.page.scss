@@ -1,0 +1,64 @@
+ion-content {
+    --background: #06e6f62e;
+}
+
+.rectangle {
+    background-color: #0074BD; /* Fondo azul */
+    border: 1px solid #000; /* Borde negro */
+    width: 80%; /* Ancho del rectángulo */
+    max-width: 500px; /* Ancho máximo */
+    margin: 20px auto; /* Centra el rectángulo y agrega margen */
+    padding: 10px; /* Espacio interno reducido */
+    box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
+    border-radius: 20px; /* Bordes redondeados más moderados */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Espacio entre el texto y la imagen */
+  }
+  
+  .left-side {
+    flex: 1; /* Ocupa la mitad del espacio disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    padding: 10px; /* Espacio interno del lado izquierdo */
+  }
+  
+  .text-container {
+    margin-bottom: 10px;
+  }
+  
+  h5, p {
+    color: #fff; /* Color del texto */
+    margin: 1; /* Elimina márgenes para que no se amontone */
+  }
+
+  h5 {
+    font-size: 10px;
+  }
+  p{
+    font-size: 8px;
+  }
+  ion-button {
+    --color: #4BAADD; /* Color del texto del botón */
+    --background: #E5EFFF; /* Color de fondo del botón */
+    --border-radius: 50px; /* Radio de borde del botón */
+    font-size: 7px; /* Tamaño de fuente del botón */
+    padding: 0px 10px; /* Tamaño del botón (alto y ancho ajustables) */
+    margin-top: 10px; /* Espacio encima del botón */
+  }
+  
+  .right-side {
+    flex: 1; /* Ocupa la mitad del espacio disponible */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+  }
+  
+  .right-side img {
+    max-width: 100%; /* Asegura que la imagen no se desborde */
+    height: auto; /* Mantiene la relación de aspecto */
+    border-radius: 8px; /* Bordes redondeados para la imagen */
+  }
+  

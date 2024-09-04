@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true"> 
+  <div class="container">
+    <div class="swiper-container">
+      <swiper-container (slidechange) ="swiperSlideChanged($event)" [loop]="true" [pagination]="true">
+        <swiper-slide>
+          <img src="assets/images/medicamentos.png" alt="Slide 1" class="slide-image"/>
+          <div class="slide-text">Contacta con un especialista</div>
+          <div class="slide-text2">¿Necesitas un especialista al instante? Esta es tu app</div>
+        </swiper-slide>
+        <swiper-slide>
+          <img src="assets/images/estetoscopio.png" alt="Slide 2" class="slide-image"/>
+          <div class="slide-text">Ubicación del especialista en tiempo real</div>
+          <div class="slide-text2">Transparencia de tiempos a nivel real</div>
+        </swiper-slide>
+        <swiper-slide>
+          <img src="assets/images/jeringa.png" alt="Slide 3" class="slide-image"/>
+          <div class="slide-text">Flexibilidad de servicios a tu alcance</div>
+          <div class="slide-text2">Aquí tienes distintos servicios que se ajustan a tu necesidad</div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+    <!-- Botón Iniciar Sesión -->
+    <div class="button-container">
+      <ion-button class="login-button" [routerLink]="['/login']">
+        Iniciar Sesión
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>

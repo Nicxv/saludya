@@ -1,0 +1,91 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="register-container">
+    <ion-card style="background: #0074BD;">
+      <ion-card-header class="ion-text-center">
+        <ion-title class="titulo">Crear una cuenta</ion-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <!-- Primera parte del formulario -->
+          <div *ngIf="currentStep === 1">
+            <ion-row>
+              <ion-col size="12" size-md="6">
+                <ion-input aria-label="Nombre" placeholder="Nombre" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12" size-md="6">
+                <ion-input aria-label="Apellidos" placeholder="Apellidos" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12" size-md="6">
+                <ion-input aria-label="Rut" placeholder="Rut" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12" size-md="6">
+                <ion-select aria-label="Género" placeholder="Selecciona tu género" class="custom-select">
+                  <ion-select-option value="masculino">Masculino</ion-select-option>
+                  <ion-select-option value="femenino">Femenino</ion-select-option>
+                  <ion-select-option value="otro">Otro</ion-select-option>
+                </ion-select>
+              </ion-col>
+              <ion-col size="12" size-md="6">
+                <ion-input aria-label="Fecha de nacimiento" placeholder="Fecha de nacimiento" type="date" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12" size-md="6">
+                <ion-input aria-label="Edad" placeholder="Edad" type="number" class="custom"></ion-input>
+              </ion-col>
+            </ion-row>
+            <!-- Botón para ir a la siguiente parte del formulario -->
+            <div class="first-step-buttons">
+              <ion-button expand="block" (click)="goToNextStep()" class="next-button">
+                Siguiente
+                <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+
+          <!-- Segunda parte del formulario -->
+          <div *ngIf="currentStep === 2">
+            <ion-row>
+              <ion-col size="12" size-md="6">
+                <ion-input aria-label="Altura" placeholder="Altura" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12" size-md="6">
+                <ion-input aria-label="Peso" placeholder="Peso" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12">
+                <ion-input aria-label="Dirección" placeholder="Dirección" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12">
+                <ion-input aria-label="Número telefónico" placeholder="Número telefónico" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12">
+                <ion-input aria-label="Correo electrónico" placeholder="Correo electrónico" type="email" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12">
+                <ion-input aria-label="Antecedentes Quirúrgicos" placeholder="Antecedentes Quirúrgicos" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12">
+                <ion-input aria-label="Alergias" placeholder="Alergias" class="custom"></ion-input>
+              </ion-col>
+              <ion-col size="12">
+                <ion-input aria-label="Medicamentos" placeholder="Medicamentos" class="custom"></ion-input>
+              </ion-col>
+            </ion-row>
+            <!-- Botones para la segunda parte del formulario -->
+            <div class="second-step-buttons">
+              <ion-button expand="block" (click)="goToPreviousStep()" class="prev-button">
+                <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+                Atrás
+              </ion-button>
+              <ion-button expand="block" class="register-button">Registrar</ion-button>
+            </div>
+          </div>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="assets/images/logo.png" class="logo"></ion-img>
+    <ion-text color="primary" >SaludYa</ion-text>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="login-container">
+    <ion-card style="background-color: #06e6f604;">
+      <ion-card-header class="ion-text-center">
+        <ion-title class="titulo">Ingreso de usuario</ion-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-input aria-label="Correo electrónico" placeholder="Correo electrónico" type="email" class="custom"></ion-input>
+            </ion-col>
+            <ion-col size="12">
+              <ion-input aria-label="Contraseña" type="password" placeholder="Contraseña" class="custom"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-button expand="block">Ingresar</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="ion-text-center" style="margin-top: 30px;">
+          <ion-text color="primary" class="ion-text-center" style="display: block; margin-top: 10px;">
+            Olvidé mi contraseña
+          </ion-text>
+          <ion-text style="color: rgba(0, 0, 0, 0.862);">
+            ¿No tienes una cuenta? <ion-router-link color="primary" routerLink="/register">Regístrate</ion-router-link>
+          </ion-text>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

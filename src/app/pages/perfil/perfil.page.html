@@ -1,14 +1,56 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container">
+    <div class="box">
+      <div class="profile-circle">
+        <!-- Aquí se colocará la imagen de perfil en el futuro -->
+      </div>
+      <div class="info">
+        <div class="info-item">
+          
+          <span>Magdalena</span>
+        </div>
+        <div class="info-item">
+          
+          <span>correo electronico</span>
+        </div>
+        <div class="info-item">
+         
+          <span>Calle 1234, Puente Alto, Santiago</span>
+        </div>
+      </div>
+      <ion-button size="small" class="btn">
+        <ion-icon name="pencil-outline"></ion-icon>
+        Editar perfil
+      </ion-button>
+      <ion-button size="small" class="btn">
+        <ion-icon name="settings-outline"></ion-icon>
+        Configuración
+      </ion-button>
+      <ion-button size="small" class="btn">
+        <ion-icon name="heart-outline"></ion-icon>
+        Mis visitas
+      </ion-button>
+      <ion-button size="small" class="btn">
+        <ion-icon name="document-text-outline"></ion-icon>
+        Mis certificados
+      </ion-button>
+      <ion-button size="small" class="btn">
+        <ion-icon name="help-outline"></ion-icon>
+        Preguntas frecuentes
+      </ion-button>
+      <ion-button size="small" class="btn">
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        Centro de soporte
+      </ion-button>
+      <ion-button size="small" class="btn">
+        <ion-icon name="call-outline"></ion-icon>
+        Contáctanos
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
 <app-tab></app-tab>

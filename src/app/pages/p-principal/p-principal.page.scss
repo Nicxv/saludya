@@ -5,7 +5,7 @@ ion-content {
 .rectangle {
     background-color: #0074BD; /* Fondo azul */
     border: 1px solid #000; /* Borde negro */
-    width: 80%; /* Ancho del rectángulo */
+    width: 90%; /* Ancho del rectángulo */
     max-width: 500px; /* Ancho máximo */
     margin: 20px auto; /* Centra el rectángulo y agrega margen */
     padding: 10px; /* Espacio interno reducido */
@@ -15,6 +15,10 @@ ion-content {
     flex-direction: row;
     align-items: center;
     justify-content: space-between; /* Espacio entre el texto y la imagen */
+  }
+  .second-rectangle {
+    margin-top: 30px; /* Ajusta el margen superior para separarlo del contenido anterior */
+    background-color: #4BAADD;
   }
   
   .left-side {
@@ -29,7 +33,7 @@ ion-content {
     margin-bottom: 10px;
   }
   
-  h5, p {
+  h5, .txt1 {
     color: #fff; /* Color del texto */
     margin: 1; /* Elimina márgenes para que no se amontone */
   }
@@ -37,16 +41,19 @@ ion-content {
   h5 {
     font-size: 10px;
   }
-  p{
+  .txt1{
     font-size: 8px;
   }
-  ion-button {
+  .btn1 {
     --color: #4BAADD; /* Color del texto del botón */
     --background: #E5EFFF; /* Color de fondo del botón */
     --border-radius: 50px; /* Radio de borde del botón */
     font-size: 7px; /* Tamaño de fuente del botón */
     padding: 0px 10px; /* Tamaño del botón (alto y ancho ajustables) */
     margin-top: 10px; /* Espacio encima del botón */
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
   }
   
   .right-side {
@@ -61,4 +68,73 @@ ion-content {
     height: auto; /* Mantiene la relación de aspecto */
     border-radius: 8px; /* Bordes redondeados para la imagen */
   }
+
+  .service-description{
+    text-align: center;
+    margin: 50px ;
+    font-size: 14px;
+    color: #0074BD;
+  }
   
+  .services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .service-box {
+    background-color: #E5EFFF;
+    border: 1px solid #0074BD;
+    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    text-align: center;
+    --color: #0074BD;
+    --background: #E5EFFF;
+  }
+  
+  .service-box ion-icon {
+    font-size: 38px;
+    color: #0074BD; /* Asegura que el icono tenga el color correcto */
+    margin-bottom: -10px;
+  }
+  
+  .service-box, .txt2 {
+    margin: 0;
+    font-size: 12px;
+    color: #0074BD;
+  }
+  .txt3{
+    font-size: 11px;
+    color: #fff;
+  }
+  
+  .solicita-aqui-container {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    margin-top: 50px; /* Espacio superior para separarlo del contenido anterior */
+  }
+  
+  .btn2 {
+    --border-radius: 50px; /* Bordes redondeados */
+    --background: #4BAADD; /* Color de fondo del botón */
+    --color: #fff; /* Color del texto del botón */
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+    width: 70%;
+  
+   
+  
+    
+  
+ 
+
+ 
+  }

@@ -1,0 +1,97 @@
+ion-content {
+    --background: #E0F7FA;
+  }
+  
+  /* Imagen de la parte superior */
+  .header-image-container {
+    width: 100%;
+    height: 20vh; /* 20% de la altura de la pantalla */
+    overflow: hidden;
+  }
+  
+  .header-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Información del doctor */
+  .doctor-info {
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .doctor-info h1 {
+    margin: 10px 0 5px;
+    font-size: 24px;
+    color: #0074BD;
+  }
+  
+  .doctor-info .description {
+    font-size: 14px;
+    color: #4D4D4D;
+  }
+  
+  /* Sección de estadísticas */
+  .stats-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #0074BD;
+    color: white;
+  }
+  
+  .stat-item {
+    text-align: center;
+  }
+  
+  .stat-item h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .stat-item p {
+    margin: 5px 0 0;
+    font-size: 12px;
+  }
+  
+  /* Sección de calificaciones */
+  .ratings-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .stars {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .stars ion-icon {
+    font-size: 28px; /* Tamaño aumentado de las estrellas */
+  }
+  
+  /* Botón de contacto */
+  .contact-button {
+    --background: #0074BD;
+    --border-radius: 50px; /* Radio de borde de los botones */
+    --border-color: #232323;
+    --border-style: solid;
+    --border-width: 1px;
+    display: block;
+    margin: 20px auto; /* Centra el botón */
+    width: 50%;
+  }
+  
+  /* Botón de reporte */
+  .report-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .report-button ion-icon {
+    margin-right: 5px;
+  }
+  

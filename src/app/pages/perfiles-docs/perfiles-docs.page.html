@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  
+</ion-header>
+
+<ion-content [fullscreen]="true">
+   <!-- Imagen de la parte superior -->
+   <div class="header-image-container">
+    <img src="assets/images/doctora.png" alt="Imagen de Dra. Sofía Rodríguez" />
+  </div>
+
+  <!-- Información del doctor -->
+  <div class="doctor-info">
+    <h1>Dra. Sofía Rodríguez</h1>
+    <p class="description">
+      Soy una persona con gran determinación al momento de atender a mis pacientes, haciendo de esta consulta algo más ameno y generando mayor cercanía.
+    </p>
+  </div>
+
+  <!-- Sección de estadísticas -->
+  <div class="stats-container">
+    <div class="stat-item">
+      <h2>+10</h2>
+      <p>Años de experiencia</p>
+    </div>
+    <div class="stat-item">
+      <h2>+5</h2>
+      <p>Certificados</p>
+    </div>
+    <div class="stat-item">
+      <ion-icon name="checkmark-circle" color="success"></ion-icon>
+      <p>Perfil verificado</p>
+    </div>
+  </div>
+
+  <!-- Sección de calificaciones -->
+  <div class="ratings-container">
+    <div class="stars">
+      <ion-icon name="star" color="warning"></ion-icon>
+      <ion-icon name="star" color="warning"></ion-icon>
+      <ion-icon name="star" color="warning"></ion-icon>
+      <ion-icon name="star" color="warning"></ion-icon>
+      <ion-icon name="star-outline" color="warning"></ion-icon>
+    </div>
+    <p>Calificaciones promedio de sus pacientes</p>
+  </div>
+
+  <!-- Botón para contactar al profesional -->
+  <ion-button  class="contact-button">
+    Contactar
+  </ion-button>
+
+  <!-- Enlace para reportar al profesional -->
+  <ion-button fill="clear" color="medium" class="report-button">
+    <ion-icon name="alert-circle-outline"></ion-icon>
+    Reportar al profesional
+  </ion-button>
+  
+</ion-content>
+
+<app-tab></app-tab>

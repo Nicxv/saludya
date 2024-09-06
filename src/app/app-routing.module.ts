@@ -38,6 +38,14 @@ const routes: Routes = [
     path: 'lista-doc',
     loadChildren: () => import('./pages/lista-doc/lista-doc.module').then( m => m.ListaDocPageModule)
   },
+  {
+    path: 'perfiles-docs',
+    loadChildren: () => import('./pages/perfiles-docs/perfiles-docs.module').then( m => m.PerfilesDocsPageModule)
+  },
+  {
+    path: 'contactanos',
+    loadChildren: () => import('./pages/contactanos/contactanos.module').then( m => m.ContactanosPageModule)
+  },
 
 ];
 

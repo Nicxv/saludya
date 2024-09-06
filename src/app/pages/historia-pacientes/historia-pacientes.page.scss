@@ -1,0 +1,114 @@
+ion-content {
+    --background: #06e6f62e; /* Fondo general */
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .header-left {
+    flex: 0 0 auto;
+  }
+  
+  .profile-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .header-right {
+    flex: 0 0 auto;
+  }
+  
+  .notification-icon {
+    font-size: 24px;
+    color: #0074BD;
+  }
+  
+  .page-title {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 22px;
+    color: #0074BD; /* Color del texto del título */
+  }
+  
+  .patient-card {
+    padding: 20px;
+    background-color: rgba(0, 116, 189, 0.6); /* Fondo con 60% de opacidad */
+    border-radius: 15px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .patient-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .patient-image {
+    flex: 0 0 35%; /* Expandir el espacio del lado izquierdo */
+  }
+  
+  .patient-profile-image {
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .patient-details {
+    flex: 1;
+    padding-left: 15px;
+  }
+  
+  .patient-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #fff; /* Cambiar color de texto a blanco para mejor contraste */
+  }
+  
+  .patient-date, .patient-address {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  
+  .patient-date ion-icon {
+    margin-right: 8px;
+    color: #333; /* Color oscuro para el ícono del calendario */
+  }
+  
+  .patient-address ion-icon {
+    margin-right: 8px;
+    color: red; /* Color rojo para el ícono de geolocalización */
+  }
+  
+  .details-button {
+    --background: #fff;
+    --color: #0074BD;
+    --border-radius: 8px;
+    font-size: 14px;
+    padding: 5px 10px;
+    text-transform: none; /* Evita que las letras estén en mayúsculas */
+  }
+  
+  @media screen and (min-width: 768px) {
+    .patient-card {
+      margin: 40px;
+    }
+  
+    .page-title {
+      font-size: 26px;
+    }
+  
+    .details-button {
+      font-size: 16px;
+    }
+  }
+  

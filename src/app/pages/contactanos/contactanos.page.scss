@@ -1,0 +1,76 @@
+ion-content {
+    --background: #06e6f62e; /* Fondo general de la página */
+  }
+  
+  .contact-container {
+    padding: 20px;
+
+    text-align: center;
+  }
+  
+  .contact-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .contact-subtitle {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .contact-item {
+    background: transparent; /* Fondo transparente para que se mezcle con el fondo de la página */
+    margin-bottom: 15px;
+  }
+  
+  .contact-label {
+    color: #333; /* Color del texto del label */
+  }
+  
+  .contact-input, .contact-textarea {
+    --background: white; /* Fondo blanco para los campos de texto */
+    --border-radius: 15px;
+    --padding: 10px;
+    --font-size: 16px;
+  }
+  
+  .contact-submit-button {
+    
+    font-size: 18px;
+    --border-radius: 50px;
+    --background: #0074BD;
+    --color: #fff;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+    margin: 0 auto;
+    width: 60%;
+  }
+  
+  ion-textarea.contact-textarea  {
+    height: 200px;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .contact-container {
+      padding: 40px;
+    }
+  
+    .contact-title {
+      font-size: 28px;
+    }
+  
+    .contact-subtitle {
+      font-size: 18px;
+    }
+  
+    .contact-input, .contact-textarea {
+      font-size: 18px;
+    }
+  }
+  

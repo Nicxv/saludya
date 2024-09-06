@@ -1,13 +1,22 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>contactanos</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">contactanos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="contact-container">
+    <h1 class="contact-title">Formulario de contacto</h1>
+    <p class="contact-subtitle">
+      Si presenta algún problema con la aplicación, alguna falla, comentario o duda, contáctanos mediante este formulario y nos comunicaremos a la brevedad contigo para resolver tus dudas.
+    </p>
+    
+    <ion-item lines="none" class="contact-item">
+      
+      <ion-input class="contact-input" label="Asunto" labelPlacement="stacked"  type="text"></ion-input>
+    </ion-item>
+    
+    <ion-item lines="none" class="contact-item">
+      <ion-textarea class="contact-textarea" label="Mensaje" labelPlacement="stacked"></ion-textarea>
+    </ion-item>
+    
+    <ion-button class="contact-submit-button">Enviar</ion-button>
+  </div>
 </ion-content>

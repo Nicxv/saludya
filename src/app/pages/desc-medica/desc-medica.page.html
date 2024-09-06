@@ -1,15 +1,52 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>desc-medica</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">desc-medica</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-select placeholder="Seleccione Profesional">
+          <ion-select-option value="carlos-palacios">Dr. Carlos Palacios</ion-select-option>
+          <ion-select-option value="maximiliano-falcon">Dr. Maximiliano Falcon</ion-select-option>
+          <ion-select-option value="brayan-cortez">Dr. Brayan Cortez</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-textarea placeholder="Ingresa aquí la descripción"></ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <p style="color: rgb(43, 42, 42);">¿Tienes una orden médica? adjúntala aquí:</p>
+        <ion-button expand="block">--Seleccionar archivo--</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-textarea placeholder="Síntomas"></ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Costo de la consulta: <strong>$50.000</strong></ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>¿Tienes un código de descuento?</p>
+            <ion-input placeholder="Ingresa aquí tu código" class="discount-input"></ion-input>
+            <ion-button expand="block">SIGUIENTE</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <app-tab></app-tab>

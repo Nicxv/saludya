@@ -54,9 +54,10 @@ ion-content {
   }
   
   .patient-profile-image {
-    width: 100%;
+    width: 100px; /* Tamaño fijo para las imágenes */
+    height: 100px; /* Tamaño fijo para las imágenes */
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: cover; /* Mantiene la proporción de la imagen y recorta el exceso */
   }
   
   .patient-details {

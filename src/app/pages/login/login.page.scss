@@ -5,6 +5,19 @@ ion-content {
   align-items: center;
 }
 
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Asegura que el contenido esté centrado horizontalmente */
+  height: 100vh; /* Hace que el contenedor ocupe toda la altura de la vista */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+}
+
 ion-input.custom {
   --background: #D8E8E7;
   --color: rgba(0, 0, 0, 0.656);
@@ -26,36 +39,25 @@ ion-button {
   --border-radius: 50px;
   margin-top: 30px;
   --border-color: blue;
-    --border-style: solid;
-    --border-width: 1px;
+  --border-style: solid;
+  --border-width: 1px;
 }
-.login-container {
-  width: 100%;
-  max-width: 400px;
-  padding: 16px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh; /* Hace que el contenedor ocupe toda la altura de la vista */
+
+.logo {
+  width: 50px;
+  margin-left: 10px;
 }
-  
-  .logo {
-    width: 50px;
-    margin-left: 10px;
 
-  }
+.separacion {
+  margin-top: 30px;
+}
 
-  .separacion {
-    margin-top: 30px;
-  }
-  .titulo{
-    font-weight: bold;
-    color: #000000d4;
-    
-  }
+.titulo {
+  font-weight: bold;
+  color: #000000d4;
+}
 
-  /* Consultas de medios para pantallas pequeñas */
+/* Consultas de medios para pantallas pequeñas */
 @media (max-width: 576px) {
   .custom {
     font-size: 14px;

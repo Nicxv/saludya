@@ -58,6 +58,10 @@ const routes: Routes = [
     path: 'consulta-med',
     loadChildren: () => import('./pages/consulta-med/consulta-med.module').then( m => m.ConsultaMedPageModule)
   },
+  {
+    path: 'modificar-datos',
+    loadChildren: () => import('./pages/modificar-datos/modificar-datos.module').then( m => m.ModificarDatosPageModule)
+  },
 
 ];
 

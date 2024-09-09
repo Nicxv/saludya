@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InfoPacientePageRoutingModule } from './info-paciente-routing.module';
+import { ConsultaMedPageRoutingModule } from './consulta-med-routing.module';
 
-import { InfoPacientePage } from './info-paciente.page';
+import { ConsultaMedPage } from './consulta-med.page';
 import { ComponentesModule } from 'src/app/componentes/componentes.module';
 
 @NgModule({
@@ -15,8 +15,8 @@ import { ComponentesModule } from 'src/app/componentes/componentes.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    InfoPacientePageRoutingModule
+    ConsultaMedPageRoutingModule
   ],
-  declarations: [InfoPacientePage]
+  declarations: [ConsultaMedPage]
 })
-export class InfoPacientePageModule {}
+export class ConsultaMedPageModule {}

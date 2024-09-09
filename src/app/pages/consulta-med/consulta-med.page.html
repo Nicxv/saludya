@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card class="doctor-card">
+    <div class="doctor-header">
+      <h2 class="doctor-name">Dra. Sofía Rodríguez</h2>
+      <img src="assets/images/dc2.jpg" alt="Doctor Image" class="doctor-image">
+    </div>
+    <div class="doctor-details">
+      <ion-row>
+        <ion-icon name="cash-outline"></ion-icon>
+        <ion-label>$20.000</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-icon name="location-outline"></ion-icon>
+        <ion-label>Av. Arturo Prat 3412, Santiago</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-icon name="star-outline"></ion-icon>
+        <ion-label>Valoración</ion-label>
+      </ion-row>
+    </div>
+  </ion-card>
+
+  <ion-card class="help-section">
+    <h3>Ayuda</h3>
+    <ion-list>
+      <ion-item button>
+        <ion-label>Certificado asociado a la consulta</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item button>
+        <ion-label>Informar un problema</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item button>
+        <ion-label>Comentarios sobre la consulta</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
+
+<app-tab></app-tab>

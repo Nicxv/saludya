@@ -1,0 +1,105 @@
+ion-content {
+    --background: #E0F7FA;
+}
+
+.doctor-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px;
+  }
+  
+  .doctor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .doctor-name {
+    margin: 0;
+    font-size: 22px;
+    color: #0074BD;
+    flex-grow: 1; /* Hace que el nombre tome todo el espacio disponible */
+  }
+  
+  .doctor-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    
+  }
+  
+  .doctor-details ion-row {
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .doctor-details ion-icon {
+    color: #0074BD;
+    margin-right: 8px;
+  }
+  
+  .doctor-details ion-label {
+    font-size: 16px;
+    color: #0074BD;
+  }
+  
+  .help-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px;
+  }
+  
+  .help-section h3 {
+    color: #0074BD;
+    margin-bottom: 20px;
+  }
+  
+  ion-item {
+    --background: #65C1F2;
+    --border-radius: 20px;
+    margin: 10px 0;
+    color: white;
+  }
+  
+  ion-label {
+    color: white;
+    font-size: 16px;
+  }
+  
+  ion-icon {
+    color: white;
+  }
+
+  
+  @media screen and (max-width: 600px) {
+    .doctor-card, .help-section {
+      margin: 10px;
+      padding: 15px;
+    }
+  
+    .doctor-header {
+      flex-direction: column;
+      align-items: center; /* Ajusta la imagen y el nombre al centro en pantallas pequeñas */
+    }
+  
+    .doctor-image {
+      width: 80px;
+      height: 80px;
+      margin-top: 15px;
+    }
+  
+    .doctor-name {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  
+    ion-label {
+      font-size: 14px;
+    }
+  }
+  

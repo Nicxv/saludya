@@ -1,7 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-img src="assets/images/logo.png" class="logo"></ion-img>
-    <ion-text color="primary">SaludYa</ion-text>
+    <ion-title>registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,15 +14,24 @@
         <ion-grid>
           <ion-row>
             <ion-col size="12">
-              <ion-input aria-label="Correo electrónico" placeholder="Correo electrónico" type="email" class="custom" [(ngModel)]="credenciales.correo"></ion-input>
+              <ion-input placeholder="Nombre" type="text" class="custom" [(ngModel)]="datos.nombre" ></ion-input>
             </ion-col>
             <ion-col size="12">
-              <ion-input aria-label="Contraseña" type="password" placeholder="Contraseña" class="custom" [(ngModel)]="credenciales.password"></ion-input>
+              <ion-input placeholder="Apellido" type="text" class="custom" [(ngModel)]="datos.apellido"></ion-input>
+            </ion-col>
+            <ion-col size="12">
+              <ion-input label="Fecha de nacimiento:" placeholder="Fecha de nacimiento" type="date" class="custom" [(ngModel)]="datos.fechaNacimiento"></ion-input>
+            </ion-col>
+            <ion-col size="12">
+              <ion-input placeholder="Correo electrónico" type="email" class="custom" [(ngModel)]="datos.correo" ></ion-input>
+            </ion-col>
+            <ion-col size="12">
+              <ion-input  type="password" placeholder="Contraseña" class="custom" [(ngModel)]="datos.password"></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <ion-button expand="block" (click)="login()">Ingresar</ion-button>
+              <ion-button expand="block" (click)="registrar()">Registrar</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -38,6 +46,7 @@
       </ion-card-content>
     </ion-card>
   </div>
+  
+  
 </ion-content>
-
 <app-tab></app-tab>

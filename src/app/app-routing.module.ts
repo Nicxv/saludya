@@ -62,6 +62,10 @@ const routes: Routes = [
     path: 'modificar-datos',
     loadChildren: () => import('./pages/modificar-datos/modificar-datos.module').then( m => m.ModificarDatosPageModule)
   },
+  {
+    path: 'registro',
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+  },
 
 ];
 

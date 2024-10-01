@@ -12,4 +12,12 @@ export class FirestoreService {
     const collection = this.firestore.collection(path);
     return collection.doc(id).set(data);
   }
+
+  getDoc<tipo>(path: string, id: string) {
+    const collection = this.firestore.collection<tipo>(path);
+    return collection.doc(id).valueChanges();
+  }
+  getId() {
+    return this.firestore.createId();
+  }
 }

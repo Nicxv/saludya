@@ -8,25 +8,28 @@
       <div class="profile-circle">
         <img src="assets/images/perfil-ejemplo.jpg" alt="Perfil">
       </div>
-      <div class="info">
+      <div *ngIf="info; else loginPrompt;" class="info">
         <div class="info-item">
-          
-          <span>Magdalena</span>
+          <span>{{info.nombre}} {{info.apellido}}</span>
         </div>
         <div class="info-item">
-          
-          <span>correo electronico</span>
+          <span>{{info.correo}}</span>
         </div>
         <div class="info-item">
-         
-          <span>Calle 1234, Puente Alto, Santiago</span>
+          <span>{{info.rol}}</span>
         </div>
       </div>
+
+      <ng-template #loginPrompt>
+        <div class="info">
+          <span>Primero debes <span><a style="text-decoration: none; color: cyan;" [routerLink]="['/login']">logearte</a></span>.</span>
+        </div>
+      </ng-template>
       <ion-button size="small" class="btn">
         <ion-icon name="pencil-outline"></ion-icon>
         Editar perfil
       </ion-button>
-      <ion-button size="small" class="btn">
+      <ion-button *ngIf="login && rol == 'admin'" size="small" class="btn">
         <ion-icon name="settings-outline"></ion-icon>
         Configuración
       </ion-button>
@@ -50,7 +53,7 @@
         <ion-icon name="call-outline"></ion-icon>
         Contáctanos
       </ion-button>
-      <ion-button size="small" class="btn" (click)="logout()">
+      <ion-button *ngIf="login == true " size="small" class="btn" (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
         Cerrar sesión
       </ion-button>

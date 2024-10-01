@@ -14,24 +14,80 @@
         <ion-grid>
           <ion-row>
             <ion-col size="12">
-              <ion-input placeholder="Nombre" type="text" class="custom" [(ngModel)]="datos.nombre" ></ion-input>
+              <ion-input
+                placeholder="Nombre"
+                type="text"
+                class="custom"
+                [(ngModel)]="datos.nombre"
+                (ionInput)="validarCampo('nombre')"
+              ></ion-input>
+              <ion-text class="error-text" *ngIf="errores.nombre" color="danger">{{ errores.nombre }}</ion-text>
             </ion-col>
             <ion-col size="12">
-              <ion-input placeholder="Apellido" type="text" class="custom" [(ngModel)]="datos.apellido"></ion-input>
+              <ion-input
+                placeholder="Apellido"
+                type="text"
+                class="custom"
+                [(ngModel)]="datos.apellido"
+                (ionInput)="validarCampo('apellido')"
+              ></ion-input>
+              <ion-text class="error-text" *ngIf="errores.apellido" color="danger">{{ errores.apellido }}</ion-text>
             </ion-col>
             <ion-col size="12">
-              <ion-input label="Fecha de nacimiento:" placeholder="Fecha de nacimiento" type="date" class="custom" [(ngModel)]="datos.fechaNacimiento"></ion-input>
+              <ion-input
+                placeholder="Fecha de nacimiento"
+                type="date"
+                class="custom"
+                [(ngModel)]="datos.fechaNacimiento"
+                (ionInput)="validarCampo('fechaNacimiento')"
+              ></ion-input>
+              <ion-text class="error-text" *ngIf="errores.fechaNacimiento" color="danger">{{ errores.fechaNacimiento }}</ion-text>
             </ion-col>
             <ion-col size="12">
-              <ion-input placeholder="Correo electrónico" type="email" class="custom" [(ngModel)]="datos.correo" ></ion-input>
+              <ion-input
+                placeholder="Correo electrónico"
+                type="email"
+                class="custom"
+                [(ngModel)]="datos.correo"
+                (ionInput)="validarCampo('correo')"
+              ></ion-input>
+              <ion-text class="error-text" *ngIf="errores.correo" color="danger">{{ errores.correo }}</ion-text>
+            </ion-col>
+            <ion-col class="icono-ojo" size="12">
+              <ion-input
+                [type]="showPassword ? 'text' : 'password'" 
+                placeholder="Contraseña"
+                class="custom"
+                [(ngModel)]="datos.password"
+                (ionInput)="validarCampo('password')"
+              >
+                <ion-icon class="icono-ojo"
+                  slot="end" 
+                  [name]="showPassword ? 'eye-off' : 'eye'" 
+                  (click)="togglePasswordVisibility()"></ion-icon> <!-- Añadir el icono del ojo -->
+              </ion-input>
+              <ion-text class="error-text" *ngIf="errores.password" color="danger">{{ errores.password }}</ion-text>
             </ion-col>
             <ion-col size="12">
-              <ion-input  type="password" placeholder="Contraseña" class="custom" [(ngModel)]="datos.password"></ion-input>
+              <ion-input
+                [type]="showRepetirPassword ? 'text' : 'password'" 
+                placeholder="Repetir contraseña"
+                class="custom"
+                [(ngModel)]="repetirPassword"
+                (ionInput)="validarCampo('repetirPassword')"
+              >
+                <ion-icon 
+                  slot="end" 
+                  [name]="showRepetirPassword ? 'eye-off' : 'eye'" 
+                  (click)="toggleRepetirPasswordVisibility()"></ion-icon> <!-- Añadir el icono del ojo -->
+              </ion-input>
+              <ion-text class="error-text" *ngIf="errores.repetirPassword" color="danger">{{ errores.repetirPassword }}</ion-text>
+              <ion-text class="error-text" *ngIf="errores.coinciden" color="danger">{{ errores.coinciden }}</ion-text>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <ion-button expand="block" (click)="registrar()">Registrar</ion-button>
+              <ion-button expand="block" (click)="validarFormulario()">Registrar</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -46,7 +102,6 @@
       </ion-card-content>
     </ion-card>
   </div>
-  
   
 </ion-content>
 <app-tab></app-tab>

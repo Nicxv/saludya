@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { registroUsuario } from '../models/models';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { registroUsuario } from '../models/models';
 export class AuthService {
 
 
-  constructor(private authfirebase: AngularFireAuth) { }
+  constructor(private authfirebase: AngularFireAuth, private firestore: AngularFirestore) { }
 
 //login
   login(correo: string, password: string) {
@@ -37,5 +38,10 @@ export class AuthService {
     }else{
       return null;
     }
+  }
+  async correoExiste(correo: string): Promise<boolean> {
+    const usersCollection = this.firestore.collection('Usuarios', ref => ref.where('correo', '==', correo));
+    const users = await usersCollection.get().toPromise();
+    return !users.empty; // Retorna true si hay usuarios con ese correo
   }
 }

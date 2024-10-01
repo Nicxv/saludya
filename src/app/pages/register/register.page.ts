@@ -12,8 +12,8 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup;
   currentStep: number = 1;
 
-  constructor(private formBuilder: FormBuilder, private alertController: AlertController) { 
-    this.registerForm = this.formBuilder.group({
+  constructor(private alertController: AlertController, private formbuilder: FormBuilder) { 
+    this.registerForm = this.formbuilder.group({
       // Primera parte del formulario
       nombre: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],

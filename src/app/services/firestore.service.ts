@@ -22,6 +22,12 @@ export class FirestoreService {
     return this.firestore.createId();
   }
 
+  // Actualiza un documento en lugar de sobrescribirlo completamente
+  updateDoc(data: any, path: string, id: string) {
+    const collection = this.firestore.collection(path);
+    return collection.doc(id).update(data); // Se usa update para solo actualizar los campos específicos
+  }
+
 
  
 }

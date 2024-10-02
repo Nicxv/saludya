@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>datos-adicionales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"> 
+<div class="login-container">
+  <ion-card style="background-color: #06e6f604;">
+    <ion-card-header class="ion-text-center">
+      <ion-title class="titulo">Datos adicionales</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.rut" placeholder="Rut" type="text" class="custom"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.edad" placeholder="Edad" type="number" class="custom"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-select [(ngModel)]="datosAdicionales.genero" aria-label="Género" placeholder="Selecciona tu género">
+              <ion-select-option value="Masculino">Masculino</ion-select-option>
+              <ion-select-option value="Femenino">Femenino</ion-select-option>
+              <ion-select-option value="Otro">Otro</ion-select-option>
+            </ion-select>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.altura" placeholder="Altura" type="number" class="custom"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.peso" placeholder="Peso" type="number" class="custom"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.direccion" placeholder="Dirección" type="text" class="custom"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.numeroTelefonico" placeholder="Número telefónico" type="text" class="custom"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.antecedentesQuirurgicos" placeholder="Antecedentes quirúrgicos" type="text" class="custom"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.alergias" placeholder="Alergias" type="text" class="custom"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="datosAdicionales.medicamentos" placeholder="Medicamentos" type="text" class="custom"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="block" (click)="guardarDatos()">Guardar datos</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</div>
+  
+</ion-content>

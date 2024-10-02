@@ -139,9 +139,8 @@ export class RegistroPage implements OnInit {
     await this.firestore.createDoc(this.datos, path, id)
     this.interaction.dismissLoading();
     this.interaction.presentToast('Te has registrado con éxito');
-    this.router.navigate(['/p-principal'])
+    this.router.navigate(['/datos-adicionales'])
   }
-
   }
   ngOnInit() {
   }

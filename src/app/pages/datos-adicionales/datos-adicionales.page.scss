@@ -1,0 +1,77 @@
+ion-content {
+    --background: #E0F7FA; /* Cambia este color según tus necesidades */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+  ion-input.custom, 
+ion-select.custom-select {
+    --background: #D8E8E7;
+    --color: rgba(0, 0, 0, 0.656);
+    --placeholder-color: #424242;
+    --placeholder-opacity: 0.8;
+    
+    /* Solo el border-radius */
+    --border-radius: 50px;
+    
+    --padding-bottom: 10px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 10px;
+}
+  
+  ion-button {
+    --background: #6A70FE;
+    --color: #FEFEFEFE;
+    --border-radius: 50px;
+    margin-top: 30px;
+    --border-color: blue;
+    --border-style: solid;
+    --border-width: 1px;
+  }
+  
+  .logo {
+    width: 50px;
+    margin-left: 10px;
+  }
+  
+  .separacion {
+    margin-top: 30px;
+  }
+  
+  .titulo {
+    font-weight: bold;
+    color: #000000d4;
+  }
+  .error-text{
+    margin-left: 10px;
+    font-size: 10px;
+  }
+  .icono-ojo{
+    cursor: pointer;
+  }
+  
+  /* Consultas de medios para pantallas pequeñas */
+  @media (max-width: 576px) {
+    .custom {
+      font-size: 14px;
+    }
+    ion-button {
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  }
+  
+  /* Consultas de medios para pantallas medianas */
+  @media (min-width: 577px) and (max-width: 768px) {
+    .custom {
+      font-size: 16px;
+    }
+    ion-button {
+      font-size: 16px;
+      margin-top: 30px;
+    }
+  }

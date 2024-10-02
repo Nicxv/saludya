@@ -65,7 +65,7 @@ export class DatosAdicionalesPage implements OnInit {
         
         // Redireccionar si es necesario o realizar otras acciones
         this.router.navigate(['/p-principal']);  // Ajusta la ruta según tu lógica
-        
+          
         
       } catch (error) {
         // Cerrar el indicador de carga y mostrar mensaje de error

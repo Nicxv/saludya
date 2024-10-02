@@ -46,14 +46,11 @@ ion-select.custom-select {
     font-weight: bold;
     color: #000000d4;
   }
-  .error-text{
-    margin-left: 10px;
-    font-size: 10px;
+  .error-message {
+    font-size: 10px; /* Tamaño de fuente más pequeño */
+    color: red; /* Color del texto de error */
+    margin-left: 10px; /* Margen izquierdo */
   }
-  .icono-ojo{
-    cursor: pointer;
-  }
-  
   /* Consultas de medios para pantallas pequeñas */
   @media (max-width: 576px) {
     .custom {

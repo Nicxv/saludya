@@ -14,48 +14,59 @@
       <ion-grid>
         <ion-row>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.rut" placeholder="Rut" type="text" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.rut" placeholder="Rut con digito verficador Ej: (22333444-5)" type="text" class="custom" (ionBlur)="validarRut()" (ionInput)="limpiarError('rut')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.rut">{{errores.rut}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.edad" placeholder="Edad" type="number" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.edad" placeholder="Edad" type="number" class="custom" (ionInput)="limpiarError('edad')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.edad">{{errores.edad}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-select [(ngModel)]="datosAdicionales.genero" aria-label="Género" placeholder="Selecciona tu género" class="custom-select">
+            <ion-select [(ngModel)]="datosAdicionales.genero" aria-label="Género" placeholder="Selecciona tu género" class="custom-select" (ionChange)="limpiarError('genero')" required>
               <ion-select-option value="Masculino">Masculino</ion-select-option>
               <ion-select-option value="Femenino">Femenino</ion-select-option>
               <ion-select-option value="Otro">Otro</ion-select-option>
             </ion-select>
+            <ion-text class="error-message" color="danger" *ngIf="errores.genero">{{errores.genero}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.altura" placeholder="Altura" type="number" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.altura" placeholder="Altura Ej: (1.78)" type="number" class="custom" (ionInput)="limpiarError('altura')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.altura">{{errores.altura}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.peso" placeholder="Peso" type="number" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.peso" placeholder="Peso Ej: (65.5)" type="number" class="custom" (ionInput)="limpiarError('peso')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.peso">{{errores.peso}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.direccion" placeholder="Dirección" type="text" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.direccion" placeholder="Dirección" type="text" class="custom" (ionInput)="limpiarError('direccion')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.direccion">{{errores.direccion}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.numeroTelefonico" placeholder="Número telefónico" type="text" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.numeroTelefonico" placeholder="Número contacto Ej: (+56911112233)" type="text" class="custom" (ionBlur)="validarTelefono()" (ionInput)="limpiarError('numeroTelefonico')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.numeroTelefonico">{{errores.numeroTelefonico}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.antecedentesQuirurgicos" placeholder="Antecedentes quirúrgicos" type="text" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.antecedentesQuirurgicos" placeholder="Antecedentes quirúrgicos" type="text" class="custom" (ionInput)="limpiarError('antecedentesQuirurgicos')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.antecedentesQuirurgicos">{{errores.antecedentesQuirurgicos}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.alergias" placeholder="Alergias" type="text" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.alergias" placeholder="Alergias" type="text" class="custom" (ionInput)="limpiarError('alergias')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.alergias">{{errores.alergias}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.medicamentos" placeholder="Medicamentos" type="text" class="custom"></ion-input>
+            <ion-input [(ngModel)]="datosAdicionales.medicamentos" placeholder="Medicamentos" type="text" class="custom" (ionInput)="limpiarError('medicamentos')" required></ion-input>
+            <ion-text class="error-message" color="danger" *ngIf="errores.medicamentos">{{errores.medicamentos}}</ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="12">
-            <ion-button expand="block" (click)="guardarDatos()">Guardar datos</ion-button>
+            <ion-button expand="block" (click)="validarYGuardarDatos()">Guardar datos</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
+  
 </div>
   
 </ion-content>

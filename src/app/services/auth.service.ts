@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { registroUsuario } from '../models/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { switchMap, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -43,5 +45,19 @@ export class AuthService {
     const usersCollection = this.firestore.collection('Usuarios', ref => ref.where('correo', '==', correo));
     const users = await usersCollection.get().toPromise();
     return !users.empty; // Retorna true si hay usuarios con ese correo
+  }
+
+  getUserRole(): Observable<string | null> {
+    return this.authfirebase.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.firestore.collection('Usuarios').doc(user.uid).valueChanges().pipe(
+            map((userData: any) => userData ? userData.rol : null)
+          );
+        } else {
+          return of(null); // Si no hay usuario autenticado, devolver null
+        }
+      })
+    );
   }
 }

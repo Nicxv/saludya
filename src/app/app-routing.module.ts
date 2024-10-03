@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
-  },  {
+  },
+  {
     path: 'p-principal',
     loadChildren: () => import('./pages/p-principal/p-principal.module').then( m => m.PPrincipalPageModule)
   },
@@ -69,6 +71,11 @@ const routes: Routes = [
   {
     path: 'datos-adicionales',
     loadChildren: () => import('./pages/datos-adicionales/datos-adicionales.module').then( m => m.DatosAdicionalesPageModule)
+  },
+  {
+    path: 'ajustes',
+    loadChildren: () => import('./pages/ajustes/ajustes.module').then( m => m.AjustesPageModule),
+    canActivate: [adminGuard] // Añadir el guard aquí
   },
 
 ];

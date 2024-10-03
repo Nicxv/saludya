@@ -40,9 +40,9 @@
       </ng-template>
   
       <!-- Botones -->
-      <ion-button expand="block" class="btn" size="small">
+      <ion-button expand="block" class="btn" size="small" [routerLink]="['/verperfil']" >
         <ion-icon slot="start" name="pencil-outline"></ion-icon>
-        Editar perfil
+        ver perfil
       </ion-button>
       <ion-button *ngIf="login && rol == 'admin'" expand="full"  class="btn" size="small">
         <ion-icon slot="start" name="settings-outline"></ion-icon>

@@ -17,7 +17,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
         return true; // Permitir acceso si es admin
       } else {
         interactionService.presentToast('No tienes permisos para acceder a esta página'); // Mostrar mensaje para no-admin
-        router.navigate(['/home']); // Redirigir a la página de inicio si no es admin
+        router.navigate(['/p-principal']); // Redirigir a la página de inicio si no es admin
         return false; // Denegar acceso si no es admin
       }
     })

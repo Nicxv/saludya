@@ -77,6 +77,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/ajustes/ajustes.module').then( m => m.AjustesPageModule),
     canActivate: [adminGuard] // Añadir el guard aquí
   },
+  {
+    path: 'verperfil',
+    loadChildren: () => import('./pages/verperfil/verperfil.module').then( m => m.VerperfilPageModule)
+  },
 
 ];
 

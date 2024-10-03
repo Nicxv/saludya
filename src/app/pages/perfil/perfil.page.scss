@@ -1,140 +1,108 @@
 ion-content {
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-top: 0;
-    --padding-bottom: 0;
-    --background: #E0F7FA;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: #E0F7FA;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  background-color: #0074BD;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 80px 20px 20px;
+}
+
+.profile-circle {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 3px solid #00d5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+  img {
     width: 100%;
     height: 100%;
-    padding: 0 10px; /* Padding para evitar que el contenido toque los bordes en pantallas pequeñas */
+    object-fit: cover;
+    border-radius: 50%;
   }
-  
-  .box {
-    position: relative;
-    width: 100%;
-    max-width: 600px; /* Tamaño máximo del recuadro */
-    background-color: #0074BD; /* Fondo del recuadro */
-    border-radius: 20px; /* Ajusta el radio de borde según prefieras */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Opcional: para un efecto de sombra */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 100px 20px 20px; /* Ajusta el padding para evitar que el contenido se superponga con el círculo */
-    box-sizing: border-box; /* Incluye el padding en el tamaño total del recuadro */
-    height: auto; /* Permite que el recuadro crezca según el contenido */
-  }
-  
-  .profile-circle {
+
+  .overlay {
     position: absolute;
-    top: -80px; /* Mueve el círculo hacia arriba desde la parte superior del recuadro */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 140px; /* Tamaño más grande para el círculo */
-    height: 140px; /* Tamaño más grande para el círculo */
-    background-color: #fff; /* Color del círculo (puedes cambiarlo a otro color si lo prefieres) */
-    border-radius: 50%; /* Hace el círculo */
-    border: 3px solid #0074BD; /* Borde del círculo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* Para asegurar que la imagen se ajuste al círculo */
-  }
-  .profile-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que la imagen cubra todo el círculo sin deformarse */
-    border-radius: 50%; /* Mantiene la forma redonda de la imagen */
-  }
-  
-  .info {
-    color: #fff; /* Color de texto */
+    color: white;
+    font-size: 12px;
     text-align: center;
-    margin-bottom: 20px; /* Espacio entre la información y los botones */
-  }
-  
-  .info-item {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centra el texto */
-    color: #fff; /* Color de texto */
-    margin-bottom: 10px; /* Espacio entre los campos */
-    gap: 15px; /* Espacio entre el icono y el texto */
-  }
-  
-  .info-item ion-icon {
-    color: #fff; /* Color del icono */
-  }
-  
-  .info-item span {
-    font-size: 14px; /* Tamaño del texto */
-    text-align: center; /* Centra el texto dentro del contenedor */
-  }
-  ion-button.btn {
-    --background: #65C1F2; /* Color de los botones */
-    margin: 5px 0; /* Espacio entre los botones */
-    --border-radius: 50px; /* Radio de borde de los botones */
-    --border-color: #ffffff;
-    --border-style: solid;
-    --border-width: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centra el texto y el icono dentro del botón */
-  }
-  
-  ion-button.btn ion-icon {
-    color: #fff; /* Color del icono en el botón */
-    margin-right: 10px; /* Espacio entre el icono y el texto del botón */
-  }
-  
-  /* Media queries para pantallas más pequeñas */
-  @media (max-width: 767px) {
-    .box {
-      padding: 80px 15px 15px; /* Ajusta el padding para pantallas más pequeñas */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 1;
     }
-  
-    .profile-circle {
-      width: 110px; /* Tamaño ajustado para pantallas más pequeñas */
-      height: 110px;
-      top: -65px; /* Ajusta la posición del círculo */
-    }
-  
-    .info-item span {
-      font-size: 12px; /* Tamaño del texto más pequeño en pantallas pequeñas */
-    }
-  
-    ion-button.btn {
-      --border-radius: 40px; /* Ajusta el radio de borde de los botones en pantallas pequeñas */
+
+    .add-photo-text,
+    .change-photo-text {
+      cursor: pointer;
+      padding: 5px 10px;
+      background-color: rgba(255, 255, 255, 0.7);
+      color: #0074BD;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: #0074BD;
+        color: #fff;
+      }
     }
   }
+}
+
+.info {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  margin-bottom: 10px;
+}
+
+ion-button.btn {
+  --background: #65C1F2; /* Color de los botones */
+  margin: 5px 0;
+  --border-color: #ffffff;
+  --border-style: solid;
+  --border-width: 1px;
+  --border-radius: 50px;
   
-  /* Ajustes para pantallas muy pequeñas (teléfonos en modo retrato) */
-  @media (max-width: 480px) {
-    .box {
-      padding: 60px 10px 10px; /* Ajusta el padding aún más para pantallas muy pequeñas */
-    }
-  
-    .profile-circle {
-      width: 100px; /* Tamaño ajustado para pantallas muy pequeñas */
-      height: 100px;
-      top: -50px; /* Ajusta la posición del círculo */
-    }
-  
-    .info-item span {
-      font-size: 10px; /* Tamaño del texto más pequeño en pantallas muy pequeñas */
-    }
-  
-    ion-button.btn {
-      --border-radius: 30px; /* Ajusta el radio de borde de los botones en pantallas muy pequeñas */
-      font-size: 12px; /* Tamaño del texto del botón más pequeño */
-    }
-  }
+}

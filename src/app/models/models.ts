@@ -19,4 +19,5 @@ export interface registroUsuario {
     alergias?: string;
     medicamentos?: string;
     
+    photoURL?: string;
 }

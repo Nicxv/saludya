@@ -1,63 +1,82 @@
 <ion-header [translucent]="true">
-
+  
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="container">
-    <div class="box">
-      <div class="profile-circle">
-        <img src="assets/images/perfil-ejemplo.jpg" alt="Perfil">
+  <div class="container ion-padding">
+    <div class="box ion-card">
+      <!-- Solo mostrar el círculo de la imagen si el usuario está logueado -->
+      <div class="profile-circle" *ngIf="login == true" (click)="selectImage()">
+        <div class="overlay">
+          <span *ngIf="info && info.photoURL; else placeholderText" class="change-photo-text">Cambiar foto de perfil</span>
+          <ng-template #placeholderText>
+            <span class="add-photo-text">Agregar foto de perfil</span>
+          </ng-template>
+        </div>
+        <img *ngIf="info && info.photoURL; else placeholderImage" [src]="info.photoURL" alt="Perfil">
+        <ng-template #placeholderImage>
+          <img src="assets/images/perfil-ejemplo.jpg" alt="Perfil">
+        </ng-template>
       </div>
-      <div *ngIf="info; else loginPrompt;" class="info">
-        <div class="info-item">
+  
+      <!-- Mostrar la información del usuario si está logueado -->
+      <div *ngIf="info; else loginPrompt" class="info ion-padding">
+        <div class="info-item ion-text-center">
           <span>{{info.nombre}} {{info.apellido}}</span>
         </div>
-        <div class="info-item">
+        <div class="info-item ion-text-center">
           <span>{{info.correo}}</span>
         </div>
-        <div class="info-item">
+        <div class="info-item ion-text-center">
           <span>{{info.rol}}</span>
         </div>
       </div>
-
+  
+      <!-- Mensaje si no está logueado -->
       <ng-template #loginPrompt>
-        <div class="info">
-          <span>Primero debes <span><a style="text-decoration: none; color: cyan;" [routerLink]="['/login']">logearte</a></span>.</span>
+        <div class="info ion-text-center">
+          <span>Primero debes <a style="text-decoration: none; color: cyan;" [routerLink]="['/login']">logearte</a>.</span>
         </div>
       </ng-template>
-      <ion-button size="small" class="btn">
-        <ion-icon name="pencil-outline"></ion-icon>
+  
+      <!-- Botones -->
+      <ion-button expand="block" class="btn" size="small">
+        <ion-icon slot="start" name="pencil-outline"></ion-icon>
         Editar perfil
       </ion-button>
-      <ion-button *ngIf="login && rol == 'admin'" size="small" class="btn">
-        <ion-icon name="settings-outline"></ion-icon>
+      <ion-button *ngIf="login && rol == 'admin'" expand="full"  class="btn" size="small">
+        <ion-icon slot="start" name="settings-outline"></ion-icon>
         Configuración
       </ion-button>
-      <ion-button size="small" class="btn">
-        <ion-icon name="heart-outline"></ion-icon>
+      <ion-button expand="block"  class="btn" size="small">
+        <ion-icon slot="start" name="heart-outline"></ion-icon>
         Mis visitas
       </ion-button>
-      <ion-button size="small" class="btn">
-        <ion-icon name="document-text-outline"></ion-icon>
+      <ion-button expand="block"  class="btn" size="small">
+        <ion-icon slot="start" name="document-text-outline"></ion-icon>
         Mis certificados
       </ion-button>
-      <ion-button size="small" class="btn">
-        <ion-icon name="help-outline"></ion-icon>
+      <ion-button expand="block"  class="btn" size="small">
+        <ion-icon slot="start" name="help-outline"></ion-icon>
         Preguntas frecuentes
       </ion-button>
-      <ion-button size="small" class="btn">
-        <ion-icon name="chatbubble-outline"></ion-icon>
+      <ion-button expand="block"  class="btn" size="small">
+        <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
         Centro de soporte
       </ion-button>
-      <ion-button size="small" class="btn">
-        <ion-icon name="call-outline"></ion-icon>
+      <ion-button expand="block"  class="btn" size="small">
+        <ion-icon slot="start" name="call-outline"></ion-icon>
         Contáctanos
       </ion-button>
-      <ion-button *ngIf="login == true " size="small" class="btn" (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
+  
+      <!-- Botón para cerrar sesión si está logueado -->
+      <ion-button *ngIf="login == true" expand="block" class="btn" size="small" (click)="logout()">
+        <ion-icon slot="start" name="log-out"></ion-icon>
         Cerrar sesión
       </ion-button>
     </div>
   </div>
+  
 </ion-content>
+
 <app-tab></app-tab>

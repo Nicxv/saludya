@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
 import { registroUsuario } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,7 +16,7 @@ export class PerfilPage implements OnInit {
 
   login: boolean = false;
   rol: 'paciente' | 'funcionario' | 'admin' = null;
-  constructor(private auth: AuthService, private interaction: InteractionService, private router: Router, private firestore: FirestoreService) {
+  constructor(private auth: AuthService, private interaction: InteractionService, private router: Router, private firestore: FirestoreService, private storage: AngularFireStorage) {
   // me suscribo para obtener el estado del usuario, logeado o no logeado
   this.auth.stateUser().subscribe(res =>{
     if(res) {
@@ -80,6 +81,40 @@ info: registroUsuario = null;
       console.log('datos son -> ', res);
     })
 
+  }
+
+  selectImage() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+  
+    fileInput.onchange = async (event: Event) => {
+      const file = (event.target as HTMLInputElement).files[0];
+      if (file) {
+        // Subir archivo a Firebase Storage usando el método de FirestoreService
+        const filePath = `perfil/${this.uid}/foto-perfil`;
+        
+        this.firestore.uploadFile(filePath, file).subscribe({
+          next: async (snapshot) => {
+            // La subida ha finalizado, obtenemos la URL
+            const downloadURL = await snapshot.ref.getDownloadURL();
+  
+            // Actualizar la URL de la foto de perfil en Firestore
+            const path = 'Usuarios';
+            const id = this.uid;
+            await this.firestore.updateDoc({ photoURL: downloadURL }, path, id);
+            
+            // Actualizar la información del usuario localmente
+            this.getInfoUser();
+          },
+          error: (error) => {
+            console.error('Error al subir la imagen', error);
+          }
+        });
+      }
+    };
+  
+    fileInput.click();
   }
 
 }

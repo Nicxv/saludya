@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
 
   createDoc(data: any, path: string, id: string) {
     const collection = this.firestore.collection(path);
@@ -26,6 +29,19 @@ export class FirestoreService {
   updateDoc(data: any, path: string, id: string) {
     const collection = this.firestore.collection(path);
     return collection.doc(id).update(data); // Se usa update para solo actualizar los campos específicos
+  }
+
+
+  // Método para cargar un archivo en Firebase Storage
+  uploadFile(filePath: string, file: any) {
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    return task.snapshotChanges().pipe(
+      finalize(() => {
+        return fileRef.getDownloadURL().toPromise();
+      })
+    );
   }
 
 

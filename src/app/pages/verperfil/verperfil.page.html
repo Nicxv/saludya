@@ -29,14 +29,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['nombre']}">
             <ion-icon aria-hidden="true" name="person" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['nombre']; else editNombre">
-              <ion-label>{{ info?.nombre }}</ion-label>
+              <ion-label color="light">{{ info?.nombre }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('nombre')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('nombre')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('nombre')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('nombre')"></ion-icon>
             </ng-container>
             <ng-template #editNombre>
               <ion-input [(ngModel)]="info.nombre" placeholder="Nombre"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('nombre')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('nombre')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('nombre')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -47,14 +47,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['apellido']}">
             <ion-icon aria-hidden="true" name="person" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['apellido']; else editApellido">
-              <ion-label>{{ info?.apellido }}</ion-label>
+              <ion-label color="light">{{ info?.apellido }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('apellido')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('apellido')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('apellido')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('apellido')"></ion-icon>
             </ng-container>
             <ng-template #editApellido>
               <ion-input [(ngModel)]="info.apellido" placeholder="Apellido"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('apellido')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('apellido')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('apellido')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -65,14 +65,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['correo']}">
             <ion-icon aria-hidden="true" name="mail" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['correo']; else editCorreo">
-              <ion-label>{{ info?.correo }}</ion-label>
+              <ion-label color="light">{{ info?.correo }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('correo')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('correo')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('correo')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('correo')"></ion-icon>
             </ng-container>
             <ng-template #editCorreo>
               <ion-input [(ngModel)]="info.correo" placeholder="Correo"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('correo')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('correo')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('correo')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -83,14 +83,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['fechaNacimiento']}">
             <ion-icon aria-hidden="true" name="calendar" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['fechaNacimiento']; else editFechaNacimiento">
-              <ion-label>Fecha de Nacimiento: {{ info?.fechaNacimiento }}</ion-label>
+              <ion-label color="light">Fecha de Nacimiento: {{ info?.fechaNacimiento }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('fechaNacimiento')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('fechaNacimiento')"></ion-icon>
             </ng-container>
             <ng-template #editFechaNacimiento>
               <ion-input [(ngModel)]="info.fechaNacimiento" placeholder="Fecha de Nacimiento"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('fechaNacimiento')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -101,14 +101,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['rut']}">
             <ion-icon aria-hidden="true" name="document" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['rut']; else editRut">
-              <ion-label>RUT: {{ info?.rut }}</ion-label>
+              <ion-label color="light">RUT: {{ info?.rut }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('rut')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('rut')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('rut')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('rut')"></ion-icon>
             </ng-container>
             <ng-template #editRut>
               <ion-input [(ngModel)]="info.rut" placeholder="RUT"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('rut')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('rut')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('rut')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -119,14 +119,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['edad']}">
             <ion-icon aria-hidden="true" name="hourglass" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['edad']; else editEdad">
-              <ion-label>{{ info?.edad }} años</ion-label>
+              <ion-label color="light">{{ info?.edad }} años</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('edad')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('edad')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('edad')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('edad')"></ion-icon>
             </ng-container>
             <ng-template #editEdad>
               <ion-input [(ngModel)]="info.edad" placeholder="Edad"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('edad')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('edad')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('edad')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -137,14 +137,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['genero']}">
             <ion-icon aria-hidden="true" name="transgender" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['genero']; else editGenero">
-              <ion-label>{{ info?.genero }}</ion-label>
+              <ion-label color="light">{{ info?.genero }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('genero')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('genero')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('genero')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('genero')"></ion-icon>
             </ng-container>
             <ng-template #editGenero>
               <ion-input [(ngModel)]="info.genero" placeholder="Género"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('genero')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('genero')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('genero')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -155,14 +155,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['altura']}">
             <ion-icon aria-hidden="true" name="arrow-up" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['altura']; else editAltura">
-              <ion-label>{{ info?.altura }} cm</ion-label>
+              <ion-label color="light">{{ info?.altura }} cm</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('altura')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('altura')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('altura')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('altura')"></ion-icon>
             </ng-container>
             <ng-template #editAltura>
               <ion-input [(ngModel)]="info.altura" placeholder="Altura (cm)"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('altura')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('altura')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('altura')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -173,14 +173,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['peso']}">
             <ion-icon aria-hidden="true" name="barbell" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['peso']; else editPeso">
-              <ion-label>{{ info?.peso }} kg</ion-label>
+              <ion-label color="light">{{ info?.peso }} kg</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('peso')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('peso')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('peso')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('peso')"></ion-icon>
             </ng-container>
             <ng-template #editPeso>
               <ion-input [(ngModel)]="info.peso" placeholder="Peso (kg)"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('peso')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('peso')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('peso')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -189,16 +189,16 @@
         <!-- Dirección -->
         <ion-col size="12">
           <ion-item [ngClass]="{'isEditing': isEditing['direccion']}">
-            <ion-icon aria-hidden="true" name="home" slot="start"></ion-icon>
+            <ion-icon aria-hidden="true" name="location" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['direccion']; else editDireccion">
-              <ion-label>{{ info?.direccion }}</ion-label>
+              <ion-label color="light">{{ info?.direccion }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('direccion')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('direccion')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('direccion')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('direccion')"></ion-icon>
             </ng-container>
             <ng-template #editDireccion>
               <ion-input [(ngModel)]="info.direccion" placeholder="Dirección"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('direccion')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('direccion')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('direccion')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -209,14 +209,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['numeroTelefonico']}">
             <ion-icon aria-hidden="true" name="call" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['numeroTelefonico']; else editnumeroTelefonico">
-              <ion-label>{{ info.numeroTelefonico }}</ion-label>
+              <ion-label color="light">{{ info.numeroTelefonico }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('numeroTelefonico')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('numeroTelefonico')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('numeroTelefonico')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('numeroTelefonico')"></ion-icon>
             </ng-container>
             <ng-template #editnumeroTelefonico>
               <ion-input [(ngModel)]="info.numeroTelefonico" placeholder="Teléfono"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('numeroTelefonico')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('numeroTelefonico')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('numeroTelefonico')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -227,14 +227,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['alergias']}">
             <ion-icon aria-hidden="true" name="alert" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['alergias']; else editAlergias">
-              <ion-label>Alergias: {{ info?.alergias }}</ion-label>
+              <ion-label color="light">Alergias: {{ info?.alergias }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('alergias')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('alergias')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('alergias')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('alergias')"></ion-icon>
             </ng-container>
             <ng-template #editAlergias>
               <ion-input [(ngModel)]="info.alergias" placeholder="Alergias"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('alergias')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('alergias')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('alergias')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -245,14 +245,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['antecedentesQuirurgicos']}">
             <ion-icon aria-hidden="true" name="medkit" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['antecedentesQuirurgicos']; else editantecedentesQuirurgicos">
-              <ion-label>A.Q: {{ info?.antecedentesQuirurgicos }}</ion-label>
+              <ion-label color="light">A.Q: {{ info?.antecedentesQuirurgicos }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('antecedentesQuirurgicos')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('antecedentesQuirurgicos')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('antecedentesQuirurgicos')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('antecedentesQuirurgicos')"></ion-icon>
             </ng-container>
             <ng-template #editantecedentesQuirurgicos>
               <ion-input [(ngModel)]="info.antecedentesQuirurgicos" placeholder="Antecedentes Quirúrgicos"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('antecedentesQuirurgicos')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('antecedentesQuirurgicos')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('antecedentesQuirurgicos')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -261,14 +261,14 @@
           <ion-item [ngClass]="{'isEditing': isEditing['medicamentos']}">
             <ion-icon aria-hidden="true" name="medkit" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['medicamentos']; else editmedicamentos">
-              <ion-label>Medicamentos: {{ info?.medicamentos }}</ion-label>
+              <ion-label color="light">Medicamentos: {{ info?.medicamentos }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('medicamentos')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('medicamentos')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('medicamentos')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('medicamentos')"></ion-icon>
             </ng-container>
             <ng-template #editmedicamentos>
               <ion-input [(ngModel)]="info.medicamentos" placeholder="medicamentos"></ion-input>
-              <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('medicamentos')"></ion-icon>
+              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('medicamentos')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('medicamentos')"></ion-icon>
             </ng-template>
           </ion-item>

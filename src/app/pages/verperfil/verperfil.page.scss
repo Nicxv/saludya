@@ -15,13 +15,14 @@ ion-content {
 .section-title {
   font-size: 20px;
   margin: 20px 0 10px 0;
+  color: rgb(71, 131, 251);
 }
 
 /* Estilo del icono de edición */
 .edit-icon {
   width: 20px;
   margin-left: 10px;
-  color: rgb(73, 117, 249);
+  color: rgb(255, 255, 0);
   cursor: pointer;
   visibility: visible;
   transform: scale(1); /* Escala inicial */
@@ -38,7 +39,7 @@ ion-content {
 .close-icon {
   width: 20px;
   margin-left: 10px;
-  color: green; /* Color para el check */
+  color: white; /* Color para el check */
   visibility: hidden;
   transform: translateX(20px); /* Desplazados inicialmente */
   transition: all 0.3s ease; /* Efecto de transición suave */
@@ -72,4 +73,16 @@ ion-item {
 .check-icon:hover,
 .close-icon:hover {
   transform: scale(1.2); /* Aumentar el tamaño en hover */
+}
+ion-item{
+  --background: rgb(21, 133, 252);
+}
+ion-list{
+  background: #E0F7FA;
+}
+ion-label, ion-input{
+  --color: #ffffff;
+}
+ion-icon{
+  color: white;
 }

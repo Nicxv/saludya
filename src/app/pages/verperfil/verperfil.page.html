@@ -85,12 +85,12 @@
             <ng-container *ngIf="!isEditing['fechaNacimiento']; else editFechaNacimiento">
               <ion-label color="light">Fecha de Nacimiento: {{ info?.fechaNacimiento }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('fechaNacimiento')"></ion-icon>
-              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('fechaNacimiento')"></ion-icon>
             </ng-container>
             <ng-template #editFechaNacimiento>
-              <ion-input [(ngModel)]="info.fechaNacimiento" placeholder="Fecha de Nacimiento"></ion-input>
-              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
+              <ion-input type="date" [(ngModel)]="info.fechaNacimiento" (ngModelChange)="updateAge()" placeholder="Fecha de Nacimiento"></ion-input>
+              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('fechaNacimiento')"></ion-icon>
             </ng-template>
           </ion-item>
@@ -116,19 +116,9 @@
       
         <!-- Edad -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['edad']}">
+          <ion-item>
             <ion-icon aria-hidden="true" name="hourglass" slot="start"></ion-icon>
-            <ng-container *ngIf="!isEditing['edad']; else editEdad">
               <ion-label color="light">{{ info?.edad }} años</ion-label>
-              <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('edad')"></ion-icon>
-              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('edad')"></ion-icon>
-              <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('edad')"></ion-icon>
-            </ng-container>
-            <ng-template #editEdad>
-              <ion-input [(ngModel)]="info.edad" placeholder="Edad"></ion-input>
-              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('edad')"></ion-icon>
-              <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('edad')"></ion-icon>
-            </ng-template>
           </ion-item>
         </ion-col>
       

@@ -9,7 +9,7 @@ export interface registroUsuario {
 
     // Campos adicionales
     rut?: string;
-    edad?: string;
+    edad?: number;
     genero?: string;
     altura?: string;
     peso?: string;

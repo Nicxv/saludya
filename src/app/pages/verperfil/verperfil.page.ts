@@ -78,6 +78,7 @@ editField(field: string) {
 }
 
 // Confirmar los cambios
+// Confirmar los cambios
 async confirmEdit(field: string) {
   const path = 'Usuarios';
   const id = this.uid;
@@ -85,17 +86,42 @@ async confirmEdit(field: string) {
   // Actualiza el campo correspondiente en Firestore
   const updatedData = { [field]: this.info[field] }; // Crea un objeto con el campo actualizado
   await this.firestore.updateDoc(updatedData, path, id);
-  this.interaction.presentToast('Datos actualizados');
+  
+  // Actualizar la edad después de confirmar la edición
+  if (field === 'fechaNacimiento') {
+    this.updateAge(); // Calcular la nueva edad
+    const edadUpdate = { edad: this.info.edad }; // Crear objeto con la edad actualizada
+    await this.firestore.updateDoc(edadUpdate, path, id); // Actualizar también la edad en Firestore
+  }
 
+  this.interaction.presentToast('Datos actualizados');
   this.isEditing[field] = false; // Desactivar edición
   this.activeField = null; // Reiniciar el campo activo
 }
-
 // Cancelar la edición
 cancelEdit(field: string) {
   this.isEditing[field] = false; // Desactivar edición
   this.activeField = null; // Reiniciar el campo activo
   this.getInfoUser(); // Vuelve a cargar la información original
 }
+// Calcular y actualizar la edad
+updateAge() {
+  if (this.info.fechaNacimiento) {
+    const birthDate = new Date(this.info.fechaNacimiento);
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    
+    // Ajustar la edad si el cumpleaños aún no ha ocurrido este año
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      this.info.edad = age - 1;
+    } else {
+      this.info.edad = age;
+    }
+  } else {
+    this.info.edad = null; // Si no hay fecha de nacimiento, edad es nula
+  }
+}
+
 
 }

@@ -78,7 +78,7 @@ export class RegistroPage implements OnInit {
         this.errores.fechaNacimiento = this.datos.fechaNacimiento ? '' : '*La fecha de nacimiento es requerida';
         // Calcular y almacenar la edad si la fecha de nacimiento es válida
         if (this.datos.fechaNacimiento) {
-          this.datos.edad = this.calcularEdad(this.datos.fechaNacimiento).toString();
+          this.datos.edad = this.calcularEdad(this.datos.fechaNacimiento);
         }
         break;
       case 'correo':

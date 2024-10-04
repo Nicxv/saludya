@@ -27,10 +27,6 @@ export class VerperfilPage implements OnInit {
     this.getUid(); 
   }
 
-  setActiveField(field: string) {
-    this.activeField = this.activeField === field ? null : field; // Cambia entre activo y nulo
-  }
-  
   //obtener la id
   async getUid() {
     const uid = await this.auth.getUid();

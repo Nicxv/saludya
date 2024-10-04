@@ -36,17 +36,17 @@
       <!-- Nombre, Apellido -->
       <ion-row>
         <ion-col>
-          <ion-item (click)="setActiveField('nombre')">
+          <ion-item >
             <ion-icon aria-hidden="true" name="person" slot="start"></ion-icon>
             <ion-label>{{ info?.nombre }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'nombre'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item (click)="setActiveField('apellido')">
+          <ion-item >
             <ion-icon aria-hidden="true" name="person" slot="start"></ion-icon>
             <ion-label>{{ info?.apellido }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'apellido'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -54,17 +54,17 @@
       <!-- Correo, Fecha de Nacimiento -->
       <ion-row>
         <ion-col>
-          <ion-item (click)="setActiveField('correo')">
+          <ion-item >
             <ion-icon aria-hidden="true" name="mail" slot="start"></ion-icon>
             <ion-label>{{ info?.correo }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'correo'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item (click)="setActiveField('fechaNacimiento')">
+          <ion-item >
             <ion-icon aria-hidden="true" name="calendar" slot="start"></ion-icon>
             <ion-label>Fecha de Nacimiento: {{ info?.fechaNacimiento }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'fechaNacimiento'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -79,17 +79,17 @@
       <!-- RUT y Edad -->
       <ion-row>
         <ion-col>
-          <ion-item (click)="setActiveField('rut')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="document" slot="start"></ion-icon>
             <ion-label>RUT: {{ info?.rut }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'rut'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item (click)="setActiveField('edad')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="hourglass" slot="start"></ion-icon>
             <ion-label>{{ info?.edad }} años</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'edad'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -97,17 +97,17 @@
       <!-- Género y Altura -->
       <ion-row>
         <ion-col>
-          <ion-item (click)="setActiveField('genero')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="transgender" slot="start"></ion-icon>
             <ion-label>{{ info?.genero }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'genero'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item (click)="setActiveField('altura')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="man" slot="start"></ion-icon>
             <ion-label>{{ info?.altura }} metros</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'altura'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -115,17 +115,17 @@
       <!-- Peso y Dirección -->
       <ion-row>
         <ion-col>
-          <ion-item (click)="setActiveField('peso')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="barbell" slot="start"></ion-icon>
             <ion-label>{{ info?.peso }} Kg</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'peso'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item (click)="setActiveField('direccion')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="location" slot="start"></ion-icon>
             <ion-label>{{ info?.direccion }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'direccion'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -133,10 +133,10 @@
       <!-- Número Telefónico -->
       <ion-row>
         <ion-col>
-          <ion-item (click)="setActiveField('numeroTelefonico')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="call" slot="start"></ion-icon>
             <ion-label>Número: {{ info?.numeroTelefonico }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'numeroTelefonico'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -144,17 +144,17 @@
       <!-- Antecedentes Quirúrgicos y Alergias -->
       <ion-row>
         <ion-col>
-          <ion-item (click)="setActiveField('antecedentesQuirurgicos')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="medkit" slot="start"></ion-icon>
             <ion-label>Antecedentes Quirúrgicos: {{ info?.antecedentesQuirurgicos }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'antecedentesQuirurgicos'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item (click)="setActiveField('alergias')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="alert-circle" slot="start"></ion-icon>
             <ion-label>Alergias: {{ info?.alergias }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'alergias'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -162,10 +162,10 @@
       <!-- Medicamentos -->
       <ion-row>
         <ion-col>
-          <ion-item (click)="setActiveField('medicamentos')">
+          <ion-item>
             <ion-icon aria-hidden="true" name="medkit" slot="start"></ion-icon>
             <ion-label>Medicamentos: {{ info?.medicamentos }}</ion-label>
-            <ion-icon name="create" slot="end" *ngIf="activeField === 'medicamentos'" class="edit-icon"></ion-icon>
+            <ion-icon name="create" slot="end" class="edit-icon"></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>

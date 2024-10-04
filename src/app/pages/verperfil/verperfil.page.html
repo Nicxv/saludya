@@ -16,7 +16,7 @@
       <!-- Sección de Datos Personales -->
       <ion-row>
         <ion-col>
-          <ion-label class="section-title">Mis Datos Personales</ion-label>
+          <ion-label class="section-title">Mis Datos</ion-label>
         </ion-col>
       </ion-row>
     
@@ -227,7 +227,7 @@
           <ion-item [ngClass]="{'isEditing': isEditing['alergias']}">
             <ion-icon aria-hidden="true" name="alert" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['alergias']; else editAlergias">
-              <ion-label>{{ info?.alergias }}</ion-label>
+              <ion-label>Alergias: {{ info?.alergias }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('alergias')"></ion-icon>
               <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('alergias')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('alergias')"></ion-icon>
@@ -245,7 +245,7 @@
           <ion-item [ngClass]="{'isEditing': isEditing['antecedentesQuirurgicos']}">
             <ion-icon aria-hidden="true" name="medkit" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['antecedentesQuirurgicos']; else editantecedentesQuirurgicos">
-              <ion-label>{{ info?.antecedentesQuirurgicos }}</ion-label>
+              <ion-label>A.Q: {{ info?.antecedentesQuirurgicos }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('antecedentesQuirurgicos')"></ion-icon>
               <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('antecedentesQuirurgicos')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('antecedentesQuirurgicos')"></ion-icon>
@@ -261,7 +261,7 @@
           <ion-item [ngClass]="{'isEditing': isEditing['medicamentos']}">
             <ion-icon aria-hidden="true" name="medkit" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['medicamentos']; else editmedicamentos">
-              <ion-label>{{ info?.medicamentos }}</ion-label>
+              <ion-label>Medicamentos: {{ info?.medicamentos }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('medicamentos')"></ion-icon>
               <ion-icon name="checkmark" slot="end" color="success" class="check-icon" (click)="confirmEdit('medicamentos')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('medicamentos')"></ion-icon>

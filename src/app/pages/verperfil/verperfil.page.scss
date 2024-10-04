@@ -1,46 +1,75 @@
+/* Fondo general de la página */
 ion-content {
-    --background: #E0F7FA; /* Cambia este color según tus necesidades */
-  }
-  .user-avatar {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-    display: block;
-  }
-  .section-title {
-    font-size: 20px;
-    margin: 20px 0 10px 0;
-  }  
+  --background: #E0F7FA; /* Cambia este color según tus necesidades */
+}
 
+/* Estilo para el avatar del usuario */
+.user-avatar {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  display: block;
+}
 
-  .edit-icon {
-    width: 16px;
-    margin-left: 10px;
-    color: rgb(73, 117, 249);
-    visibility: visible; /* Siempre visible */
-  }
-  
-  .check-icon {
-    width: 16px;
-    margin-left: 10px;
-    visibility: hidden; /* Ocultar icono por defecto */
-  }
-  
-  .close-icon {
-    width: 16px;
-    margin-left: 10px;
-    visibility: hidden; /* Ocultar icono por defecto */
-  }
-  
-  ion-item {
-    position: relative; /* Permite posicionar los íconos relativos al ion-item */
-  }
-  
-  .edit-icon:hover + .check-icon,
-  .edit-icon:hover + .close-icon,
-  .isEditing .check-icon,
-  .isEditing .close-icon {
-    visibility: visible; /* Mostrar iconos al editar */
-  }
-  
-  
+/* Estilo para los títulos de sección */
+.section-title {
+  font-size: 20px;
+  margin: 20px 0 10px 0;
+}
+
+/* Estilo del icono de edición */
+.edit-icon {
+  width: 20px;
+  margin-left: 10px;
+  color: rgb(73, 117, 249);
+  cursor: pointer;
+  visibility: visible;
+  transform: scale(1); /* Escala inicial */
+  transition: all 0.3s ease; /* Efecto de suavidad */
+}
+
+/* Agrandar el ícono al hacer hover */
+.edit-icon:hover {
+  transform: scale(1.3); /* Agrandar el ícono al pasar el mouse */
+}
+
+/* Estilo para los iconos de check y close ocultos inicialmente */
+.check-icon,
+.close-icon {
+  width: 20px;
+  margin-left: 10px;
+  color: green; /* Color para el check */
+  visibility: hidden;
+  transform: translateX(20px); /* Desplazados inicialmente */
+  transition: all 0.3s ease; /* Efecto de transición suave */
+  cursor: pointer; /* Hacer el cursor un puntero en hover */
+}
+
+.close-icon {
+  color: red; /* Color para el icono de cancelar */
+}
+
+/* Mostrar los iconos de check y close cuando está en modo edición */
+.isEditing .check-icon,
+.isEditing .close-icon {
+  visibility: visible;
+  transform: translateX(0); /* Volver a la posición original con suavidad */
+}
+
+/* Ocultar el icono de edición cuando se hace clic para editar */
+.isEditing .edit-icon {
+  visibility: hidden;
+}
+
+/* Estilo para los ion-items para posicionar correctamente los íconos */
+ion-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Opcional: efecto hover en los iconos de check y close */
+.check-icon:hover,
+.close-icon:hover {
+  transform: scale(1.2); /* Aumentar el tamaño en hover */
+}

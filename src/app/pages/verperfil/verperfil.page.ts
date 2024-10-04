@@ -85,6 +85,7 @@ async confirmEdit(field: string) {
   // Actualiza el campo correspondiente en Firestore
   const updatedData = { [field]: this.info[field] }; // Crea un objeto con el campo actualizado
   await this.firestore.updateDoc(updatedData, path, id);
+  this.interaction.presentToast('Datos actualizados');
 
   this.isEditing[field] = false; // Desactivar edición
   this.activeField = null; // Reiniciar el campo activo

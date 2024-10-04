@@ -1,24 +1,46 @@
 ion-content {
     --background: #E0F7FA; /* Cambia este color según tus necesidades */
   }
-.user-avatar {
+  .user-avatar {
     width: 150px;
     height: 150px;
     margin: 0 auto;
     display: block;
   }
   .section-title {
-    font-size: 1.2rem;
+    font-size: 20px;
     margin: 20px 0 10px 0;
   }  
 
+
   .edit-icon {
-    cursor: pointer; /* Cambia el cursor para indicar que es interactivo */
-    color: #0074BD; /* Cambia el color del ícono si lo deseas */
-    transition: color 0.3s ease; /* Transición suave para el cambio de color */
-    width: 18px;
+    width: 16px;
+    margin-left: 10px;
+    color: rgb(73, 117, 249);
+    visibility: visible; /* Siempre visible */
   }
   
-  .edit-icon:hover {
-    color: #65C1F2; /* Cambia a otro color al pasar el mouse */
+  .check-icon {
+    width: 16px;
+    margin-left: 10px;
+    visibility: hidden; /* Ocultar icono por defecto */
   }
+  
+  .close-icon {
+    width: 16px;
+    margin-left: 10px;
+    visibility: hidden; /* Ocultar icono por defecto */
+  }
+  
+  ion-item {
+    position: relative; /* Permite posicionar los íconos relativos al ion-item */
+  }
+  
+  .edit-icon:hover + .check-icon,
+  .edit-icon:hover + .close-icon,
+  .isEditing .check-icon,
+  .isEditing .close-icon {
+    visibility: visible; /* Mostrar iconos al editar */
+  }
+  
+  

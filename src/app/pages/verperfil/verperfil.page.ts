@@ -12,8 +12,28 @@ import { InteractionService } from 'src/app/services/interaction.service';
 })
 export class VerperfilPage implements OnInit {
   uid: string = null;
-  info: registroUsuario = null;
+  info: registroUsuario = {
+    uid: null,
+    nombre: null,
+    apellido: null,
+    fechaNacimiento: null,
+    correo: null,
+    password: null,
+    rol: 'paciente',
+    rut: null,
+    edad: null,
+    genero: null,
+    altura: null,
+    peso: null,
+    direccion: null,
+    numeroTelefonico: null,
+    antecedentesQuirurgicos: null,
+    alergias: null,
+    medicamentos: null,
+    photoURL: null
+  };
   activeField: string | null = null; // Inicialmente no hay campo activo
+  isEditing: { [key: string]: boolean } = {}; // Objeto para gestionar la edición de cada campo
 
 
   constructor(private auth:AuthService, private interaction: InteractionService, private router: Router, private firestore: FirestoreService) { }
@@ -49,6 +69,32 @@ getInfoUser(){
     console.log('datos son -> ', res);
   })
 
+}
+
+// Activar el modo de edición
+editField(field: string) {
+  this.activeField = field;
+  this.isEditing[field] = true; // Habilitar edición para el campo específico
+}
+
+// Confirmar los cambios
+async confirmEdit(field: string) {
+  const path = 'Usuarios';
+  const id = this.uid;
+
+  // Actualiza el campo correspondiente en Firestore
+  const updatedData = { [field]: this.info[field] }; // Crea un objeto con el campo actualizado
+  await this.firestore.updateDoc(updatedData, path, id);
+
+  this.isEditing[field] = false; // Desactivar edición
+  this.activeField = null; // Reiniciar el campo activo
+}
+
+// Cancelar la edición
+cancelEdit(field: string) {
+  this.isEditing[field] = false; // Desactivar edición
+  this.activeField = null; // Reiniciar el campo activo
+  this.getInfoUser(); // Vuelve a cargar la información original
 }
 
 }

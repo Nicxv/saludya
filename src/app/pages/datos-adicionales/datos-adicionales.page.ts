@@ -15,7 +15,6 @@ export class DatosAdicionalesPage implements OnInit {
   // Aquí se almacenarán los datos del formulario
   datosAdicionales = {
     rut: '',
-    edad: '',
     genero: '',
     altura: '',
     peso: '',
@@ -29,7 +28,6 @@ export class DatosAdicionalesPage implements OnInit {
    // Objeto para almacenar los errores
    errores: any = {
     rut: '',
-    edad: '',
     genero: '',
     altura: '',
     peso: '',
@@ -99,10 +97,6 @@ async validarYGuardarDatos() {
   // Validar campos obligatorios
   if (!this.datosAdicionales.rut) {
     this.errores.rut = 'El campo es obligatorio';
-    camposValidos = false;
-  }
-  if (!this.datosAdicionales.edad) {
-    this.errores.edad = 'El campo es obligatorio';
     camposValidos = false;
   }
   if (!this.datosAdicionales.genero) {

@@ -20,6 +20,7 @@ export class RegistroPage implements OnInit {
     correo: null,
     password: null,
     rol: 'paciente',
+    edad: null
    
   }
 
@@ -50,7 +51,21 @@ export class RegistroPage implements OnInit {
   toggleRepetirPasswordVisibility() {
     this.showRepetirPassword = !this.showRepetirPassword;
   }
+  // Método para calcular la edad
+  calcularEdad(fechaNacimiento: Date): number {
+    const hoy = new Date();
+    const nacimiento = new Date(fechaNacimiento);
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+      edad--;
+    }
+
+    return edad;
+  }
    // Método para validar el formulario de forma dinámica
+  // Validar campos del formulario
   async validarCampo(campo: string) {
     switch (campo) {
       case 'nombre':
@@ -61,10 +76,13 @@ export class RegistroPage implements OnInit {
         break;
       case 'fechaNacimiento':
         this.errores.fechaNacimiento = this.datos.fechaNacimiento ? '' : '*La fecha de nacimiento es requerida';
+        // Calcular y almacenar la edad si la fecha de nacimiento es válida
+        if (this.datos.fechaNacimiento) {
+          this.datos.edad = this.calcularEdad(this.datos.fechaNacimiento).toString();
+        }
         break;
       case 'correo':
         this.errores.correo = this.datos.correo && this.validarCorreo(this.datos.correo) ? '' : '*El correo es requerido o inválido';
-        // Validar si el correo ya existe
         if (this.errores.correo === '') {
           const existe = await this.auth.correoExiste(this.datos.correo);
           this.errores.correo = existe ? '*El correo ya existe' : '';
@@ -78,6 +96,7 @@ export class RegistroPage implements OnInit {
         break;
     }
   }
+
 
   validarCorreo(correo: string): boolean {
     const re = /\S+@\S+\.\S+/;

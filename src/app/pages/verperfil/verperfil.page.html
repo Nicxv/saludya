@@ -62,19 +62,9 @@
       
         <!-- Correo -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['correo']}">
+          <ion-item>
             <ion-icon aria-hidden="true" name="mail" slot="start"></ion-icon>
-            <ng-container *ngIf="!isEditing['correo']; else editCorreo">
               <ion-label color="light">{{ info?.correo }}</ion-label>
-              <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('correo')"></ion-icon>
-              <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('correo')"></ion-icon>
-              <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('correo')"></ion-icon>
-            </ng-container>
-            <ng-template #editCorreo>
-              <ion-input [(ngModel)]="info.correo" placeholder="Correo"></ion-input>
-              <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('correo')"></ion-icon>
-              <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('correo')"></ion-icon>
-            </ng-template>
           </ion-item>
         </ion-col>
       

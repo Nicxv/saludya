@@ -60,4 +60,13 @@ export class AuthService {
       })
     );
   }
+  async recuperarContrasena(correo: string): Promise<void> {
+    try {
+      await this.authfirebase.sendPasswordResetEmail(correo);
+    } catch (error) {
+      console.error('Error al enviar el correo de recuperación:', error);
+      throw error; // Puedes manejar este error en el componente
+    }
+  }
+
 }

@@ -2,7 +2,7 @@ ion-content {
     --padding-start: 0;
     --padding-end: 0;
     --padding-top: 0;
-    --padding-bottom: 0;
+    padding-bottom: 70px;
     --background: #E0F7FA;
     display: flex;
     align-items: center;
@@ -88,46 +88,3 @@ ion-content {
     --border-style: solid;
     --border-width: 1px;
   }
-  
-  /* Media Queries para Responsividad */
-  @media (max-width: 767px) {
-    .header-image {
-      height: 150px;
-    }
-  
-    .doctor-card {
-      padding: 15px;
-    }
-  
-    .doctor-name {
-      font-size: 18px;
-    }
-  
-    .doctor-description {
-      font-size: 13px;
-    }
-  
-    .view-profile-btn {
-      width: 50%;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .header-image {
-      height: 120px;
-    }
-  
-    .doctor-card {
-      width: 95%;
-      padding: 10px;
-    }
-  
-    .doctor-name {
-      font-size: 16px;
-    }
-  
-    .doctor-description {
-      font-size: 12px;
-    }
-  }
-  

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonInput } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { GoogleMapsService } from 'src/app/services/google-maps.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
@@ -10,6 +12,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
   styleUrls: ['./datos-adicionales.page.scss'],
 })
 export class DatosAdicionalesPage implements OnInit {
+ 
   uid: string | null = null;
 
   // Aquí se almacenarán los datos del formulario
@@ -37,8 +40,9 @@ export class DatosAdicionalesPage implements OnInit {
     alergias: '',
     medicamentos: ''
   };
+  @ViewChild('direccionInput', { static: false }) direccionInput!: IonInput; // Referencia al ion-input
 
-  constructor(private firestoreService: FirestoreService, private authService: AuthService, private interaction:InteractionService, private router: Router) { }
+  constructor(private firestoreService: FirestoreService, private authService: AuthService, private interaction:InteractionService, private router: Router, private googleMapsService: GoogleMapsService) { }
 
   ngOnInit() {
     // Verificar el estado del usuario al iniciar la página
@@ -51,6 +55,32 @@ export class DatosAdicionalesPage implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.cargarGoogleMaps();
+  }
+
+  async cargarGoogleMaps() {
+    const apiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8'; // Asegúrate de usar tu API Key correcta
+
+    try {
+      await this.googleMapsService.loadGoogleMaps(apiKey);
+
+      // Asegúrate de que el input está disponible
+      const inputElement = this.direccionInput.getInputElement(); // Obtener el elemento de entrada
+
+      if (inputElement) {
+        // Inicializar autocompletado en el campo de dirección
+        this.googleMapsService.initAutocomplete(await inputElement, (place) => {
+          this.datosAdicionales.direccion = place.formatted_address; // Guardar la dirección seleccionada
+          console.log('Dirección seleccionada:', place);
+        });
+      } else {
+        console.error('El elemento de entrada no se encontró en el DOM');
+      }
+    } catch (error) {
+      console.error('Error al cargar Google Maps:', error);
+    }
+  }
 
   async getUid() {
     const uid = await this.authService.getUid();

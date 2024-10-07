@@ -34,9 +34,11 @@
             <ion-text class="error-message" color="danger" *ngIf="errores.peso">{{errores.peso}}</ion-text>
           </ion-col>
           <ion-col size="12">
-            <ion-input [(ngModel)]="datosAdicionales.direccion" placeholder="Dirección" type="text" class="custom" (ionInput)="limpiarError('direccion')" required></ion-input>
+            <ion-input #direccionInput [(ngModel)]="datosAdicionales.direccion" placeholder="Dirección" type="text" class="custom" (ionInput)="limpiarError('direccion')" required></ion-input>
             <ion-text class="error-message" color="danger" *ngIf="errores.direccion">{{errores.direccion}}</ion-text>
           </ion-col>
+          
+          
           <ion-col size="12">
             <ion-input [(ngModel)]="datosAdicionales.numeroTelefonico" placeholder="Número contacto Ej: (+56911112233)" type="text" class="custom" (ionBlur)="validarTelefono()" (ionInput)="limpiarError('numeroTelefonico')" required></ion-input>
             <ion-text class="error-message" color="danger" *ngIf="errores.numeroTelefonico">{{errores.numeroTelefonico}}</ion-text>

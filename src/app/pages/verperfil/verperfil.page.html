@@ -177,7 +177,7 @@
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('direccion')"></ion-icon>
             </ng-container>
             <ng-template #editDireccion>
-              <ion-input [(ngModel)]="info.direccion" placeholder="Dirección"></ion-input>
+              <ion-input #direccionInput [(ngModel)]="info.direccion" placeholder="Dirección"></ion-input>
               <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('direccion')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('direccion')"></ion-icon>
             </ng-template>

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { registroUsuario } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { IonInput } from '@ionic/angular';
+import { GoogleMapsService } from 'src/app/services/google-maps.service';
+
 
 @Component({
   selector: 'app-verperfil',
@@ -35,8 +38,9 @@ export class VerperfilPage implements OnInit {
   activeField: string | null = null; // Inicialmente no hay campo activo
   isEditing: { [key: string]: boolean } = {}; // Objeto para gestionar la edición de cada campo
 
+  @ViewChild('direccionInput', { static: false }) direccionInput!: IonInput; // Referencia al ion-input
 
-  constructor(private auth:AuthService, private interaction: InteractionService, private router: Router, private firestore: FirestoreService) { }
+  constructor(private auth:AuthService, private interaction: InteractionService, private router: Router, private firestore: FirestoreService, private googleMapsService: GoogleMapsService) { }
 
   async ngOnInit() { 
     console.log('ver perfil');
@@ -45,6 +49,37 @@ export class VerperfilPage implements OnInit {
       this.getUid();
     });
     this.getUid(); 
+  }
+
+  ngAfterViewInit() {
+    console.log(this.direccionInput);
+    setTimeout(() => {
+      this.cargarGoogleMaps();
+    }, 100); // Adjust the delay as needed
+    console.log('direccionInput in verperfil:', this.direccionInput);
+    this.cargarGoogleMaps();
+  }
+
+  async cargarGoogleMaps() {
+    const apiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8'; // Asegúrate de usar tu API Key correcta
+
+    try {
+      await this.googleMapsService.loadGoogleMaps(apiKey);
+
+      // Asegúrate de que el input está disponible
+      const inputElement = this.direccionInput.getInputElement(); // Obtener el elemento de entrada
+
+      if (inputElement) {
+        // Inicializar autocompletado en el campo de dirección
+        this.googleMapsService.initAutocomplete(await inputElement, (place) => {
+          console.log('Dirección seleccionada:', place);
+        });
+      } else {
+        console.error('El elemento de entrada no se encontró en el DOM');
+      }
+    } catch (error) {
+      console.error('Error al cargar Google Maps:', error);
+    }
   }
 
   //obtener la id
@@ -75,8 +110,35 @@ getInfoUser(){
 editField(field: string) {
   this.activeField = field;
   this.isEditing[field] = true; // Habilitar edición para el campo específico
+
+  if (field === 'direccion') {
+    setTimeout(() => {
+      this.initializeAutocompleteForAddress();
+    }, 100); // Delay to ensure the input is properly rendered
+  }
 }
 
+async initializeAutocompleteForAddress() {
+  const apiKey = 'YOUR_API_KEY_HERE';
+
+  try {
+    await this.googleMapsService.loadGoogleMaps(apiKey);
+    console.log('Google Maps script loaded successfully.');
+
+    const inputElement = await this.direccionInput.getInputElement(); // Obtain the input element
+
+    if (inputElement) {
+      // Initialize autocomplete on the address field
+      this.googleMapsService.initAutocomplete(inputElement, (place) => {
+        console.log('Dirección seleccionada:', place);
+      });
+    } else {
+      console.error('El elemento de entrada no se encontró en el DOM');
+    }
+  } catch (error) {
+    console.error('Error al cargar Google Maps:', error);
+  }
+}
 // Confirmar los cambios
 // Confirmar los cambios
 async confirmEdit(field: string) {

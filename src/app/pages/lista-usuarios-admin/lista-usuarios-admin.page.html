@@ -5,16 +5,57 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item *ngFor="let lista of Usuarios">
-      <ion-label>
-        <h2>{{ lista.rut }}</h2>
-        <h3>{{ lista.nombre }}</h3>
-        <p>Rol: {{ lista.rol }}</p>
-      </ion-label>
-      <ion-button (click)="verUsuario(lista)">
-        <ion-icon name="eye"></ion-icon>
-      </ion-button>
+ <!-- Texto introductorio -->
+<div class="intro-text">
+  <p>Aquí podrás ver la información de los usuarios y asignarles o modificarles un rol según sea necesario. Por favor, asegúrate de revisar la información antes de realizar cambios.</p>
+</div>
+
+<!-- Contenedor de filtros en columnas -->
+<div class="filtro-container">
+  <div class="filtro-columna">
+    <ion-item class="search-item">
+      <ion-input label="Filtro por nombre:" labelPlacement="floating" [(ngModel)]="nombreFiltro" placeholder="Nombre" (ionInput)="filtrarUsuarios()"></ion-input>
     </ion-item>
-  </ion-list>
+  </div>
+
+  <div class="filtro-columna">
+    <ion-item class="search-item">
+      <ion-input label="Filtro por rut:" labelPlacement="floating" [(ngModel)]="rutFiltro" placeholder="RUT" (ionInput)="filtrarUsuarios()"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="filtro-columna">
+    <ion-item class="filter-item">
+      <ion-label>Filtrar por rol:</ion-label>
+      <ion-select [(ngModel)]="rolFiltro" placeholder="Rol" (ionChange)="filtrarUsuarios()">
+        <ion-select-option value="">Todos</ion-select-option>
+        <ion-select-option value="paciente">Paciente</ion-select-option>
+        <ion-select-option value="funcionario">Funcionario</ion-select-option>
+        <ion-select-option value="admin">Admin</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+</div>
+
+<!-- Lista de usuarios filtrados -->
+<ion-list>
+  <ion-item *ngFor="let lista of UsuariosFiltrados">
+    <ion-label>
+      <h2>{{ lista.rut }}</h2>
+      <h3>{{ lista.nombre }}</h3>
+    </ion-label>
+
+    <ion-select placeholder="Selecciona rol" [(ngModel)]="lista.rol" (ionChange)="confirmarCambioRol(lista)">
+      <ion-select-option value="paciente">Paciente</ion-select-option>
+      <ion-select-option value="funcionario">Funcionario</ion-select-option>
+      <ion-select-option value="admin">Admin</ion-select-option>
+    </ion-select>
+
+    <ion-button (click)="verUsuario(lista)">
+      <ion-icon name="eye"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-list>
+
+
 </ion-content>

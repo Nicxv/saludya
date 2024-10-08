@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { DatosAdicionalesPageRoutingModule } from './datos-adicionales-routing.module';
 
 import { DatosAdicionalesPage } from './datos-adicionales.page';
+import { ComponentesModule } from 'src/app/componentes/componentes.module';
 
 @NgModule({
   imports: [
+    ComponentesModule,
     CommonModule,
     FormsModule,
     IonicModule,

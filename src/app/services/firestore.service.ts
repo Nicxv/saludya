@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 import { finalize } from 'rxjs/operators';
+import { registroUsuario } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class FirestoreService {
         return fileRef.getDownloadURL().toPromise();
       })
     );
+  }
+
+  getUsuarios(): Observable<registroUsuario[]> {
+    return this.firestore.collection<registroUsuario>('Usuarios').valueChanges();
   }
 
 

@@ -21,10 +21,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
     path: 'p-principal',
     loadChildren: () => import('./pages/p-principal/p-principal.module').then( m => m.PPrincipalPageModule)
   },
@@ -81,6 +77,11 @@ const routes: Routes = [
     path: 'verperfil',
     loadChildren: () => import('./pages/verperfil/verperfil.module').then( m => m.VerperfilPageModule)
   },
+  {
+    path: 'lista-usuarios-admin',
+    loadChildren: () => import('./pages/lista-usuarios-admin/lista-usuarios-admin.module').then( m => m.ListaUsuariosAdminPageModule)
+  },
+
 
 ];
 

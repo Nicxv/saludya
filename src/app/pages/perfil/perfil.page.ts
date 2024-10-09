@@ -16,7 +16,7 @@ export class PerfilPage implements OnInit {
 
   login: boolean = false;
   rol: 'paciente' | 'funcionario' | 'admin' = null;
-  
+   
   constructor(private auth: AuthService, private interaction: InteractionService, private router: Router, private firestore: FirestoreService, private storage: AngularFireStorage) {
   // me suscribo para obtener el estado del usuario, logeado o no logeado
   this.auth.stateUser().subscribe(res =>{

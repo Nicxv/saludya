@@ -57,10 +57,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/consulta-med/consulta-med.module').then( m => m.ConsultaMedPageModule)
   },
   {
-    path: 'modificar-datos',
-    loadChildren: () => import('./pages/modificar-datos/modificar-datos.module').then( m => m.ModificarDatosPageModule)
-  },
-  {
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
@@ -71,7 +67,7 @@ const routes: Routes = [
   {
     path: 'ajustes',
     loadChildren: () => import('./pages/ajustes/ajustes.module').then( m => m.AjustesPageModule),
-    canActivate: [adminGuard] // Añadir el guard aquí
+    canActivate: [adminGuard] // Añadir el guard aquí para que solo pueda entrar un usuario admin
   },
   {
     path: 'verperfil',
@@ -79,7 +75,8 @@ const routes: Routes = [
   },
   {
     path: 'lista-usuarios-admin',
-    loadChildren: () => import('./pages/lista-usuarios-admin/lista-usuarios-admin.module').then( m => m.ListaUsuariosAdminPageModule)
+    loadChildren: () => import('./pages/lista-usuarios-admin/lista-usuarios-admin.module').then( m => m.ListaUsuariosAdminPageModule),
+    canActivate: [adminGuard] //admin guard
   },
 
 

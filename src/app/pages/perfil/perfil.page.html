@@ -28,7 +28,7 @@
           <span>{{info.correo}}</span>
         </div>
         <div class="info-item ion-text-center">
-          <span>{{info.rol}}</span>
+          <span>{{info.direccion}}</span>
         </div>
       </div>
   
@@ -44,7 +44,7 @@
         <ion-icon slot="start" name="pencil-outline"></ion-icon>
         ver perfil
       </ion-button>
-      <ion-button *ngIf="login && rol == 'admin'" expand="full"  class="btn" size="small">
+      <ion-button *ngIf="login && rol == 'admin'" expand="block"  class="btn" size="small" [routerLink]="['/ajustes']">
         <ion-icon slot="start" name="settings-outline"></ion-icon>
         Configuración
       </ion-button>
@@ -64,7 +64,7 @@
         <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
         Centro de soporte
       </ion-button>
-      <ion-button expand="block"  class="btn" size="small">
+      <ion-button expand="block"  class="btn" size="small" [routerLink]="['/verperfil']" >
         <ion-icon slot="start" name="call-outline"></ion-icon>
         Contáctanos
       </ion-button>

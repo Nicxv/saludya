@@ -3,7 +3,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-grid class="ion-text-center">
-    <ion-list>
+    
       <!-- Foto del Usuario centrada y más grande -->
       <ion-row class="ion-justify-content-center">
         <ion-col size="auto">
@@ -14,8 +14,9 @@
       </ion-row>
     
       <!-- Sección de Datos Personales -->
+      <ion-list>
       <ion-row>
-        <ion-col>
+        <ion-col> 
           <ion-label class="section-title">Mis Datos</ion-label>
         </ion-col>
       </ion-row>
@@ -26,10 +27,10 @@
       <ion-row>
         <!-- Nombre -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['nombre']}">
-            <ion-icon aria-hidden="true" name="person" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['nombre']}">
+            <ion-icon aria-hidden="true" name="person-circle-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['nombre']; else editNombre">
-              <ion-label color="light">{{ info?.nombre }}</ion-label>
+              <ion-label color="primary">{{ info?.nombre }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('nombre')"></ion-icon>
               <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('nombre')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('nombre')"></ion-icon>
@@ -44,10 +45,10 @@
       
         <!-- Apellido -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['apellido']}">
-            <ion-icon aria-hidden="true" name="person" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['apellido']}">
+            <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['apellido']; else editApellido">
-              <ion-label color="light">{{ info?.apellido }}</ion-label>
+              <ion-label color="primary">{{ info?.apellido }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('apellido')"></ion-icon>
               <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('apellido')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('apellido')"></ion-icon>
@@ -62,18 +63,18 @@
       
         <!-- Correo -->
         <ion-col size="12">
-          <ion-item>
-            <ion-icon aria-hidden="true" name="mail" slot="start"></ion-icon>
-              <ion-label color="light">{{ info?.correo }}</ion-label>
+          <ion-item lines="none">
+            <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
+              <ion-label color="primary">{{ info?.correo }}</ion-label>
           </ion-item>
         </ion-col>
       
         <!-- Fecha de Nacimiento -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['fechaNacimiento']}">
-            <ion-icon aria-hidden="true" name="calendar" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['fechaNacimiento']}">
+            <ion-icon aria-hidden="true" name="calendar-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['fechaNacimiento']; else editFechaNacimiento">
-              <ion-label color="light">Fecha de Nacimiento: {{ info?.fechaNacimiento }}</ion-label>
+              <ion-label color="primary">Fecha de Nacimiento: {{ info?.fechaNacimiento }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('fechaNacimiento')"></ion-icon>
               <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('fechaNacimiento')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('fechaNacimiento')"></ion-icon>
@@ -88,10 +89,10 @@
       
         <!-- RUT -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['rut']}">
-            <ion-icon aria-hidden="true" name="document" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['rut']}">
+            <ion-icon aria-hidden="true" name="document-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['rut']; else editRut">
-              <ion-label color="light">RUT: {{ info?.rut }}</ion-label>
+              <ion-label color="primary">RUT: {{ info?.rut }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('rut')"></ion-icon>
               <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('rut')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('rut')"></ion-icon>
@@ -107,17 +108,17 @@
         <!-- Edad -->
         <ion-col size="12">
           <ion-item>
-            <ion-icon aria-hidden="true" name="hourglass" slot="start"></ion-icon>
-              <ion-label color="light">{{ info?.edad }} años</ion-label>
+            <ion-icon aria-hidden="true" name="hourglass-outline" slot="start"></ion-icon>
+              <ion-label color="primary">{{ info?.edad }} años</ion-label>
           </ion-item>
         </ion-col>
       
         <!-- Género -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['genero']}">
-            <ion-icon aria-hidden="true" name="transgender" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['genero']}">
+            <ion-icon aria-hidden="true" name="transgender-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['genero']; else editGenero">
-              <ion-label color="light">{{ info?.genero }}</ion-label>
+              <ion-label color="primary">{{ info?.genero }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('genero')"></ion-icon>
               <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('genero')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('genero')"></ion-icon>
@@ -132,10 +133,10 @@
       
         <!-- Altura -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['altura']}">
-            <ion-icon aria-hidden="true" name="arrow-up" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['altura']}">
+            <ion-icon aria-hidden="true" name="arrow-up-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['altura']; else editAltura">
-              <ion-label color="light">{{ info?.altura }} cm</ion-label>
+              <ion-label color="primary">{{ info?.altura }} cm</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('altura')"></ion-icon>
               <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('altura')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('altura')"></ion-icon>
@@ -150,10 +151,10 @@
       
         <!-- Peso -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['peso']}">
-            <ion-icon aria-hidden="true" name="barbell" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['peso']}">
+            <ion-icon aria-hidden="true" name="barbell-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['peso']; else editPeso">
-              <ion-label color="light">{{ info?.peso }} kg</ion-label>
+              <ion-label color="primary">{{ info?.peso }} kg</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('peso')"></ion-icon>
               <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('peso')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('peso')"></ion-icon>
@@ -168,10 +169,10 @@
       
         <!-- Dirección -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['direccion']}">
-            <ion-icon aria-hidden="true" name="location" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['direccion']}">
+            <ion-icon aria-hidden="true" name="location-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['direccion']; else editDireccion">
-              <ion-label color="light">{{ info?.direccion }}</ion-label>
+              <ion-label color="primary">{{ info?.direccion }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('direccion')"></ion-icon>
               <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('direccion')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('direccion')"></ion-icon>
@@ -186,10 +187,10 @@
       
         <!-- Teléfono -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['numeroTelefonico']}">
-            <ion-icon aria-hidden="true" name="call" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['numeroTelefonico']}">
+            <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['numeroTelefonico']; else editnumeroTelefonico">
-              <ion-label color="light">{{ info.numeroTelefonico }}</ion-label>
+              <ion-label color="primary">{{ info.numeroTelefonico }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('numeroTelefonico')"></ion-icon>
               <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('numeroTelefonico')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('numeroTelefonico')"></ion-icon>
@@ -204,10 +205,10 @@
       
         <!-- Alergias -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['alergias']}">
-            <ion-icon aria-hidden="true" name="alert" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['alergias']}">
+            <ion-icon aria-hidden="true" name="alert-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['alergias']; else editAlergias">
-              <ion-label color="light">Alergias: {{ info?.alergias }}</ion-label>
+              <ion-label color="primary">Alergias: {{ info?.alergias }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('alergias')"></ion-icon>
               <ion-icon name="checkmark" slot="end"  class="check-icon" (click)="confirmEdit('alergias')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('alergias')"></ion-icon>
@@ -222,10 +223,10 @@
       
         <!-- Antecedentes Quirúrgicos -->
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['antecedentesQuirurgicos']}">
-            <ion-icon aria-hidden="true" name="medkit" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['antecedentesQuirurgicos']}">
+            <ion-icon aria-hidden="true" name="medkit-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['antecedentesQuirurgicos']; else editantecedentesQuirurgicos">
-              <ion-label color="light">A.Q: {{ info?.antecedentesQuirurgicos }}</ion-label>
+              <ion-label color="primary">A.Q: {{ info?.antecedentesQuirurgicos }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('antecedentesQuirurgicos')"></ion-icon>
               <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('antecedentesQuirurgicos')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('antecedentesQuirurgicos')"></ion-icon>
@@ -238,10 +239,10 @@
           </ion-item>
         </ion-col>
         <ion-col size="12">
-          <ion-item [ngClass]="{'isEditing': isEditing['medicamentos']}">
-            <ion-icon aria-hidden="true" name="medkit" slot="start"></ion-icon>
+          <ion-item lines="none" [ngClass]="{'isEditing': isEditing['medicamentos']}">
+            <ion-icon aria-hidden="true" name="medkit-outline" slot="start"></ion-icon>
             <ng-container *ngIf="!isEditing['medicamentos']; else editmedicamentos">
-              <ion-label color="light">Medicamentos: {{ info?.medicamentos }}</ion-label>
+              <ion-label color="primary">Medicamentos: {{ info?.medicamentos }}</ion-label>
               <ion-icon name="create" slot="end" class="edit-icon" (click)="editField('medicamentos')"></ion-icon>
               <ion-icon name="checkmark" slot="end" class="check-icon" (click)="confirmEdit('medicamentos')"></ion-icon>
               <ion-icon name="close" slot="end" color="danger" class="close-icon" (click)="cancelEdit('medicamentos')"></ion-icon>

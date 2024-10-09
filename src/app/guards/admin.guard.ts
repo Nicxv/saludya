@@ -13,7 +13,6 @@ export const adminGuard: CanActivateFn = (route, state) => {
   return authService.getUserRole().pipe(
     map(rol => {
       if (rol === 'admin') {
-        interactionService.presentToast('Bienvenido administrador'); // Mostrar mensaje para admin
         return true; // Permitir acceso si es admin
       } else {
         interactionService.presentToast('No tienes permisos para acceder a esta página'); // Mostrar mensaje para no-admin

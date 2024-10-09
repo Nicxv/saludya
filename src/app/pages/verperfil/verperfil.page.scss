@@ -15,14 +15,14 @@ ion-content {
 .section-title {
   font-size: 20px;
   margin: 20px 0 10px 0;
-  color: rgb(71, 131, 251);
+  color: white;
 }
 
 /* Estilo del icono de edición */
 .edit-icon {
   width: 20px;
   margin-left: 10px;
-  color: rgb(255, 255, 0);
+  color: #0097A7;
   cursor: pointer;
   visibility: visible;
   transform: scale(1); /* Escala inicial */
@@ -48,6 +48,9 @@ ion-content {
 
 .close-icon {
   color: red; /* Color para el icono de cancelar */
+}
+.check-icon{
+  color: rgb(0, 163, 0);
 }
 
 /* Mostrar los iconos de check y close cuando está en modo edición */
@@ -75,14 +78,21 @@ ion-item {
   transform: scale(1.2); /* Aumentar el tamaño en hover */
 }
 ion-item{
-  --background: rgb(21, 133, 252);
+  --background: rgb(255, 255, 255);
+    border-radius: 20px;
+    --ion-item-lines:none;
 }
 ion-list{
-  background: #E0F7FA;
+  background: #0097A7;
+  border-radius: 20px;
+  
 }
 ion-label, ion-input{
-  --color: #ffffff;
+  --color: #0097A7;
+  --ion-color-primary: #0097A7;
 }
 ion-icon{
-  color: white;
+  color: #0097A7;
+  width: 24px;
+  
 }

@@ -22,6 +22,7 @@ export class FirestoreService {
     const collection = this.firestore.collection<tipo>(path);
     return collection.doc(id).valueChanges();
   }
+
   getId() {
     return this.firestore.createId();
   }
@@ -47,6 +48,12 @@ export class FirestoreService {
 
   getUsuarios(): Observable<registroUsuario[]> {
     return this.firestore.collection<registroUsuario>('Usuarios').valueChanges();
+  }
+
+  // Método para obtener una colección de Firestore
+  getCollection<tipo>(path: string): Observable<tipo[]> {
+    const collection = this.firestore.collection<tipo>(path);
+    return collection.valueChanges();  // Devuelve un Observable de los datos
   }
 
 

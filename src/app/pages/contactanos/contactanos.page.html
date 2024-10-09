@@ -9,14 +9,14 @@
     </p>
     
     <ion-item lines="none" class="contact-item">
-      
-      <ion-input class="contact-input" label="Asunto" labelPlacement="stacked"  type="text"></ion-input>
+      <ion-input [(ngModel)]="asunto" placeholder="Asunto" labelPlacement="floating" label="Asunto" type="text"></ion-input>
     </ion-item>
     
     <ion-item lines="none" class="contact-item">
-      <ion-textarea class="contact-textarea" label="Mensaje" labelPlacement="stacked"></ion-textarea>
+      <ion-textarea [(ngModel)]="mensaje" placeholder="Mensaje" labelPlacement="floating" label="Mensaje" class="contact-textarea"></ion-textarea>
     </ion-item>
     
-    <ion-button class="contact-submit-button">Enviar</ion-button>
+    <ion-button (click)="enviarMensaje()" class="contact-submit-button">Enviar</ion-button>
   </div>
+  
 </ion-content>

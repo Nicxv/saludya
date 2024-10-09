@@ -21,3 +21,12 @@ export interface registroUsuario {
     
     photoURL?: string;
 }
+
+export interface Mensaje {
+    id_mensaje: string;
+    asunto: string;
+    mensaje: string;
+    fecha: Date;
+    uid: string;
+  }
+  

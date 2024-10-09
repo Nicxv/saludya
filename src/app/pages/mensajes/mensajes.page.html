@@ -1,17 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Mensajes o reclamos</ion-title>
+    <ion-title>Mensajes o Reclamos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let mensaje of mensajes">
+  <ion-list *ngFor="let usuario of usuariosConMensajes">
+    <!-- Item principal del usuario -->
+    <ion-item (click)="toggleExpand(usuario.uid)">
+      <ion-avatar slot="start">
+        <ion-icon name="person-circle-outline" size="large"></ion-icon> <!-- Icono de usuario -->
+      </ion-avatar>
       <ion-label>
-        <h2>{{ mensaje.asunto }}</h2>
-        <p>{{ mensaje.mensaje }}</p>
-        <small>Enviado por: {{ mensaje.uid }}</small> <!-- Aquí mostrarás el UID del usuario -->
+        <h2>{{ usuario.nombre_usu }} {{ usuario.apellido_usu }}</h2> <!-- Mostrar nombre y apellido del usuario -->
+        <p>Mensajes o Reclamos</p>
       </ion-label>
+      <!-- Badge con el número total de mensajes de ese usuario -->
+      <ion-badge color="danger" slot="end">{{ usuario.mensajes.length }}</ion-badge>
     </ion-item>
+
+    <!-- Detalles del mensaje, se expanden solo si el item está seleccionado -->
+    <ion-list *ngIf="expandedUserId === usuario.uid">
+      <ion-item *ngFor="let mensaje of usuario.mensajes">
+        <ion-label>
+          <h3>{{ mensaje.asunto }}</h3>
+          <p>{{ mensaje.mensaje }}</p>
+          <p><small>{{ mensaje.fecha.toDate() | date: 'medium' }}</small></p> <!-- Fecha del mensaje -->
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </ion-list>
 </ion-content>

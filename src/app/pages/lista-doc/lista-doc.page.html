@@ -1,21 +1,25 @@
 <ion-content>
 
-  <div style="position: relative; width: 100%; height: calc(50%);">
-    <img src="assets/images/medicos.jpg"
-      style="position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: top;"
-      alt="Cabecera Imagen" />
-  </div>
-  <ion-header>
 
-    <ion-toolbar>
-      <ion-title size="title">Contamos con un amplio equipo de trabajo</ion-title>
-      <ion-text class="subtitle">Adaptamos nuestro personal a tus necesidades</ion-text>
-    </ion-toolbar>
-  </ion-header>
+  <div style=" position:relative; background-image: url('assets/images/medicos.jpg'); background-position: center 10%; background-repeat: no-repeat; background-size: cover; display: block; width: 100%; height: 40%;"></div>
+
+  <div style=" background: white; box-shadow: 0 3px 5px rgba(0,0,0,0.5); padding: 1rem; display: flex; flex-direction: column; justify-items: center; align-items: center;">
+
+    <h2 class="title" style="position: relative;">Contamos con un amplio equipo de trabajo</h2>
+    <p class="subtitle" style="position: relative;">Adaptamos nuestro personal a tus necesidades</p>
+
+    <ion-select fill="outline" label="Especialidad" placeholder="Seleccione especialidad"
+      style="display: inline-block; max-width: 500px; margin: 0 auto;">
+      <ion-select-option *ngFor="let esp of especialidades" value="{{ esp.name }}">{{ esp.name
+        }}</ion-select-option>
+    </ion-select>
+
+  </div>
+
+
 
 
   <ion-card *ngFor="let lista of UsuariosFiltrados">
-
     <ion-grid>
       <ion-row>
         <ion-col size="8">

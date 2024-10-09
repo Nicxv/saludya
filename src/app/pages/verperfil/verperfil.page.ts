@@ -119,7 +119,7 @@ editField(field: string) {
 }
 
 async initializeAutocompleteForAddress() {
-  const apiKey = 'YOUR_API_KEY_HERE';
+  const apiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8';
 
   try {
     await this.googleMapsService.loadGoogleMaps(apiKey);

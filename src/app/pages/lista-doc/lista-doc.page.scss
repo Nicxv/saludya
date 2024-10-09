@@ -23,7 +23,8 @@ h2.title {
     display: block;
     font-size: 24px;
     font-weight: bold;
-    color: #0074BD;
+    color: white;
+    text-shadow: 0 0.15rem 0.3rem rgba(0,0,0,0.8), 0 0 1rem rgba(0,0,0,0.6);
     text-align: center;
   }
   
@@ -32,10 +33,16 @@ p.subtitle {
   padding: 0;
     display: block;
     font-size: 16px;
-    color: #555;
+    font-weight: normal;
+    color: white;
+    text-shadow: 0 0.05rem 0.1rem rgba(0,0,0,0.8), 0 0 1rem rgba(0,0,0,1), 0 0 2rem rgba(0,0,0,1);
     text-align: center;
   }
-  
+
+  ion-button {
+    --background: #4BAADD;
+  }
+
   .doctor-card {
     background-color: #fff;
     border-radius: 20px;

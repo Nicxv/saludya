@@ -33,16 +33,15 @@ export class MensajesPage implements OnInit {
     const usuariosMap = new Map();
     
     mensajes.forEach(mensaje => {
-      // Verifica si el usuario ya está en el mapa
       if (!usuariosMap.has(mensaje.uid)) {
         usuariosMap.set(mensaje.uid, {
           uid: mensaje.uid,
-          nombre_usu: mensaje.nombre_usu,  // Agregar nombre
-          apellido_usu: mensaje.apellido_usu, // Agregar apellido
+          nombre_usu: mensaje.nombre_usu,
+          apellido_usu: mensaje.apellido_usu,
+          correo_usu: mensaje.correo_usu,
           mensajes: []
         });
       }
-      // Agregar el mensaje al usuario correspondiente
       usuariosMap.get(mensaje.uid).mensajes.push(mensaje);
     });
 
@@ -53,4 +52,24 @@ export class MensajesPage implements OnInit {
   toggleExpand(uid: string) {
     this.expandedUserId = this.expandedUserId === uid ? '' : uid;
   }
+
+  // Método para eliminar un mensaje basado en id_mensaje
+  eliminarMensaje(uid: string, id_mensaje: string) {
+    const usuario = this.usuariosConMensajes.find(u => u.uid === uid);
+    if (usuario) {
+      const path = `Mensajes/${id_mensaje}`; // Usar id_mensaje para eliminar
+      this.firestore.deleteDoc(path).then(() => {
+        console.log('Mensaje eliminado de la base de datos');
+        // Eliminar el mensaje de la lista del usuario
+        usuario.mensajes = usuario.mensajes.filter(m => m.id_mensaje !== id_mensaje);
+        // Si ya no tiene mensajes, quitar el usuario de la lista
+        if (usuario.mensajes.length === 0) {
+          this.usuariosConMensajes = this.usuariosConMensajes.filter(u => u.uid !== uid);
+        }
+      }).catch(error => {
+        console.error('Error al eliminar el mensaje:', error);
+      });
+    }
+  }
 }
+

@@ -56,4 +56,8 @@ export class FirestoreService {
     return collection.valueChanges();  // Devuelve un Observable de los datos
   }
 
+  deleteDoc(path: string) {
+    return this.firestore.doc(path).delete();  // Eliminar documento
+  }
+
 }

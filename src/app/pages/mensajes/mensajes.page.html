@@ -12,13 +12,16 @@
         <ion-icon name="person-circle-outline" size="large"></ion-icon> <!-- Icono de usuario -->
       </ion-avatar>
       <ion-label>
-        <h2>{{ usuario.nombre_usu }} {{ usuario.apellido_usu }}</h2> <!-- Mostrar nombre y apellido del usuario -->
         <p>Mensajes o Reclamos</p>
+        <h2>
+          De: <a [href]="'mailto:' + usuario.correo_usu">{{ usuario.correo_usu }}</a>
+        </h2>
+        <p>{{ usuario.nombre_usu }} {{ usuario.apellido_usu }}</p> <!-- Mostrar nombre y apellido del usuario -->
       </ion-label>
       <!-- Badge con el número total de mensajes de ese usuario -->
-      <ion-badge color="danger" slot="end">{{ usuario.mensajes.length }}</ion-badge>
+      <ion-badge color="danger" slot="end" style="border-radius: 50%; width: 20px;">{{ usuario.mensajes.length }}</ion-badge>
     </ion-item>
-
+  
     <!-- Detalles del mensaje, se expanden solo si el item está seleccionado -->
     <ion-list *ngIf="expandedUserId === usuario.uid">
       <ion-item *ngFor="let mensaje of usuario.mensajes">
@@ -27,7 +30,15 @@
           <p>{{ mensaje.mensaje }}</p>
           <p><small>{{ mensaje.fecha.toDate() | date: 'medium' }}</small></p> <!-- Fecha del mensaje -->
         </ion-label>
+        <!-- Iconos de acciones -->
+        <ion-buttons slot="end">
+          <ion-button (click)="eliminarMensaje(usuario.uid, mensaje.id_mensaje)">
+            <ion-icon name="trash-outline" color="danger"></ion-icon> <!-- Eliminar mensaje -->
+          </ion-button>
+        </ion-buttons>
       </ion-item>
     </ion-list>
   </ion-list>
+  
+
 </ion-content>

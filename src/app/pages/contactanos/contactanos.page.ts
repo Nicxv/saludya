@@ -13,6 +13,7 @@ export class ContactanosPage implements OnInit {
   uid: string = null;
   nombre_usu: string = '';
   apellido_usu: string = '';
+  correo_usu: string = '';
   asunto: string = '';
   mensaje: string = '';
 
@@ -42,8 +43,9 @@ export class ContactanosPage implements OnInit {
     this.firestore.getDoc<registroUsuario>('Usuarios', uid).subscribe(usuarioDoc => {
       if (usuarioDoc) {
         this.nombre_usu = usuarioDoc.nombre; // Asignar nombre a la variable
-        this.apellido_usu = usuarioDoc.apellido; // Asignar apellido a la variable
-        console.log('Nombre:', this.nombre_usu, 'Apellido:', this.apellido_usu); // Verificar
+        this.apellido_usu = usuarioDoc.apellido; 
+        this.correo_usu = usuarioDoc.correo;// Asignar apellido a la variable
+        console.log('Nombre:', this.nombre_usu, 'Apellido:', this.apellido_usu, 'Correo:', this.correo_usu); // Verificar
       }
     });
   }
@@ -55,7 +57,8 @@ export class ContactanosPage implements OnInit {
       const data = {
         id_mensaje: id_mensaje,  // Cambiamos a id_mensaje para mejor identificación
         nombre_usu: this.nombre_usu, // Agregar nombre del usuario
-        apellido_usu: this.apellido_usu, // Agregar apellido del usuario
+        apellido_usu: this.apellido_usu, 
+        correo_usu: this.correo_usu,// Agregar apellido del usuario
         asunto: this.asunto,
         mensaje: this.mensaje,
         fecha: new Date(),

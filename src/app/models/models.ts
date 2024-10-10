@@ -26,6 +26,7 @@ export interface Mensaje {
     id_mensaje: string;
     nombre_usu: string;
     apellido_usu: string;
+    correo_usu: string;
     asunto: string;
     mensaje: string;
     fecha: Date;

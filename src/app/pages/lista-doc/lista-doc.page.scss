@@ -99,3 +99,11 @@ p.subtitle {
     --border-style: solid;
     --border-width: 1px;
   }
+
+  .icon-button {
+    font-size: 1.2rem; /* Aumentar el tamaño de los iconos */
+    margin-right: 10px; /* Separar los iconos horizontalmente */
+    cursor: pointer; /* Cambiar el cursor a pointer */
+    color: #0074BD; /* Puedes cambiar el color de los iconos si lo deseas */
+  }
+  

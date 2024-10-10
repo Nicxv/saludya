@@ -16,18 +16,13 @@
         label="Especialidad"
         placeholder="Seleccione especialidad"
         interface="popover"
-        interface="alert"
         style="display: inline-block; max-width: 432px; margin: 0.1rem; padding: 0.2rem 1rem; background-color: rgba(255,255,255,0.8);">
         <ion-select-option *ngFor="let esp of especialidades" value="{{ esp.name }}">
           {{ esp.name }}
         </ion-select-option>
       </ion-select>
     </div>
-  
   </div>
-
-
-
 
   <ion-card *ngFor="let lista of UsuariosFiltrados">
     <ion-grid>
@@ -35,29 +30,49 @@
         <ion-col size="8">
           <ion-card-header>
             <ion-card-title>{{ lista.nombre }}</ion-card-title>
-            <ion-card-subtitle>{{ lista.rol }}</ion-card-subtitle>
+
+            <!-- Mostrar especialidad en lugar de rol -->
+            <ion-card-subtitle>
+              <span *ngIf="!lista.isEditing">{{ lista.especialidad || 'Sin especialidad' }}</span>
+              <ion-input *ngIf="lista.isEditing" [(ngModel)]="lista.especialidad" placeholder="Especialidad"></ion-input>
+            </ion-card-subtitle>
           </ion-card-header>
+
+          <!-- Campo editable de la descripción -->
           <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
+            <div *ngIf="!lista.descripcion && !lista.isEditing">
+              <p *ngIf="userRole !== 'funcionario'">No tiene descripción</p>
+            </div>
+            <div *ngIf="lista.isEditing">
+              <ion-textarea [(ngModel)]="lista.descripcion" placeholder="Descripción"></ion-textarea>
+            </div>
+            <div *ngIf="lista.descripcion && !lista.isEditing">
+              {{ lista.descripcion }}
+            </div>
           </ion-card-content>
+
+          <!-- Botones para editar -->
           <ion-card-content>
-            <ion-button>Ver perfil</ion-button>
+            <ion-icon *ngIf="!lista.isEditing" color="primary" name="create-outline" (click)="enableEdit(lista)" class="icon-button"></ion-icon>
+            <ion-icon *ngIf="lista.isEditing" color="success" name="checkmark-outline" (click)="saveChanges(lista)" class="icon-button"></ion-icon>
+            <ion-icon *ngIf="lista.isEditing" color="danger" name="close-outline" (click)="cancelEdit(lista)" class="icon-button"></ion-icon>
+          </ion-card-content>
+
+          <!-- Ver perfil -->
+          <ion-card-content style="margin-top: -15px;">
+            <ion-button [routerLink]="['/perfiles-docs']">Ver perfil</ion-button>
           </ion-card-content>
         </ion-col>
+
         <ion-col>
           <ion-card-content style="position: relative; height: 100%;">
-            <img src="assets/images/doctora.png"
-              style="position: absolute; width: 100%; height: 100%; object-fit: contain;" alt="" />
+            <img src="assets/images/doctora.png" style="position: absolute; width: 100%; height: 100%; object-fit: contain;" alt="" />
           </ion-card-content>
         </ion-col>
-
       </ion-row>
     </ion-grid>
-
   </ion-card>
 
 </ion-content>
 
-<ion-footer>
-  <app-tab></app-tab>
-</ion-footer>
+<app-tab></app-tab>

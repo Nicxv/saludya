@@ -18,8 +18,10 @@ export interface registroUsuario {
     antecedentesQuirurgicos?: string;
     alergias?: string;
     medicamentos?: string;
-    
-    photoURL?: string;
+    photoURL?: string; //foto
+    especialidad?: string;
+    descripcion?: string;
+    isEditing?: boolean;  // Campo opcional para controlar la edición
 }
 
 export interface Mensaje {

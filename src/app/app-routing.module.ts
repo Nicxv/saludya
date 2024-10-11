@@ -77,7 +77,8 @@ const routes: Routes = [
     path: 'lista-usuarios-admin',
     loadChildren: () => import('./pages/lista-usuarios-admin/lista-usuarios-admin.module').then( m => m.ListaUsuariosAdminPageModule),
     canActivate: [adminGuard] //admin guard
-  },  {
+  },
+  {
     path: 'mensajes',
     loadChildren: () => import('./pages/mensajes/mensajes.module').then( m => m.MensajesPageModule)
   },

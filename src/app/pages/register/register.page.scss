@@ -1,0 +1,105 @@
+ion-content {
+    --background: #E0F7FA; /* Cambia este color según tus necesidades */
+  }
+
+.register-container {
+    max-width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+  
+
+  .separacion {
+    margin-top: 30px;
+  }
+  .titulo{
+    font-weight: bold;
+    color: #FFFFFF;
+    
+  }
+  ion-input.custom {
+    --background: #FFFFFF;
+    --color: rgba(0, 0, 0, 0.656);
+    --placeholder-color: #353535;
+    --placeholder-opacity: 0.8;
+    
+    /* Solo el border-radius */
+    --border-radius: 50px;
+  
+    --padding-bottom: 10px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 10px;
+  }
+
+  ion-button {
+    --background: #4BAADD;
+    --color: #FEFEFE;
+    --border-radius: 50px;
+    margin-top: 30px;
+  }
+  
+  /* Contenedor de botones para el primer paso */
+  .first-step-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  /* Botón de Siguiente (alineado a la derecha con ícono de flecha) */
+  .next-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Contenedor de botones para el segundo paso */
+  .second-step-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  /* Botón de Atrás (alineado a la izquierda con ícono de flecha) */
+  .prev-button {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  /* Botón de Registrarse (alineado a la derecha, sin ícono) */
+  .register-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .custom-select {
+    --background: #ffffff; /* Fondo blanco para el campo */
+    --color: #000000; /* Color del texto */
+    --placeholder-color: #a0a0a0; /* Color del placeholder */
+    --padding-start: 12px; /* Espacio interno a la izquierda */
+    --padding-end: 12px; /* Espacio interno a la derecha */
+    --border-radius: 50px; /* Bordes redondeados */
+    --border-width: 1px; /* Ancho del borde */
+    --border-color: #dcdcdc; /* Color del borde */
+    --icon-color: #6A70FE; /* Color del icono */
+  }
+
+
+  /* Consultas de medios para pantallas pequeñas */
+@media (max-width: 576px) {
+    .custom {
+      font-size: 14px;
+    }
+  }
+  
+  /* Consultas de medios para pantallas medianas */
+  @media (min-width: 577px) and (max-width: 768px) {
+    .custom {
+      font-size: 16px;
+    }
+  }
+
+  .error-message {
+    color: white; /* Cambia el color del texto a blanco */
+    font-size: 14px; /* Ajusta el tamaño de fuente si es necesario */
+    margin-left: 10px;
+  }

@@ -1,19 +1,15 @@
-<ion-header [translucent]="true">
-  
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
-   <!-- Imagen de la parte superior -->
-   <div class="header-image-container">
-    <img src="assets/images/doctora.png" alt="Imagen de Dra. Sofía Rodríguez" />
+  <!-- Imagen de la parte superior -->
+  <div class="header-image-container">
+    <img [src]="usuario.photoURL ? usuario.photoURL : 'assets/images/doctora.png'" alt="Imagen de {{ usuario.nombre }}" />
   </div>
 
   <!-- Información del doctor -->
   <div class="doctor-info">
-    <h1>Dra. Sofía Rodríguez</h1>
-    <p class="description">
-      Soy una persona con gran determinación al momento de atender a mis pacientes, haciendo de esta consulta algo más ameno y generando mayor cercanía.
-    </p>
+    <h1>{{ usuario.nombre }} {{ usuario.apellido }}</h1>
+    <p class="description">{{ usuario.descripcion }}</p>
   </div>
 
   <!-- Sección de estadísticas -->
@@ -45,7 +41,7 @@
   </div>
 
   <!-- Botón para contactar al profesional -->
-  <ion-button  class="contact-button">
+  <ion-button class="contact-button">
     Contactar
   </ion-button>
 
@@ -54,7 +50,4 @@
     <ion-icon name="alert-circle-outline"></ion-icon>
     Reportar al profesional
   </ion-button>
-  
 </ion-content>
-
-<app-tab></app-tab>

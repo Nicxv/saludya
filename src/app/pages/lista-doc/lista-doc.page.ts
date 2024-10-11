@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { registroUsuario } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-doc',
@@ -14,12 +15,13 @@ export class ListaDocPage implements OnInit {
   searchTerm: string = ''; // Almacenar el término de búsqueda
   userRole: string | null = null;
 
-  constructor(private firestoreService: FirestoreService, private authService: AuthService) { }
+  constructor(private firestoreService: FirestoreService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.cargarUsuarios();
     this.getUserRole();
   }
+  
   clearSearch() {
     this.searchTerm = '';
     this.filteredUsuarios = this.UsuariosFiltrados; // Mostrar todos los usuarios cuando se borra el término de búsqueda

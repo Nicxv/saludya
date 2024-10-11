@@ -3,42 +3,73 @@
   <div style="position: relative; background-color: white; height: 40%; 
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
-  padding: 1rem; display: flex; flex-direction: column; justify-content: flex-end; align-content: flex-end; ">
+  padding: 1rem; display: flex; flex-direction: column; justify-content: flex-end; align-content: flex-end;">
 
-    <div style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('assets/images/medicos.jpg'); background-position: center 10%; background-repeat: no-repeat; background-size: cover; "></div>
-    <div style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 20%; "></div>
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('assets/images/medicos.jpg'); background-position: center 10%; background-repeat: no-repeat; background-size: cover;"></div>
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 20%;"></div>
 
-    <div style="position: relative; text-align: center;">
-      <h2 class="title">Contamos con un amplio equipo de trabajo</h2>
-      <p class="subtitle">Adaptamos nuestro personal a tus necesidades</p>
+  <div style="position: relative; text-align: center;">
+    <h2 class="title">Contamos con un amplio equipo de trabajo</h2>
+    <p class="subtitle">Adaptamos nuestro personal a tus necesidades</p>
 
-      <ion-select
-        label="Especialidad"
-        placeholder="Seleccione especialidad"
-        interface="popover"
-        style="display: inline-block; max-width: 432px; margin: 0.1rem; padding: 0.2rem 1rem; background-color: rgba(255,255,255,0.8);">
-        <ion-select-option *ngFor="let esp of especialidades" value="{{ esp.name }}">
-          {{ esp.name }}
-        </ion-select-option>
-      </ion-select>
+    <div style="position: relative; display: inline-block; width: 100%; max-width: 432px; margin: 0.1rem;">
+      <ion-input
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar por especialidad"
+        style="padding: 0.2rem 1rem; background-color: rgba(255,255,255,0.8);"
+        (ionInput)="filterUsuarios()">
+      </ion-input>
+
+      <ion-icon 
+        name="search" 
+        (click)="filterUsuarios()"
+        style="position: absolute; top: 50%; right: 50px; transform: translateY(-50%); cursor: pointer; z-index: 2; color: #0074BD;">
+      </ion-icon>
+
+      <ion-icon 
+        name="close" 
+        *ngIf="searchTerm" 
+        (click)="clearSearch()"
+        style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer; z-index: 2; color: red;">
+      </ion-icon>
     </div>
   </div>
+</div>
 
-  <ion-card *ngFor="let lista of UsuariosFiltrados">
+
+
+
+
+  <ion-card *ngFor="let lista of filteredUsuarios" class="user-card">
     <ion-grid>
-      <ion-row>
-        <ion-col size="8">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="12" class="ion-text-center">
+          <!-- Imagen circular -->
+          <ion-card-content>
+            <img 
+              [src]="lista.photoURL ? lista.photoURL : 'assets/images/doctora.png'" 
+              class="profile-image"
+              alt="Imagen de {{ lista.nombre }}" 
+            />
+          </ion-card-content>
+  
+          <!-- Nombre del usuario -->
           <ion-card-header>
-            <ion-card-title>{{ lista.nombre }}</ion-card-title>
-
-            <!-- Mostrar especialidad en lugar de rol -->
-            <ion-card-subtitle>
-              <span *ngIf="!lista.isEditing">{{ lista.especialidad || 'Sin especialidad' }}</span>
-              <ion-input *ngIf="lista.isEditing" [(ngModel)]="lista.especialidad" placeholder="Especialidad"></ion-input>
-            </ion-card-subtitle>
+            <ion-card-title>{{ lista.nombre }} {{ lista.apellido }} </ion-card-title>
+  
+            <!-- Especialidad y botón de editar -->
+            <div class="especialidad-container">
+              <ion-card-subtitle>
+                <span *ngIf="!lista.isEditing">{{ lista.especialidad || 'Sin especialidad' }}</span>
+                <ion-input *ngIf="lista.isEditing" [(ngModel)]="lista.especialidad" placeholder="Especialidad"></ion-input>
+              </ion-card-subtitle>
+              <ion-icon *ngIf="!lista.isEditing" color="primary" name="create-outline" (click)="enableEdit(lista)" class="edit-icon"></ion-icon>
+              <ion-icon *ngIf="lista.isEditing" color="success" name="checkmark-outline" (click)="saveChanges(lista)" class="icon-button"></ion-icon>
+              <ion-icon *ngIf="lista.isEditing" color="danger" name="close-outline" (click)="cancelEdit(lista)" class="icon-button"></ion-icon>
+            </div>
           </ion-card-header>
-
-          <!-- Campo editable de la descripción -->
+  
+          <!-- Descripción -->
           <ion-card-content>
             <div *ngIf="!lista.descripcion && !lista.isEditing">
               <p *ngIf="userRole !== 'funcionario'">No tiene descripción</p>
@@ -50,23 +81,10 @@
               {{ lista.descripcion }}
             </div>
           </ion-card-content>
-
-          <!-- Botones para editar -->
-          <ion-card-content>
-            <ion-icon *ngIf="!lista.isEditing" color="primary" name="create-outline" (click)="enableEdit(lista)" class="icon-button"></ion-icon>
-            <ion-icon *ngIf="lista.isEditing" color="success" name="checkmark-outline" (click)="saveChanges(lista)" class="icon-button"></ion-icon>
-            <ion-icon *ngIf="lista.isEditing" color="danger" name="close-outline" (click)="cancelEdit(lista)" class="icon-button"></ion-icon>
-          </ion-card-content>
-
+  
           <!-- Ver perfil -->
-          <ion-card-content style="margin-top: -15px;">
-            <ion-button [routerLink]="['/perfiles-docs']">Ver perfil</ion-button>
-          </ion-card-content>
-        </ion-col>
-
-        <ion-col>
-          <ion-card-content style="position: relative; height: 100%;">
-            <img src="assets/images/doctora.png" style="position: absolute; width: 100%; height: 100%; object-fit: contain;" alt="" />
+          <ion-card-content>
+            <ion-button [routerLink]="['/perfiles-docs']" size="small" shape="round">Ver perfil</ion-button>
           </ion-card-content>
         </ion-col>
       </ion-row>

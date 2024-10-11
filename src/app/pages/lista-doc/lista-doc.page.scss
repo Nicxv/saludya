@@ -106,4 +106,51 @@ p.subtitle {
     cursor: pointer; /* Cambiar el cursor a pointer */
     color: #0074BD; /* Puedes cambiar el color de los iconos si lo deseas */
   }
+
+  .user-card {
+    padding: 15px; /* Reducir padding general */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-image {
+    width: 110px; /* Hacer la imagen más pequeña */
+    height: 110px;
+    border-radius: 50%; /* Mantener la imagen circular */
+    object-fit: cover;
+    margin: 0 auto; /* Centrar la imagen */
+  }
+  
+  .ion-card-title {
+    font-size: 1.2rem; /* Reducir tamaño de texto */
+    margin-top: 8px;
+  }
+  
+  .ion-card-subtitle {
+    font-size: 0.9rem; /* Reducir tamaño de subtítulo */
+    color: gray;
+  }
+  
+  .especialidad-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espacio entre especialidad e icono */
+  }
+  
+  .edit-icon {
+    font-size: 1.2rem; /* Hacer el icono de editar un poco más pequeño */
+    cursor: pointer;
+  }
+  ion-button {
+    margin-top: 8px; /* Acercar el botón "Ver perfil" al contenido */
+  }
+  
+  .button-container {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Aumentar espacio entre botones de confirmación/cancelar */
+  }
+  
   

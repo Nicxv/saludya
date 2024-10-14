@@ -125,5 +125,9 @@ info: registroUsuario = null;
   
     fileInput.click();
   }
+  verMensajes() {
+    // Lógica para redirigir a la página de mensajes
+    this.router.navigate(['/list-fchat']); // Cambia la ruta según sea necesario
+  }
 
 }

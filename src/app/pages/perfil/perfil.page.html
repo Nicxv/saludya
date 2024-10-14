@@ -40,7 +40,7 @@
       </ng-template>
   
       <!-- Botones -->
-      <ion-button *ngIf="login && rol === 'funcionario'" expand="block" class="btn" size="small">
+      <ion-button *ngIf="login && rol === 'funcionario'" expand="block" class="btn" size="small" (click)="verMensajes()">
         <ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>
         Mensajes
         <span *ngIf="notificacionCount > 0" class="notification-badge">{{ notificacionCount }}</span>

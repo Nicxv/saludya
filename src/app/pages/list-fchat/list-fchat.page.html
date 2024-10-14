@@ -1,13 +1,23 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>list-fchat</ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">list-fchat</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <ion-item *ngFor="let mensaje of mensajes" (click)="mensaje.expanded = !mensaje.expanded">
+      <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+      <ion-label>
+        Mensaje de: {{ mensaje.remitente }}
+      </ion-label>
+      <ion-note slot="start" *ngIf="mensaje.expanded" class="expanded-note">
+        <div>
+          <strong>Asunto:</strong> {{ mensaje.asunto }}<br>
+          <strong>Mensaje:</strong> {{ mensaje.mensaje }}<br>
+          <strong>Fecha:</strong> {{ mensaje.timestamp | date:'short' }}
+        </div>
+      </ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+

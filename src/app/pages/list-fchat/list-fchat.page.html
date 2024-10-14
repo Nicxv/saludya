@@ -4,7 +4,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-list *ngFor="let mensaje of mensajes">
-    <ion-item  (click)="mensaje.expanded = !mensaje.expanded">
+    <ion-item (click)="mensaje.expanded = !mensaje.expanded">
       <ion-icon name="person-circle-outline" slot="start"></ion-icon>
       <ion-label>
         Mensaje de: {{ mensaje.remitente }}

@@ -44,6 +44,7 @@ export interface Chat {
     remitente: string; // UID del usuario que envía el mensaje
     destinatario: string; // UID del funcionario que recibe el mensaje
     timestamp: Date; // Marca de tiempo del mensaje
+    correoRemitente?: string; // Añadir esta línea para incluir el campo de correo
     expanded?: boolean;  // Campo opcional para la expansion
     
   }

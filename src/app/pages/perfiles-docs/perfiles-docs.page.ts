@@ -16,4 +16,9 @@ export class PerfilesDocsPage implements OnInit {
     // Obtener el estado pasado a la ruta
     this.usuario = history.state.usuario; // Esto obtiene el usuario que pasamos
   }
+
+  contactarFuncionario() {
+    // Navegar a la página de mensajes pasando el uid del funcionario
+    this.router.navigate(['/msj-funcionario'], { state: { uidFuncionario: this.usuario.uid } });
+  }
 }

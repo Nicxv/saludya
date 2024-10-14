@@ -29,7 +29,7 @@ export class ContactanosPage implements OnInit {
   async getUid() {
     const uid = await this.auth.getUid();
     if (uid) {
-      this.uid = uid;
+      this.uid = uid; 
       console.log('uid ->', this.uid);
       // Obtener el usuario desde Firestore
       this.getUsuario(this.uid); // Llama a obtener el usuario

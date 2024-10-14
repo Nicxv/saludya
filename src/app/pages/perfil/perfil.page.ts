@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
-import { registroUsuario } from 'src/app/models/models';
+import { Chat, registroUsuario } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -12,8 +12,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  
-
+  notificacionCount: number = 0; // Contador de notificaciones
   login: boolean = false;
   rol: 'paciente' | 'funcionario' | 'admin' = null;
    
@@ -23,7 +22,7 @@ export class PerfilPage implements OnInit {
     if(res) {
       console.log('Esta logeado');
       this.login = true;
-      this.getDatosUser(res.uid)
+      this.getDatosUser(res.uid);
     }else {
       console.log('No está logeado');
       this.login = false;
@@ -67,9 +66,18 @@ info: registroUsuario = null;
          this.uid = uid;
          console.log('uid ->', this.uid);
          this.getInfoUser();
+         this.getNotificaciones(uid); // Llamar a la función para obtener notificaciones
        }else {
          console.log('no existe uid');
     }
+  }
+  getNotificaciones(uid: string) {
+    const path = 'Chat';
+    this.firestore.getCollection<Chat>(path).subscribe(chats => {
+      // Filtramos los mensajes donde el destinatario sea el UID del funcionario
+      const mensajesParaFuncionario = chats.filter(chat => chat.destinatario === uid);
+      this.notificacionCount = mensajesParaFuncionario.length; // Contamos los mensajes
+    });
   }
 //obtener datos de la base de datos para mostrarlos en el html
   getInfoUser(){

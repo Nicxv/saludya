@@ -40,6 +40,11 @@
       </ng-template>
   
       <!-- Botones -->
+      <ion-button *ngIf="login && rol === 'funcionario'" expand="block" class="btn" size="small">
+        <ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>
+        Mensajes
+        <span *ngIf="notificacionCount > 0" class="notification-badge">{{ notificacionCount }}</span>
+      </ion-button>
       <ion-button expand="block" class="btn" size="small" [routerLink]="['/verperfil']" >
         <ion-icon slot="start" name="pencil-outline"></ion-icon>
         ver perfil

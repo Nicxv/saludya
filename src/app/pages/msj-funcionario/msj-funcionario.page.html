@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="contact-container">
+    <h1 class="contact-title">Formulario de contacto</h1>
+    <p class="contact-subtitle">
+      Quieres contactarte conmigo, solo enviame este mensaje y me contactare contigo lo mas pronto posible.
+    </p>
+
+    <ion-item lines="none" class="contact-item">
+      <ion-input [(ngModel)]="asunto" placeholder="Asunto" labelPlacement="floating" label="Asunto" type="text"></ion-input>
+    </ion-item>
+    
+    <ion-item lines="none" class="contact-item">
+      <ion-textarea [(ngModel)]="mensaje" placeholder="Mensaje" labelPlacement="floating" label="Mensaje" class="contact-textarea"></ion-textarea>
+    </ion-item>
+    
+    <ion-button (click)="enviarMensaje()" class="contact-submit-button">Enviar</ion-button>
+  </div>
+</ion-content>
+

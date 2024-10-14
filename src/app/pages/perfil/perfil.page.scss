@@ -106,3 +106,12 @@ ion-button.btn {
   --border-radius: 50px;
   
 }
+.notification-badge {
+  background-color: red; /* Cambia el color de fondo */
+  color: white; /* Color del texto */
+  border-radius: 50%;
+  width: 15px;
+  position: absolute; /* Posición absoluta para superponerlo sobre el botón */
+  top: 0; /* Ajusta según sea necesario */
+  right: 10px; /* Ajusta según sea necesario */
+}

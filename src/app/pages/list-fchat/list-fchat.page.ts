@@ -15,34 +15,40 @@ export class ListFchatPage implements OnInit {
   constructor(private firestoreService: FirestoreService, private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.getUid().then(uid => {
-      this.uid = uid;
+    const mensajesGuardados = localStorage.getItem('mensajes');
+    if (mensajesGuardados) {
+      this.mensajes = JSON.parse(mensajesGuardados);
+    } else {
+      this.getUid(); // Cargar mensajes si no están en local storage
+    }
+  }
+  
+  async getUid() {
+    this.uid = await this.authService.getUid();
+    if (this.uid) {
       this.cargarMensajes();
-    });
+    }
   }
 
   cargarMensajes() {
     if (this.uid) {
       this.firestoreService.getCollection<Chat>('Chat').subscribe(chatMessages => {
-        console.log('Mensajes obtenidos:', chatMessages); // Verifica los mensajes
         this.mensajes = chatMessages
           .filter(chat => chat.destinatario === this.uid)
           .map(chat => ({
             ...chat,
-            timestamp: this.convertTimestampToDate(chat.timestamp) // Conversión alternativa
+            timestamp: this.convertTimestampToDate(chat.timestamp)
           }));
-      }, error => {
-        console.error('Error al cargar mensajes:', error);
+        localStorage.setItem('mensajes', JSON.stringify(this.mensajes)); // Guarda los mensajes en local storage
       });
-    } else {
-      console.warn('UID no está definido, no se pueden cargar los mensajes.');
     }
   }
 
   convertTimestampToDate(timestamp: any): Date {
     if (timestamp && timestamp.seconds !== undefined) {
-      return new Date(timestamp.seconds * 1000); // Convertir a milisegundos
+      return new Date(timestamp.seconds * 1000);
     }
-    return new Date(); // Devuelve la fecha actual si no es válido
+    return new Date();
   }
+
 }

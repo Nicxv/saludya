@@ -1,26 +1,24 @@
-<ion-header [translucent]="true">
-
-</ion-header>
+<ion-header [translucent]="true"></ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor="let mensaje of mensajes">
-    <ion-item (click)="mensaje.expanded = !mensaje.expanded">
-      <ion-icon name="person-circle-outline" slot="start"></ion-icon>
-      <ion-label>
-        Mensaje de: {{ mensaje.remitente }}
-      </ion-label>
-    </ion-item>
-    <!-- Detalles del mensaje que se expanden hacia abajo -->
-    <div *ngIf="mensaje.expanded" class="mensaje-detalles">
-      <ion-card>
-        <ion-card-content>
-          <p><strong>Asunto:</strong> {{ mensaje.asunto }}</p>
-          <p><strong>Mensaje:</strong> {{ mensaje.mensaje }}</p>
-          <p><strong>Fecha:</strong> {{ mensaje.timestamp | date:'short' }}</p>
-        </ion-card-content>
-      </ion-card>
-    </div>
+  <ion-list>
+    <ng-container *ngFor="let mensaje of mensajes">
+      <ion-item (click)="mensaje.expanded = !mensaje.expanded">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label>
+          Mensaje de: {{ mensaje.remitente }}
+        </ion-label>
+      </ion-item>
+      <!-- Message details that expand downwards -->
+      <div *ngIf="mensaje.expanded" class="mensaje-detalles">
+        <ion-card>
+          <ion-card-content>
+            <p><strong>Asunto:</strong> {{ mensaje.asunto }}</p>
+            <p><strong>Mensaje:</strong> {{ mensaje.mensaje }}</p>
+            <p><strong>Fecha:</strong> {{ mensaje.timestamp | date:'short' }}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ng-container>
   </ion-list>
 </ion-content>
-
-

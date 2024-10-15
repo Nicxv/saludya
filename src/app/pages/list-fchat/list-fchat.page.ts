@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-fchat',
@@ -17,7 +18,8 @@ export class ListFchatPage implements OnInit {
 
   constructor(
     private firestoreService: FirestoreService,
-    private authService: AuthService ) {}
+    private authService: AuthService,
+    private router: Router ) {}
 
   ngOnInit() {
     // Use onAuthStateChanged to ensure we detect the user state correctly
@@ -35,7 +37,7 @@ export class ListFchatPage implements OnInit {
 
   cargarMensajes() {
     if (this.uid) {
-      this.firestoreService.getCollection<Chat>('Chat').subscribe((chatMessages) => {
+      this.firestoreService.getCollectionWithId<Chat>('Chat').subscribe((chatMessages) => {
         console.log('Fetched Messages:', chatMessages);
         this.mensajes = chatMessages
           .filter((chat) => chat.destinatario === this.uid)
@@ -45,6 +47,16 @@ export class ListFchatPage implements OnInit {
             timestamp: this.convertTimestampToDate(chat.timestamp),
           }));
       });
+    }
+  }
+
+  async deleteMensaje(mensajeId: string) {
+    try {
+      await this.firestoreService.deleteDocTwo('Chat', mensajeId);
+      console.log('Mensaje borrado:', mensajeId);
+      this.mensajes = this.mensajes.filter(m => m.id_chat !== mensajeId); // Update the list after deletion
+    } catch (error) {
+      console.error('Error deleting message:', error);
     }
   }
 

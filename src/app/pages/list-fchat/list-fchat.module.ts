@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { ListFchatPageRoutingModule } from './list-fchat-routing.module';
 
 import { ListFchatPage } from './list-fchat.page';
+import { ComponentesModule } from 'src/app/componentes/componentes.module';
 
 @NgModule({
   imports: [
+    ComponentesModule,
     CommonModule,
     FormsModule,
     IonicModule,

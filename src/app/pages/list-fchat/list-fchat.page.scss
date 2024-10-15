@@ -2,5 +2,14 @@
     margin: 0 16px;
     padding: 8px 0;
     transition: all 0.3s ease-in-out;
+    display: block;
   }
+  ion-content {
+    --background: #E0F7FA; /* Cambia este color según tus necesidades */
+  
+  }
+  ion-button {
+    --background: #4BAADD;
+  }
+
   

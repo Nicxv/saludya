@@ -22,6 +22,9 @@ export class DescMedicaPage implements OnInit {
     iva: 0, // Se calculará dinámicamente
     costoConsulta: 0, // Se calculará dinámicamente
     fecha_pago: new Date(),
+    rutUsuario: '', // Inicializar el nuevo campo
+    nombreUsuario: '', // Inicializar el nuevo campo
+    direccionUsuario: '', // Inicializar el nuevo campo
   };
   archivoSeleccionado: File | null = null;
 
@@ -48,7 +51,12 @@ export class DescMedicaPage implements OnInit {
   getDatosUser(uid: string) {
     const path = 'Usuarios';
     this.firestore.getDoc<registroUsuario>(path, uid).subscribe(res => {
-      console.log('datos -> ', res);
+      if (res) {
+        // Asignar los datos del usuario logueado a la consulta
+        this.consulta.rutUsuario = res.rut || '';
+        this.consulta.nombreUsuario = res.nombre || '';
+        this.consulta.direccionUsuario = res.direccion || '';
+      }
     });
   }
 

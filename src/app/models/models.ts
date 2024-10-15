@@ -55,12 +55,16 @@ export interface Chat {
     descripcion: string;
     ordenMedicaURL?: string; // Campo opcional para almacenar la URL del PDF
     sintomas: string;
-    subtotal: number; // Nuevo campo para el subtotal
-    iva: number; // Nuevo campo para el IVA
+    subtotal: number; // Subtotal de la consulta
+    iva: number; // IVA de la consulta
     costoConsulta: number; // Costo final de la consulta con IVA incluido
     codigoDescuento?: string; // Campo opcional para el código de descuento
     fecha_pago: Date;
+    rutUsuario: string; // Nuevo campo para el RUT del usuario
+    nombreUsuario: string; // Nuevo campo para el nombre del usuario
+    direccionUsuario: string; // Nuevo campo para la dirección del usuario
   }
+  
   
   
   

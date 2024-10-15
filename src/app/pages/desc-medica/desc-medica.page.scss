@@ -6,7 +6,7 @@ ion-content {
     --background: #4BAADD;
     --placeholder-color: #ffffff;
     --padding-start: 15px;
-    --padding-end: 12px;
+    --padding-end: 12px; 
     --border-radius: 50px;
     width: 65%;
     margin: 0 auto; /* Centra el select */
@@ -20,14 +20,11 @@ ion-content {
     color: #fff;
     opacity: 1;
   }
-  
-  ion-textarea {
-    background-color: #E5EFFF;
-    border-radius: 10px;
-    color: #3a3a3ae9;
-    padding: 30px;
-    --placeholder-color: #313131;
-    text-align: start;
+  ion-textarea.area {
+    --background: white; /* Fondo blanco para los campos de texto */
+    --border-radius: 15px;
+    font-size: 14px;
+    height: 150px;
   }
   
   p {

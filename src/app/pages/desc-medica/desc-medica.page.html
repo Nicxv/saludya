@@ -5,30 +5,44 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-select placeholder="Seleccione Profesional">
-          <ion-select-option value="carlos-palacios">Dr. Carlos Palacios</ion-select-option>
-          <ion-select-option value="maximiliano-falcon">Dr. Maximiliano Falcon</ion-select-option>
-          <ion-select-option value="brayan-cortez">Dr. Brayan Cortez</ion-select-option>
+        <ion-select placeholder="Seleccione Profesional" [(ngModel)]="consulta.nombreFuncionario">
+          <ion-select-option *ngFor="let funcionario of funcionarios" [value]="funcionario.nombre">D. 
+            {{ funcionario.nombre }} {{ funcionario.apellido }}
+          </ion-select-option>
         </ion-select>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-textarea placeholder="Ingresa aquí la descripción"></ion-textarea>
+        <ion-textarea
+          label="Descripción"
+          fill="outline"
+          labelPlacement="floating"
+          placeholder="Ingresa aquí la descripción"
+          class="area"
+          [(ngModel)]="consulta.descripcion">
+        </ion-textarea>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
         <p style="color: rgb(43, 42, 42);">¿Tienes una orden médica? adjúntala aquí:</p>
-        <ion-button expand="block">--Seleccionar archivo--</ion-button>
+        <input type="file" (change)="onFileSelected($event)" />
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-textarea placeholder="Síntomas"></ion-textarea>
+        <ion-textarea
+          label="Síntomas"
+          fill="outline"
+          labelPlacement="floating"
+          placeholder="Ingresa tus síntomas"
+          class="area"
+          [(ngModel)]="consulta.sintomas">
+        </ion-textarea>
       </ion-col>
     </ion-row>
 
@@ -36,17 +50,22 @@
       <ion-col>
         <ion-card>
           <ion-card-header>
-            <ion-card-title>Costo de la consulta: <strong>$50.000</strong></ion-card-title>
+            <ion-card-title>Costo de la consulta: ${{consulta.costoConsulta}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <p>¿Tienes un código de descuento?</p>
-            <ion-input placeholder="Ingresa aquí tu código" class="discount-input"></ion-input>
-            <ion-button expand="block">SIGUIENTE</ion-button>
+            <ion-input
+              placeholder="Ingresa aquí tu código"
+              class="discount-input"
+              [(ngModel)]="consulta.codigoDescuento">
+            </ion-input>
+            <ion-button expand="block" (click)="guardarConsulta()">SIGUIENTE</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
 
 <app-tab></app-tab>

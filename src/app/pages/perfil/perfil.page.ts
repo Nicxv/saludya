@@ -27,7 +27,7 @@ export class PerfilPage implements OnInit {
       console.log('No está logeado');
       this.login = false;
     }
-  })
+  }) 
 }
 //metodo logout
   logout() {
@@ -59,6 +59,17 @@ info: registroUsuario = null;
     });
     this.getUid(); 
   }
+  getInfoUser(){
+    const path = 'Usuarios';
+    const id = this.uid;
+    this.firestore.getDoc<registroUsuario>(path, id).subscribe( res => {
+      if (res) {
+        this.info = res;
+      }
+      console.log('datos son -> ', res);
+    })
+
+  }
   //obtener la id
     async getUid() {
        const uid = await this.auth.getUid();
@@ -80,17 +91,7 @@ info: registroUsuario = null;
     });
   }
 //obtener datos de la base de datos para mostrarlos en el html
-  getInfoUser(){
-    const path = 'Usuarios';
-    const id = this.uid;
-    this.firestore.getDoc<registroUsuario>(path, id).subscribe( res => {
-      if (res) {
-        this.info = res;
-      }
-      console.log('datos son -> ', res);
-    })
-
-  }
+  
 
   selectImage() {
     const fileInput = document.createElement('input');

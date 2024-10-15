@@ -48,5 +48,19 @@ export interface Chat {
     expanded?: boolean;  // Campo opcional para la expansion
     
   }
+
+  export interface Consultamedica {
+    id_consulta: string;
+    nombreFuncionario: string;
+    descripcion: string;
+    ordenMedicaURL?: string; // Campo opcional para almacenar la URL del PDF
+    sintomas: string;
+    subtotal: number; // Nuevo campo para el subtotal
+    iva: number; // Nuevo campo para el IVA
+    costoConsulta: number; // Costo final de la consulta con IVA incluido
+    codigoDescuento?: string; // Campo opcional para el código de descuento
+    fecha_pago: Date;
+  }
+  
   
   

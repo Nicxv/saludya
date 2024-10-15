@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-
+import { map } from 'rxjs/operators';
 import { finalize } from 'rxjs/operators';
 import { registroUsuario } from '../models/models';
 
@@ -58,6 +58,22 @@ export class FirestoreService {
 
   deleteDoc(path: string) {
     return this.firestore.doc(path).delete();  // Eliminar documento
+  }
+
+  getCollectionWithId<T>(path: string): Observable<T[]> {
+    return this.firestore.collection(path).snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as T;
+          const id_chat = a.payload.doc.id;
+          return { id_chat, ...data };
+        })
+      )
+    );
+  }
+
+  deleteDocTwo(path: string, id: string): Promise<void> {
+    return this.firestore.collection(path).doc(id).delete();
   }
 
 }

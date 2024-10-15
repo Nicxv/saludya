@@ -10,14 +10,22 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const router = inject(Router); // Inyectar el router
   const interactionService = inject(InteractionService); // Inyectar el servicio de interacción
 
+  const requiresAdmin = route.data?.['admin'] === true; // Check if route requires admin
+
   return authService.getUserRole().pipe(
     map(rol => {
-      if (rol === 'admin') {
-        return true; // Permitir acceso si es admin
+      if (rol) {
+        if (requiresAdmin && rol !== 'admin') {
+          // Admin route but user isn't an admin
+          interactionService.presentToast('No tienes permisos para acceder a esta página');
+          router.navigate(['/p-principal']); // Redirect if not admin
+          return false;
+        }
+        return true; // User is authenticated and has the required role
       } else {
-        interactionService.presentToast('No tienes permisos para acceder a esta página'); // Mostrar mensaje para no-admin
-        router.navigate(['/p-principal']); // Redirigir a la página de inicio si no es admin
-        return false; // Denegar acceso si no es admin
+        interactionService.presentToast('Debes iniciar sesión primero');
+        router.navigate(['/login']); // Redirect to login if not authenticated
+        return false;
       }
     })
   );

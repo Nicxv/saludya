@@ -81,13 +81,15 @@ const routes: Routes = [
   {
     path: 'mensajes',
     loadChildren: () => import('./pages/mensajes/mensajes.module').then( m => m.MensajesPageModule)
-  },  {
+  },
+  {
     path: 'msj-funcionario',
     loadChildren: () => import('./pages/msj-funcionario/msj-funcionario.module').then( m => m.MsjFuncionarioPageModule)
   },
   {
     path: 'list-fchat',
-    loadChildren: () => import('./pages/list-fchat/list-fchat.module').then( m => m.ListFchatPageModule)
+    loadChildren: () => import('./pages/list-fchat/list-fchat.module').then( m => m.ListFchatPageModule),
+    canActivate: [adminGuard]
   },
 
 

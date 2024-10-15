@@ -11,8 +11,8 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthService {
 
-
   constructor(private authfirebase: AngularFireAuth, private firestore: AngularFirestore) { }
+
 
 //login
   login(correo: string, password: string) {
@@ -26,21 +26,27 @@ export class AuthService {
   //registrar un usuario
   registrarUser(datos: registroUsuario) {
     return this.authfirebase.createUserWithEmailAndPassword(datos.correo, datos.password);
-    
   }
+
   //Ver el estado de un usuario
   stateUser() {
     return this.authfirebase.authState
   }
+
   //obtener id del usuario
   async getUid() {
+
     const user = await this.authfirebase.currentUser;
+    console.log('AuthService - Current User:', user);
+
     if (user) {
-      return user.uid;
-    }else{
-      return null;
-    }
+      return user.uid; }
+    else {
+      console.warn('No user logged in.');
+      return null; }
+
   }
+
   async correoExiste(correo: string): Promise<boolean> {
     const usersCollection = this.firestore.collection('Usuarios', ref => ref.where('correo', '==', correo));
     const users = await usersCollection.get().toPromise();

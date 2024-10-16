@@ -99,6 +99,10 @@ const routes: Routes = [
     path: 'profesionales-seguimiento',
     loadChildren: () => import('./pages/profesionales-seguimiento/profesionales-seguimiento.module').then( m => m.ProfesionalesSeguimientoPageModule)
   },
+  {
+    path: 'profesional-consulta-alerta',
+    loadChildren: () => import('./pages/profesional-consulta-alerta/profesional-consulta-alerta.module').then( m => m.ProfesionalConsultaAlertaPageModule)
+  },
 
 
 

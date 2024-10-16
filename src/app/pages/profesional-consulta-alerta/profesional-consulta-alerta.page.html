@@ -1,0 +1,72 @@
+<ion-content class="ion-padding"  [ngStyle]="{ 'position': 'relative', '--background': '#E0F7FA' }">
+
+  <ion-grid>
+    <ion-row class="ion-padding ">
+      <ion-col class="ion-padding ion-text-right ion-align-self-center">
+        <ion-img
+          [ngStyle]="{'max-width': '200px', 'max-height': '200px', 'border-radius': '50%', 'overflow': 'hidden', 'border': 'solid 8px #4BAADD', 'display': 'inline-block' }"
+          src="assets/images/group-of-medical-staff-at-hospital-doctor-in-front-of-team-free-photo-squeare.jpg"></ion-img>
+      </ion-col>
+      <ion-col class="ion-padding ion-text-center ion-align-self-center">
+        <div>
+          <svg [ngStyle]="{'color': '#4BAADD','max-width': '50px', 'max-height': '50px', 'margin': '0 auto' }"
+            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512">
+            <path
+              d="M440.08 341.31c-1.66-2-3.29-4-4.89-5.93-22-26.61-35.31-42.67-35.31-118 0-39-9.33-71-27.72-95-13.56-17.73-31.89-31.18-56.05-41.12a3 3 0 01-.82-.67C306.6 51.49 282.82 32 256 32s-50.59 19.49-59.28 48.56a3.13 3.13 0 01-.81.65c-56.38 23.21-83.78 67.74-83.78 136.14 0 75.36-13.29 91.42-35.31 118-1.6 1.93-3.23 3.89-4.89 5.93a35.16 35.16 0 00-4.65 37.62c6.17 13 19.32 21.07 34.33 21.07H410.5c14.94 0 28-8.06 34.19-21a35.17 35.17 0 00-4.61-37.66zM256 480a80.06 80.06 0 0070.44-42.13 4 4 0 00-3.54-5.87H189.12a4 4 0 00-3.55 5.87A80.06 80.06 0 00256 480z" />
+          </svg>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid
+  class="ion-no-padding ion-no-margin"
+    [ngStyle]="{
+          'background-color': 'rgba(217, 217, 217, 0.6)',
+          'overflow': 'hidden',
+          'border-radius': '6px',
+          'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px',
+          '-webkit-box-shadow': 'rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px',}">
+    <ion-row class="ion-align-items-center">
+      <ion-col class="ion-padding ion-text-right ion-align-self-center">
+        <ion-img
+          [ngStyle]="{'max-width': '150px', 'max-height': '150px', 'border-radius': '50%', 'overflow': 'hidden', 'display': 'inline-block' }"
+          src="assets/images/vecteezy_alto-colegio-estudiantes-participacion-libros-dentro-el-colegio_20808734.png"></ion-img>
+      </ion-col>
+      <ion-col class="ion-padding ion-text-left ion-align-self-center ">
+        <ion-title class="ion-no-padding ion-text-left">Magdalena Salgado</ion-title>
+        <p class="ion-no-padding ion-text-left">19.123.123-1</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-no-padding ion-margin-top ion-text-center">
+        <ion-title>Detalles de la solicitud</ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-padding ion-margin ion-text-center"
+      [ngStyle]="{'background-color': 'white', 'border-radius': '6px'}" >
+        <ion-text>El día de hoy desperté con un fuerte dolor en la rodilla el cual me incapacita para moverme o hacer cualquier actividad física</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row >
+      <ion-col >
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31740.776110693267!2d-70.58845853222552!3d-33.558695362978085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2scl!4v1729084708818!5m2!1ses!2scl" width="100%" height="600px" style="border:0; margin:0; padding:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-padding ion-text-center ion-align-self-center">
+        <ion-button shape="round" [ngStyle]="{'--background': '#4BAADD'}">Aceptar oferta</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
+</ion-content>
+
+<app-tab></app-tab>

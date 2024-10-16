@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { loadStripe } from '@stripe/stripe-js';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class PaymentModalComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private paymentService: PaymentService,
-    private firestore: FirestoreService
+    private firestore: FirestoreService,
+    private interactionService: InteractionService // Inyectar el InteractionService
   ) {}
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class PaymentModalComponent implements OnInit {
 
   async confirmarPago() {
     try {
+      await this.interactionService.presentLoading('Procesando pago...'); // Mostrar el loading
       const amount = this.consulta.costoConsulta * 100; // Convertir a centavos
       const clientSecret = await this.paymentService.createPaymentIntent(amount);
       const { error, paymentIntent } = await this.stripe.confirmCardPayment(clientSecret, {
@@ -42,14 +45,20 @@ export class PaymentModalComponent implements OnInit {
       });
 
       if (error) {
+        this.interactionService.dismissLoading(); // Cerrar el loading en caso de error
         console.error('Error en el proceso de pago:', error.message);
+        await this.interactionService.presentAlert('Error', 'Hubo un problema al procesar el pago. Por favor, intenta de nuevo.', 'Aceptar');
       } else {
         console.log('Pago realizado:', paymentIntent);
-        this.guardarConsulta(); // Guardar la consulta después de un pago exitoso
+        await this.guardarConsulta(); // Guardar la consulta después de un pago exitoso
+        this.interactionService.dismissLoading(); // Cerrar el loading
+        await this.interactionService.presentToast('Pago realizado con éxito', 'success'); // Mostrar un mensaje de éxito
         this.cerrarModal(); // Cerrar el modal
       }
     } catch (error) {
+      this.interactionService.dismissLoading(); // Asegurar que se cierre el loading en caso de excepción
       console.error('Error en el proceso de pago:', error);
+      await this.interactionService.presentAlert('Error', 'Ocurrió un problema inesperado. Por favor, intenta más tarde.', 'Aceptar');
     }
   }
 

@@ -1,0 +1,66 @@
+.custom-toolbar {
+    --background: #3880ff;
+    --color: #fff;
+    ion-title {
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+  }
+  
+  .custom-content {
+    --background: #f0f2f5;
+    padding: 16px;
+  }
+  
+  .payment-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    
+    ion-card-header {
+      background-color: #0074bd;
+      color: white;
+      border-radius: 12px 12px 0 0;
+      ion-card-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+  
+    ion-card-content {
+      font-size: 0.9em;
+      p {
+        margin: 8px 0;
+        color: #555;
+      }
+    }
+  }
+  
+  .card-input {
+    margin-top: 20px;
+    padding: 12px;
+    border: 1px solid #c7c7c7;
+    border-radius: 8px;
+  }
+  
+  .card-errors {
+    color: #e74c3c;
+    font-size: 0.85em;
+    margin-top: 8px;
+  }
+  
+  .confirm-button {
+    margin-top: 16px;
+    background-color: #0074bd;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #005f9e;
+    }
+  }
+  

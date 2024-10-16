@@ -29,6 +29,7 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
     fecha_pago: new Date(),
     rutUsuario: '',
     nombreUsuario: '',
+    apellidoUsuario: '',
     direccionUsuario: '',
   };
   archivoSeleccionado: File | null = null;
@@ -75,6 +76,7 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
       if (res) {
         this.consulta.rutUsuario = res.rut || '';
         this.consulta.nombreUsuario = res.nombre || '';
+        this.consulta.apellidoUsuario = res.apellido || '';
         this.consulta.direccionUsuario = res.direccion || '';
       }
     });
@@ -137,32 +139,6 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
       }
     });
   }
-
-  async iniciarPago() {
-    try {
-      const amount = this.consulta.costoConsulta * 100; // Convertir a centavos
-      const clientSecret = await this.paymentService.createPaymentIntent(amount);
-      console.log('Client Secret:', clientSecret);
-
-      // Aquí deberías manejar la confirmación del pago
-      const { error, paymentIntent } = await this.stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: this.card,
-        }
-      });
-
-      if (error) {
-        // Muestra el error a los usuarios
-        console.error('Error en el proceso de pago:', error.message);
-      } else {
-        // La transacción fue exitosa
-        console.log('Pago realizado:', paymentIntent);
-        this.guardarConsulta(); // Guardar la consulta después de un pago exitoso
-      }
-    } catch (error) {
-      console.error('Error en el proceso de pago:', error);
-    }
-  }
   async abrirModalPago() {
     const modal = await this.modalController.create({
       component: PaymentModalComponent,
@@ -172,5 +148,6 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
     });
     return await modal.present();
   }
+  
   
 }

@@ -15,7 +15,7 @@ import { PaymentModalComponent } from './payment-modal/payment-modal.component';
     CommonModule, IonicModule, FormsModule
   ],
   exports: [
-    TabComponent, ResetPasswordModalComponent, UsuarioModalComponent, PaymentModalComponent
+    TabComponent, ResetPasswordModalComponent, UsuarioModalComponent, PaymentModalComponent,
   ]
 })
 export class ComponentesModule { }

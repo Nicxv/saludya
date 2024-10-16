@@ -1,19 +1,18 @@
 <ion-header [translucent]="true"></ion-header>
 
 <ion-content class="ion-padding">
-  <div style="
-  background-color: white;
-  overflow: hidden;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
-  display: flex; flex-direction: column; justify-content: flex-end; align-content: flex-end;
-  ">
+  <div [ngStyle]="{
+  'background-color': 'white',
+  'overflow': 'hidden',
+  'border-radius': '6px',
+  'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px',
+  '-webkit-box-shadow': 'rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px',
+  'display': 'flex', 'flex-direction': 'column', 'justify-content': 'flex-end', 'align-content': 'flex-end' }">
 
-    <ion-accordion-group *ngFor="let mensaje of mensajes">
+    <ion-accordion-group *ngFor="let mensaje of mensajes; let i = index">
       <ion-accordion>
 
-        <ion-item slot="header" style="cursor: pointer; border-top: solid 1px #ccc; background-color: #ddd;">
+        <ion-item slot="header" [ngStyle]="i !== 0 ? {'border-top': 'solid 1px #ccc'} : {}">
           <ion-icon name="person-circle-outline" slot="start"></ion-icon>
           <ion-label>
             <ion-title>Mensaje de: {{ mensaje.remitente }}</ion-title>

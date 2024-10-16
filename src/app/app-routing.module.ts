@@ -91,6 +91,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/list-fchat/list-fchat.module').then( m => m.ListFchatPageModule),
     canActivate: [adminGuard]
   },
+  {
+    path: 'profesionales-busqueda',
+    loadChildren: () => import('./pages/profesionales-busqueda/profesionales-busqueda.module').then( m => m.ProfesionalesBusquedaPageModule)
+  },
+  {
+    path: 'profesionales-seguimiento',
+    loadChildren: () => import('./pages/profesionales-seguimiento/profesionales-seguimiento.module').then( m => m.ProfesionalesSeguimientoPageModule)
+  },
 
 
 

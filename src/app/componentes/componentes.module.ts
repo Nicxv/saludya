@@ -5,16 +5,17 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms'; 
 import { ResetPasswordModalComponent } from './reset-password-modal/reset-password-modal.component';
 import { UsuarioModalComponent } from './usuario-modal/usuario-modal.component';
+import { PaymentModalComponent } from './payment-modal/payment-modal.component';
 
 
 
 @NgModule({
-  declarations: [TabComponent,ResetPasswordModalComponent, UsuarioModalComponent],
+  declarations: [TabComponent,ResetPasswordModalComponent, UsuarioModalComponent, PaymentModalComponent],
   imports: [
     CommonModule, IonicModule, FormsModule
   ],
   exports: [
-    TabComponent, ResetPasswordModalComponent, UsuarioModalComponent
+    TabComponent, ResetPasswordModalComponent, UsuarioModalComponent, PaymentModalComponent
   ]
 })
 export class ComponentesModule { }

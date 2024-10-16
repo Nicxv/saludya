@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ModalController } from '@ionic/angular';
+import { loadStripe } from '@stripe/stripe-js';
 import { finalize } from 'rxjs';
+import { PaymentModalComponent } from 'src/app/componentes/payment-modal/payment-modal.component';
 import { Consultamedica, registroUsuario } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
   selector: 'app-desc-medica',
   templateUrl: './desc-medica.page.html',
   styleUrls: ['./desc-medica.page.scss'],
 })
-export class DescMedicaPage implements OnInit {
+export class DescMedicaPage implements OnInit, AfterViewInit {
+  mostrarModal = false;
   login: boolean = false;
   funcionarios: registroUsuario[] = [];
   consulta: Consultamedica = {
@@ -19,19 +24,23 @@ export class DescMedicaPage implements OnInit {
     descripcion: '',
     sintomas: '',
     subtotal: 50000,
-    iva: 0, // Se calculará dinámicamente
-    costoConsulta: 0, // Se calculará dinámicamente
+    iva: 0,
+    costoConsulta: 0,
     fecha_pago: new Date(),
-    rutUsuario: '', // Inicializar el nuevo campo
-    nombreUsuario: '', // Inicializar el nuevo campo
-    direccionUsuario: '', // Inicializar el nuevo campo
+    rutUsuario: '',
+    nombreUsuario: '',
+    direccionUsuario: '',
   };
   archivoSeleccionado: File | null = null;
+  stripe: any;
+  card: any;
 
   constructor(
     private auth: AuthService,
     private firestore: FirestoreService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private paymentService: PaymentService,
+    private modalController: ModalController
   ) {
     this.auth.stateUser().subscribe(res => {
       if (res) {
@@ -45,14 +54,25 @@ export class DescMedicaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.calcularCostoConsulta(); // Calcular el costo al cargar la página
+    this.calcularCostoConsulta();
+  }
+
+  ngAfterViewInit() {
+    this.initializeStripe(); // Inicializa Stripe al cargar el componente
+  }
+
+  private async initializeStripe() {
+    this.stripe = await loadStripe('pk_test_51QAZP0Fm8vIFI2nfBfipUaYZkh8BgXJsecl5dx0Da335OSx6Q7X2XnIUiGu2E90CKBI5Hjep5eLbNGqgDQd87KGL006bKX1Z6V');
+
+    const elements = this.stripe.elements();
+    this.card = elements.create('card');
+    this.card.mount('#card-element'); // Monta el elemento de tarjeta en el DOM
   }
 
   getDatosUser(uid: string) {
     const path = 'Usuarios';
     this.firestore.getDoc<registroUsuario>(path, uid).subscribe(res => {
       if (res) {
-        // Asignar los datos del usuario logueado a la consulta
         this.consulta.rutUsuario = res.rut || '';
         this.consulta.nombreUsuario = res.nombre || '';
         this.consulta.direccionUsuario = res.direccion || '';
@@ -117,4 +137,40 @@ export class DescMedicaPage implements OnInit {
       }
     });
   }
+
+  async iniciarPago() {
+    try {
+      const amount = this.consulta.costoConsulta * 100; // Convertir a centavos
+      const clientSecret = await this.paymentService.createPaymentIntent(amount);
+      console.log('Client Secret:', clientSecret);
+
+      // Aquí deberías manejar la confirmación del pago
+      const { error, paymentIntent } = await this.stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: this.card,
+        }
+      });
+
+      if (error) {
+        // Muestra el error a los usuarios
+        console.error('Error en el proceso de pago:', error.message);
+      } else {
+        // La transacción fue exitosa
+        console.log('Pago realizado:', paymentIntent);
+        this.guardarConsulta(); // Guardar la consulta después de un pago exitoso
+      }
+    } catch (error) {
+      console.error('Error en el proceso de pago:', error);
+    }
+  }
+  async abrirModalPago() {
+    const modal = await this.modalController.create({
+      component: PaymentModalComponent,
+      componentProps: {
+        consulta: this.consulta, // Pasa los datos de la consulta al modal
+      }
+    });
+    return await modal.present();
+  }
+  
 }

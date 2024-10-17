@@ -31,7 +31,8 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
     nombreUsuario: '',
     apellidoUsuario: '',
     direccionUsuario: '',
-    uidFuncionario: '', // Nueva propiedad para almacenar la UID del funcionario
+    uidFuncionario: '',// Nueva propiedad para almacenar la UID del funcionario
+    fotoUsuario: '', 
   };
   archivoSeleccionado: File | null = null;
   stripe: any;
@@ -79,6 +80,7 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
         this.consulta.nombreUsuario = res.nombre || '';
         this.consulta.apellidoUsuario = res.apellido || '';
         this.consulta.direccionUsuario = res.direccion || '';
+        this.consulta.fotoUsuario = res.photoURL || '';
       }
     });
   }

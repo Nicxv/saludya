@@ -98,6 +98,23 @@ ion-content {
     padding: 5px 10px;
     text-transform: none; /* Evita que las letras estén en mayúsculas */
   }
+  .notification-container {
+    position: relative;
+  }
+  
+  .notification-icon {
+    width: 24px;
+    color: #0074BD;
+    cursor: pointer;
+  }
+  
+  .notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+    border-radius: 50%;
+  }
   
   @media screen and (min-width: 768px) {
     .patient-card {
@@ -112,4 +129,5 @@ ion-content {
       font-size: 16px;
     }
   }
+
   

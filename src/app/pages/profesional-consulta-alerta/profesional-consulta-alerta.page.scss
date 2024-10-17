@@ -1,0 +1,46 @@
+/* Estilo del contenedor de la notificación */
+.notification-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+  }
+  
+  /* Estilo del indicador de notificación */
+  .notification-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilo para la imagen del usuario */
+  .user-image {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 8px #4baadd;
+    display: inline-block;
+  }
+  
+  /* Estilo para el icono de la campana */
+  .bell-icon {
+    color: #4baadd;
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* Ajuste para la columna que contiene la campana */
+  .bell-column {
+    position: relative;
+  }
+  

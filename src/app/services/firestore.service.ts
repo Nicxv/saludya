@@ -76,4 +76,6 @@ export class FirestoreService {
     return this.firestore.collection(path).doc(id).delete();
   }
 
+  
+
 }

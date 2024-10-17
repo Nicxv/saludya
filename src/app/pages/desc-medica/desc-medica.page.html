@@ -5,11 +5,12 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-select placeholder="Seleccione Profesional" [(ngModel)]="consulta.nombreFuncionario">
-          <ion-select-option *ngFor="let funcionario of funcionarios" [value]="funcionario.nombre">D. 
-            {{ funcionario.nombre }} {{ funcionario.apellido }}
+        <ion-select placeholder="Seleccione Profesional" (ionChange)="onSelectChange($event)">
+          <ion-select-option *ngFor="let funcionario of funcionarios" [value]="funcionario">
+            D. {{ funcionario.nombre }} {{ funcionario.apellido }}
           </ion-select-option>
         </ion-select>
+        
       </ion-col>
     </ion-row>
 

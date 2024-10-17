@@ -31,6 +31,7 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
     nombreUsuario: '',
     apellidoUsuario: '',
     direccionUsuario: '',
+    uidFuncionario: '', // Nueva propiedad para almacenar la UID del funcionario
   };
   archivoSeleccionado: File | null = null;
   stripe: any;
@@ -97,6 +98,11 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
     this.consulta.iva = this.consulta.subtotal * ivaPorcentaje;
     this.consulta.costoConsulta = this.consulta.subtotal + this.consulta.iva;
   }
+  onSelectChange(event: any) {
+    const funcionarioSeleccionado = event.detail.value;
+    this.consulta.nombreFuncionario = funcionarioSeleccionado.nombre;
+    this.consulta.uidFuncionario = funcionarioSeleccionado.uid; // Asignar la uid del funcionario
+  }
 
   async guardarConsulta() {
     const id = this.firestore.getId();
@@ -139,6 +145,7 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
       }
     });
   }
+
   async abrirModalPago() {
     const modal = await this.modalController.create({
       component: PaymentModalComponent,
@@ -148,6 +155,4 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
     });
     return await modal.present();
   }
-  
-  
 }

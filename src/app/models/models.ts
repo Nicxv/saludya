@@ -64,6 +64,7 @@ export interface Chat {
     nombreUsuario: string; // Nuevo campo para el nombre del usuario
     apellidoUsuario: string;
     direccionUsuario: string; // Nuevo campo para la dirección del usuario
+    uidFuncionario: string;
   }
   
   

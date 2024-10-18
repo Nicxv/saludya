@@ -18,11 +18,16 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
   usuario: registroUsuario = null;
   numeroConsultas: number = 0;
   consulta: Consultamedica;
+  private watchId: number; // Variable para almacenar el ID del seguimiento de geolocalización
   private googleMapsApiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8';
 
-
-  constructor(private auth: AuthService, private firestore: FirestoreService, private navCtrl: NavController, private route: ActivatedRoute, private googleMapsService: GoogleMapsService) { 
-    // Suscribirse para obtener el estado del usuario (logueado o no)
+  constructor(
+    private auth: AuthService,
+    private firestore: FirestoreService,
+    private navCtrl: NavController,
+    private route: ActivatedRoute,
+    private googleMapsService: GoogleMapsService
+  ) {
     this.auth.stateUser().subscribe(res => {
       if (res) {
         this.login = true;
@@ -34,20 +39,18 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
     });
   }
 
-  ngOnInit() { 
-    // Obtener los datos de la consulta desde la URL
+  ngOnInit() {
     const consultaData = this.route.snapshot.paramMap.get('consulta');
     if (consultaData) {
       this.consulta = JSON.parse(consultaData);
     }
-    
+    this.loadMap();
   }
 
   goToHistoriaPacientes() {
     this.navCtrl.navigateForward('/historia-pacientes');
   }
 
-  // Obtener los datos del usuario logueado
   getDatosUser(uid: string) {
     const path = 'Usuarios';
     this.firestore.getDoc<registroUsuario>(path, uid).subscribe(res => {
@@ -58,36 +61,62 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
     });
   }
 
-  // Verificar si hay consultas asociadas al usuario logueado
   verificarConsultas(uidFuncionario: string) {
     const path = 'ConsultasMedicas';
     this.firestore.getCollection<Consultamedica>(path).subscribe(consultas => {
       if (consultas) {
-        this.numeroConsultas = consultas.filter(consulta => consulta.uidFuncionario === uidFuncionario).length;
+        this.numeroConsultas = consultas.filter(
+          consulta => consulta.uidFuncionario === uidFuncionario
+        ).length;
       } else {
         this.numeroConsultas = 0;
       }
     });
   }
 
-  ionViewDidEnter() {
-    // Iniciar el mapa con una ubicación por defecto
-    this.googleMapsService.initMap(this.mapElement.nativeElement, { lat: -33.5587, lng: -70.5885 }, this.googleMapsApiKey);
+  loadMap() {
+    const mapElement = document.getElementById('map');
+    this.googleMapsService
+      .loadGoogleMaps(this.googleMapsApiKey)
+      .then(() => {
+        this.googleMapsService.initMap(mapElement, -33.447487, -70.673676);
+      });
   }
 
   aceptarOferta() {
-    if (this.consulta?.direccionUsuario && this.usuario?.direccion) {
-      this.googleMapsService.getRoute(this.usuario.direccion, this.consulta.direccionUsuario)
-        .then((result: any) => {
-          console.log('Ruta trazada correctamente');
-          // Iniciar la animación del autito en la ruta
-          this.googleMapsService.startCarAnimation(result);
-        })
-        .catch((error) => {
-          console.error('Error al obtener la ruta:', error);
-        });
-    } else {
-      console.warn('No se encontraron direcciones para trazar la ruta.');
+    if (this.consulta && this.consulta.direccionUsuario) {
+      // Iniciar el seguimiento en tiempo real para obtener la ubicación del funcionario
+      this.startRealTimeTracking();
+    }
+  }
+
+  startRealTimeTracking() {
+    if (navigator.geolocation) {
+      this.watchId = navigator.geolocation.watchPosition(
+        position => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          this.googleMapsService.updateCurrentPosition(lat, lng);
+  
+          // Trazar la ruta desde la ubicación actual hasta el destino
+          const origen = { lat, lng };
+          const destino = this.consulta.direccionUsuario;
+          this.googleMapsService.showRoute(origen, destino);
+        },
+        error => {
+          console.error('Error obteniendo la geolocalización:', error);
+        },
+        { enableHighAccuracy: true }
+      );
+    }
+  }
+  
+  cancelarRuta() {
+    if (navigator.geolocation && this.watchId !== undefined) {
+      navigator.geolocation.clearWatch(this.watchId);
+      this.watchId = undefined;
+      console.log('Seguimiento en tiempo real detenido');
+      this.googleMapsService.clearRoute(); // Método para limpiar la ruta del mapa
     }
   }
   

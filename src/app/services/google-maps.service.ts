@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class GoogleMapsService {
   private autocompleteService: any;
-
   private directionsService: any;
   private directionsRenderer: any;
   private map: any; // Guardar la referencia del mapa
   private carMarker: any; // Marcador del vehículo
+  private currentPositionMarker: any;
 
   constructor() { }
 
@@ -53,77 +53,59 @@ export class GoogleMapsService {
     });
   }
 
-  initMap(mapElement: HTMLElement, center: { lat: number, lng: number }, apiKey: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if (!window['google']) {
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        document.body.appendChild(script);
-
-        script.onload = () => this.initializeMap(mapElement, center, resolve);
-        script.onerror = (error: any) => reject(error);
-      } else {
-        this.initializeMap(mapElement, center, resolve);
-      }
-    });
-  }
-
-  private initializeMap(mapElement: HTMLElement, center: { lat: number, lng: number }, resolve: (value?: unknown) => void) {
+  initMap(mapElement: HTMLElement, lat: number, lng: number) {
     this.map = new window['google'].maps.Map(mapElement, {
-      center,
-      zoom: 14
+      center: { lat, lng },
+      zoom: 14,
     });
+
     this.directionsService = new window['google'].maps.DirectionsService();
     this.directionsRenderer = new window['google'].maps.DirectionsRenderer();
     this.directionsRenderer.setMap(this.map);
-    resolve(this.map);
   }
 
-  getRoute(origin: string, destination: string) {
-    return new Promise((resolve, reject) => {
-      const request = {
-        origin,
-        destination,
-        travelMode: window['google'].maps.TravelMode.DRIVING
-      };
+  showRoute(origin: { lat: number; lng: number }, destination: any) {
+    const request = {
+      origin: new window['google'].maps.LatLng(origin.lat, origin.lng),
+      destination,
+      travelMode: window['google'].maps.TravelMode.DRIVING,
+    };
 
-      this.directionsService.route(request, (result: any, status: any) => {
-        if (status === window['google'].maps.DirectionsStatus.OK) {
-          this.directionsRenderer.setDirections(result);
-          resolve(result);
-        } else {
-          reject('Error al trazar la ruta: ' + status);
-        }
-      });
+    this.directionsService.route(request, (result, status) => {
+      if (status === window['google'].maps.DirectionsStatus.OK) {
+        this.directionsRenderer.setDirections(result);
+      } else {
+        console.error('Error mostrando la ruta:', status);
+      }
     });
   }
 
-  // Método para iniciar la animación del autito
-  startCarAnimation(route: any) {
-    const steps = route.routes[0].legs[0].steps;
-    const carIcon = {
-      url: 'assets/images/auto-icon.png', // Ruta a la imagen del autito
-      scaledSize: new window['google'].maps.Size(40, 40)
-    };
+  updateCurrentPosition(lat: number, lng: number) {
+    const position = new window['google'].maps.LatLng(lat, lng);
 
-    if (!this.carMarker) {
-      this.carMarker = new window['google'].maps.Marker({
+    if (!this.currentPositionMarker) {
+      this.currentPositionMarker = new window['google'].maps.Marker({
+        position,
         map: this.map,
-        icon: carIcon,
-        position: steps[0].start_location
+        icon: {
+          url: 'assets/images/auto-icon.png',
+          scaledSize: new window['google'].maps.Size(40, 40),
+        },
       });
+    } else {
+      this.currentPositionMarker.setPosition(position);
     }
 
-    let stepIndex = 0;
-    const moveCar = () => {
-      if (stepIndex < steps.length) {
-        this.carMarker.setPosition(steps[stepIndex].start_location);
-        stepIndex++;
-        setTimeout(moveCar, 1000); // Controla la velocidad del movimiento
-      }
-    };
-    moveCar();
+    this.map.setCenter(position);
   }
+  clearRoute() {
+    if (this.directionsRenderer) {
+      this.directionsRenderer.setDirections({ routes: [] }); // Limpiar la ruta en el mapa
+    }
+    if (this.currentPositionMarker) {
+      this.currentPositionMarker.setMap(null); // Remover el marcador de posición actual
+      this.currentPositionMarker = null;
+    }
+  }
+  
 }

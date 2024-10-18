@@ -1,3 +1,4 @@
+<!-- profesional-consulta-alerta.page.html -->
 <ion-content class="ion-padding" [ngStyle]="{ 'position': 'relative', '--background': '#E0F7FA' }">
 
   <ion-grid>
@@ -31,7 +32,7 @@
           'border-radius': '50%',
           'overflow': 'hidden',
           'display': 'inline-block'
-        }" [src]="consulta?.fotoUsuario || 'assets/images/default-profile.png'"></ion-img>
+        }" [src]="consulta?.fotoUsuario || 'assets/images/doctor.png'"></ion-img>
       </ion-col>
       <ion-col class="ion-padding ion-text-left ion-align-self-center">
         <ion-title class="ion-no-padding ion-text-left">{{ consulta?.nombreUsuario }} {{ consulta?.apellidoUsuario }}</ion-title>
@@ -53,7 +54,7 @@
 
     <ion-row>
       <ion-col class="ion-padding ion-text-center ion-align-self-center">
-        <ion-button shape="round" [ngStyle]="{ '--background': '#4BAADD' }">Aceptar oferta</ion-button>
+        <ion-button shape="round" (click)="aceptarOferta()" [ngStyle]="{ '--background': '#4BAADD' }">Aceptar oferta</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -61,9 +62,7 @@
   <!-- El mapa se muestra siempre -->
   <ion-row>
     <ion-col>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31740.776110693267!2d-70.58845853222552!3d-33.558695362978085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2scl!4v1729084708818!5m2!1ses!2scl"
-        width="100%" height="600px" style="border: 0; margin: 0; padding: 0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div #map id="map" style="height: 600px; width: 100%;"></div>
     </ion-col>
   </ion-row>
 

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Consultamedica, registroUsuario } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { GoogleMapsService } from 'src/app/services/google-maps.service';
 
 @Component({
   selector: 'app-profesional-consulta-alerta',
@@ -11,13 +12,16 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   styleUrls: ['./profesional-consulta-alerta.page.scss'],
 })
 export class ProfesionalConsultaAlertaPage implements OnInit {
+  @ViewChild('map', { static: false }) mapElement: ElementRef;
   login: boolean = false;
   rol: 'paciente' | 'funcionario' | 'admin' = null;
   usuario: registroUsuario = null;
   numeroConsultas: number = 0;
   consulta: Consultamedica;
+  private googleMapsApiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8';
 
-  constructor(private auth: AuthService, private firestore: FirestoreService, private navCtrl: NavController, private route: ActivatedRoute) { 
+
+  constructor(private auth: AuthService, private firestore: FirestoreService, private navCtrl: NavController, private route: ActivatedRoute, private googleMapsService: GoogleMapsService) { 
     // Suscribirse para obtener el estado del usuario (logueado o no)
     this.auth.stateUser().subscribe(res => {
       if (res) {
@@ -65,4 +69,26 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
       }
     });
   }
+
+  ionViewDidEnter() {
+    // Iniciar el mapa con una ubicación por defecto
+    this.googleMapsService.initMap(this.mapElement.nativeElement, { lat: -33.5587, lng: -70.5885 }, this.googleMapsApiKey);
+  }
+
+  aceptarOferta() {
+    if (this.consulta?.direccionUsuario && this.usuario?.direccion) {
+      this.googleMapsService.getRoute(this.usuario.direccion, this.consulta.direccionUsuario)
+        .then((result: any) => {
+          console.log('Ruta trazada correctamente');
+          // Iniciar la animación del autito en la ruta
+          this.googleMapsService.startCarAnimation(result);
+        })
+        .catch((error) => {
+          console.error('Error al obtener la ruta:', error);
+        });
+    } else {
+      console.warn('No se encontraron direcciones para trazar la ruta.');
+    }
+  }
+  
 }

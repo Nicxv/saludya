@@ -104,7 +104,7 @@ export class GoogleMapsService {
   startCarAnimation(route: any) {
     const steps = route.routes[0].legs[0].steps;
     const carIcon = {
-      url: 'path_to_car_image.png', // Ruta a la imagen del autito
+      url: 'assets/images/auto-icon.png', // Ruta a la imagen del autito
       scaledSize: new window['google'].maps.Size(40, 40)
     };
 

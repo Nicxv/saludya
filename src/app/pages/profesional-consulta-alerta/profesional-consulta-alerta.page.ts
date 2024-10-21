@@ -20,6 +20,8 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
   consulta: Consultamedica;
   private watchId: number; // Variable para almacenar el ID del seguimiento de geolocalización
   private googleMapsApiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8';
+  ofertaAceptada: boolean = false;
+
 
   constructor(
     private auth: AuthService,
@@ -85,8 +87,8 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
 
   aceptarOferta() {
     if (this.consulta && this.consulta.direccionUsuario) {
-      // Iniciar el seguimiento en tiempo real para obtener la ubicación del funcionario
-      this.startRealTimeTracking();
+      this.ofertaAceptada = true; // La oferta ha sido aceptada
+      this.startRealTimeTracking(); // Iniciar el seguimiento en tiempo real
     }
   }
 
@@ -112,12 +114,17 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
   }
   
   cancelarRuta() {
+    
     if (navigator.geolocation && this.watchId !== undefined) {
       navigator.geolocation.clearWatch(this.watchId);
       this.watchId = undefined;
       console.log('Seguimiento en tiempo real detenido');
       this.googleMapsService.clearRoute(); // Método para limpiar la ruta del mapa
+      this.ofertaAceptada = false; // Restablecer el estado de la oferta
+      console.log('Ruta cancelada');
     }
+    
+    
   }
   
 }

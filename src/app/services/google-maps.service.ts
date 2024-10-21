@@ -107,5 +107,28 @@ export class GoogleMapsService {
       this.currentPositionMarker = null;
     }
   }
+
+  addCustomMarker(lat: number, lng: number, photoURL: string) {
+  const image = {
+    url: photoURL,
+    scaledSize: new window['google'].maps.Size(50, 50), // Tamaño de la imagen
+    origin: new window['google'].maps.Point(0, 0), // Origen de la imagen
+    anchor: new window['google'].maps.Point(25, 25), // Punto de anclaje
+  };
+
+  const marker = new window['google'].maps.Marker({
+    position: new window['google'].maps.LatLng(lat, lng),
+    map: this.map,
+    icon: image,
+  });
+
+  // Aplicar borde circular
+  const markerDiv = marker.getIcon();
+  if (markerDiv && typeof markerDiv === 'object') {
+    markerDiv['style'] = 'border-radius: 50%; border: 2px solid white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);';
+  }
+}
+  
+  
   
 }

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { registroUsuario } from 'src/app/models/models';
+import { AuthService } from 'src/app/services/auth.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { GoogleMapsService } from 'src/app/services/google-maps.service';
 
 @Component({
   selector: 'app-profesionales-busqueda',
@@ -6,10 +10,109 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profesionales-busqueda.page.scss'],
 })
 export class ProfesionalesBusquedaPage implements OnInit {
+  login: boolean = false;
+  rol: 'paciente' | 'funcionario' | 'admin' = null;
+  @ViewChild('map', { static: false }) mapElement: ElementRef;
+  usuariosFuncionarios: registroUsuario[] = [];
+  mapLoaded: boolean = false;
 
-  constructor() { }
+  constructor(private auth: AuthService, private firestore:FirestoreService, private googleMapsService: GoogleMapsService) { 
+    // me suscribo para obtener el estado del usuario, logeado o no logeado
+  this.auth.stateUser().subscribe(res =>{
+    if(res) {
+      console.log('Esta logeado');
+      this.login = true;
+      this.getDatosUser(res.uid);
+    }else {
+      console.log('No está logeado');
+      this.login = false;
+    }
+  }) 
+  }
+  //permisos roles de usuario
+  getDatosUser(uid:string) {
+    const path = 'Usuarios';
+    const id = uid;
+    this.firestore.getDoc<registroUsuario>(path, id).subscribe( res => {
+      console.log('datos -> ', res);
+      if(res) {
+        this.rol = res.rol
+      }
+    })
+  }
+
+   // Obtener los usuarios con rol "funcionario"
+   getUsuariosFuncionarios() {
+    const path = 'Usuarios';
+    this.firestore.getCollection<registroUsuario>(path).subscribe((usuarios) => {
+      this.usuariosFuncionarios = usuarios.filter(user => user.rol === 'funcionario');
+      if (this.mapLoaded) {
+        this.addMarkersToMap();
+      }
+    });
+  }
+
+  // Método para inicializar el mapa
+  ionViewDidEnter() {
+    this.googleMapsService.loadGoogleMaps('AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8').then(() => {
+      this.googleMapsService.initMap(this.mapElement.nativeElement, -33.5587, -70.5885);
+      this.mapLoaded = true;
+      this.addMarkersToMap();
+    });
+  }
+
+  // Agregar marcadores en el mapa
+addMarkersToMap() {
+  this.usuariosFuncionarios.forEach(usuario => {
+    if (usuario.direccion && usuario.photoURL) {
+      // Convertir la dirección a coordenadas usando un servicio real de geocodificación
+      this.convertirDireccionACoordenadas(usuario.direccion).then(latLng => {
+        if (latLng) {
+          // Generar una posición aleatoria dentro de un radio de 500 metros
+          const randomLatLng = this.generarPosicionAleatoria(latLng.lat, latLng.lng, 1000);
+          
+          // Agregar el marcador al mapa
+          this.googleMapsService.addCustomMarker(randomLatLng.lat, randomLatLng.lng, usuario.photoURL);
+        }
+      });
+    }
+  });
+}
+
+// Función para generar una posición aleatoria en un radio especificado (en metros)
+generarPosicionAleatoria(lat: number, lng: number, radio: number) {
+  const r = radio / 111320; // Convertir metros a grados (aproximado)
+  const y0 = lat;
+  const x0 = lng;
+  const u = Math.random();
+  const v = Math.random();
+  const w = r * Math.sqrt(u);
+  const t = 2 * Math.PI * v;
+  const x = w * Math.cos(t);
+  const y = w * Math.sin(t);
+  const newLat = y + y0;
+  const newLng = x + x0;
+  return { lat: newLat, lng: newLng };
+}
+
+// Método para convertir la dirección a coordenadas usando un servicio de geocodificación
+convertirDireccionACoordenadas(direccion: string): Promise<{ lat: number; lng: number }> {
+  return new Promise((resolve, reject) => {
+    const geocoder = new window['google'].maps.Geocoder();
+    geocoder.geocode({ address: direccion }, (results, status) => {
+      if (status === window['google'].maps.GeocoderStatus.OK && results[0]) {
+        const location = results[0].geometry.location;
+        resolve({ lat: location.lat(), lng: location.lng() });
+      } else {
+        console.error('Geocodificación fallida: ', status);
+        reject(null);
+      }
+    });
+  });
+}
 
   ngOnInit() {
+    this.getUsuariosFuncionarios();
   }
 
 }

@@ -1,3 +1,4 @@
+// models.ts
 export interface registroUsuario {
     uid: string;
     nombre: string;

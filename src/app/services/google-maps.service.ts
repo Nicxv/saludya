@@ -128,6 +128,13 @@ export class GoogleMapsService {
     markerDiv['style'] = 'border-radius: 50%; border: 2px solid white; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);';
   }
 }
+clearMarkers() {
+  if (this.map) {
+    this.map.markers.forEach(marker => marker.setMap(null));
+    this.map.markers = [];
+  }
+}
+
   
   
   

@@ -1,0 +1,9 @@
+ion-icon {
+    cursor: pointer; /* Asegúrate de que sea obvio que se puede hacer clic */
+    margin-left: 8px; /* Ajusta el margen según sea necesario */
+    /* Alinear verticalmente el icono */
+    position: relative; 
+    top: -7px; /* Ajusta este valor según sea necesario */
+    left: -10px;
+    max-width: 24px;
+  }

@@ -1,22 +1,30 @@
 <!-- profesionales-seguimiento.page.html -->
 <ion-content [ngStyle]="{ 'position': 'relative' }">
 
+  <!-- Input para búsqueda por dirección -->
   <ion-item lines="none" class="ion-padding" [ngStyle]="{'--background': 'transparent', 'position': 'absolute', 'top': '0', 'left': '0', 'width': '100%'}">
     <ion-input  [ngStyle]="{'--background': 'rgba(75, 170, 251, 0.7)', 'color': 'white' }"
                 class="ion-padding-start"
-                shape="round" 
+                shape="round"
                 label="Ingrese dirección"
                 labelPlacement="floating"
-                inputmode="text"></ion-input>
+                inputmode="text"
+                (ionInput)="buscarPorDireccion($event)">
+      <ion-icon name="search-outline" slot="end" (click)="buscarPorDireccion($event)"></ion-icon>
+    </ion-input>
   </ion-item>
 
-  <ion-item lines="none" class="ion-padding" [ngStyle]="{'--background': 'transparent', 'position': 'absolute', 'bottom': '0', 'left': '0'}">
+  <!-- Input para búsqueda de profesional -->
+  <ion-item lines="none" class="ion-padding" [ngStyle]="{'--background': 'transparent', 'position': 'absolute', 'bottom': '0', 'left': '0', 'width': '100%'}">
     <ion-input  [ngStyle]="{'--background': 'rgba(75, 170, 251, 0.7)', 'color': 'white' }"
                 class="ion-padding-start"
-                shape="round" 
+                shape="round"
                 label="Busca tu profesional"
                 labelPlacement="floating"
-                inputmode="text"></ion-input>
+                inputmode="text"
+                (input)="filtrarProfesionales($event)">
+      <ion-icon name="search-outline" slot="end" (click)="filtrarProfesionales($event)"></ion-icon>
+    </ion-input>
   </ion-item>
 
   <div #map id="map" style="height: 100%; width: 100%;"></div>

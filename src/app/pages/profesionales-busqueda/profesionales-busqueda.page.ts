@@ -15,6 +15,9 @@ export class ProfesionalesBusquedaPage implements OnInit {
   @ViewChild('map', { static: false }) mapElement: ElementRef;
   usuariosFuncionarios: registroUsuario[] = [];
   mapLoaded: boolean = false;
+  filtroNombreProfesional: string = '';
+  filteredUsuarios: registroUsuario[] = []; // Lista para mostrar resultados filtrados
+
 
   constructor(private auth: AuthService, private firestore:FirestoreService, private googleMapsService: GoogleMapsService) { 
     // me suscribo para obtener el estado del usuario, logeado o no logeado
@@ -41,16 +44,17 @@ export class ProfesionalesBusquedaPage implements OnInit {
     })
   }
 
-   // Obtener los usuarios con rol "funcionario"
-   getUsuariosFuncionarios() {
+  getUsuariosFuncionarios() {
     const path = 'Usuarios';
-    this.firestore.getCollection<registroUsuario>(path).subscribe((usuarios) => {
+    this.firestore.getCollection<registroUsuario>(path).subscribe(usuarios => {
       this.usuariosFuncionarios = usuarios.filter(user => user.rol === 'funcionario');
+      this.filteredUsuarios = this.usuariosFuncionarios; // Inicializar la lista filtrada
       if (this.mapLoaded) {
         this.addMarkersToMap();
       }
     });
   }
+
 
   // Método para inicializar el mapa
   ionViewDidEnter() {
@@ -109,6 +113,44 @@ convertirDireccionACoordenadas(direccion: string): Promise<{ lat: number; lng: n
       }
     });
   });
+}
+
+// Método para buscar por dirección
+buscarPorDireccion(event: any) {
+  const direccion = event.target.value;
+  if (direccion && direccion.length > 3) { // Buscar si el texto es suficientemente largo
+    this.convertirDireccionACoordenadas(direccion).then(coordenadas => {
+      if (coordenadas) {
+        this.googleMapsService.updateCurrentPosition(coordenadas.lat, coordenadas.lng);
+      }
+    }).catch(error => console.error('No se encontró la dirección: ', error));
+  }
+}
+
+filtrarProfesionales(event: any) {
+  this.filtroNombreProfesional = event.target.value.toLowerCase();
+  this.filtrarMarcadores();
+}
+
+filtrarMarcadores() {
+  if (this.mapLoaded && this.usuariosFuncionarios.length > 0) {
+    this.googleMapsService.clearMarkers(); // Limpiar todos los marcadores
+
+    const usuarioEncontrado = this.usuariosFuncionarios.find(usuario => 
+      usuario.nombre.toLowerCase().includes(this.filtroNombreProfesional)
+    );
+
+    if (usuarioEncontrado) {
+      this.convertirDireccionACoordenadas(usuarioEncontrado.direccion).then(latLng => {
+        if (latLng) {
+          this.googleMapsService.updateCurrentPosition(latLng.lat, latLng.lng); // Centrar el mapa
+          this.googleMapsService.addCustomMarker(latLng.lat, latLng.lng, usuarioEncontrado.photoURL); // Agregar el marcador del usuario encontrado
+        }
+      });
+    } else {
+      console.log('No se encontró el profesional');
+    }
+  }
 }
 
   ngOnInit() {

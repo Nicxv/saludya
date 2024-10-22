@@ -65,7 +65,7 @@ export class ProfesionalesBusquedaPage implements OnInit {
     });
   }
 
-  // Agregar marcadores en el mapa
+ // Agregar marcadores en el mapa con nombres
 addMarkersToMap() {
   this.usuariosFuncionarios.forEach(usuario => {
     if (usuario.direccion && usuario.photoURL) {
@@ -75,14 +75,13 @@ addMarkersToMap() {
           // Generar una posición aleatoria dentro de un radio de 500 metros
           const randomLatLng = this.generarPosicionAleatoria(latLng.lat, latLng.lng, 1000);
           
-          // Agregar el marcador al mapa
-          this.googleMapsService.addCustomMarker(randomLatLng.lat, randomLatLng.lng, usuario.photoURL);
+          // Agregar el marcador al mapa con nombre del usuario
+          this.googleMapsService.addCustomMarker(randomLatLng.lat, randomLatLng.lng, usuario.photoURL, usuario.nombre);
         }
       });
     }
   });
 }
-
 // Función para generar una posición aleatoria en un radio especificado (en metros)
 generarPosicionAleatoria(lat: number, lng: number, radio: number) {
   const r = radio / 111320; // Convertir metros a grados (aproximado)
@@ -132,24 +131,25 @@ filtrarProfesionales(event: any) {
   this.filtrarMarcadores();
 }
 
+// Método para filtrar los marcadores
 filtrarMarcadores() {
   if (this.mapLoaded && this.usuariosFuncionarios.length > 0) {
     this.googleMapsService.clearMarkers(); // Limpiar todos los marcadores
 
-    const usuarioEncontrado = this.usuariosFuncionarios.find(usuario => 
+    // Filtrar los usuarios por el nombre ingresado en el filtro
+    this.filteredUsuarios = this.usuariosFuncionarios.filter(usuario => 
       usuario.nombre.toLowerCase().includes(this.filtroNombreProfesional)
     );
 
-    if (usuarioEncontrado) {
-      this.convertirDireccionACoordenadas(usuarioEncontrado.direccion).then(latLng => {
+    // Agregar los marcadores filtrados en el mapa
+    this.filteredUsuarios.forEach(usuario => {
+      this.convertirDireccionACoordenadas(usuario.direccion).then(latLng => {
         if (latLng) {
           this.googleMapsService.updateCurrentPosition(latLng.lat, latLng.lng); // Centrar el mapa
-          this.googleMapsService.addCustomMarker(latLng.lat, latLng.lng, usuarioEncontrado.photoURL); // Agregar el marcador del usuario encontrado
+          this.googleMapsService.addCustomMarker(latLng.lat, latLng.lng, usuario.photoURL, usuario.nombre); // Agregar marcador
         }
       });
-    } else {
-      console.log('No se encontró el profesional');
-    }
+    });
   }
 }
 

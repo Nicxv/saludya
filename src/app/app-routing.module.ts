@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { adminGuard } from './guards/admin.guard';
+import { funcionarioGuard } from './guards/funcionario.guard';
 
 const routes: Routes = [
   {
@@ -101,7 +102,8 @@ const routes: Routes = [
   },
   {
     path: 'profesional-consulta-alerta',
-    loadChildren: () => import('./pages/profesional-consulta-alerta/profesional-consulta-alerta.module').then( m => m.ProfesionalConsultaAlertaPageModule)
+    loadChildren: () => import('./pages/profesional-consulta-alerta/profesional-consulta-alerta.module').then( m => m.ProfesionalConsultaAlertaPageModule),
+    canActivate: [funcionarioGuard]
   },
 
 

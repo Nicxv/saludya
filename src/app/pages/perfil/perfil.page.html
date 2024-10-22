@@ -53,9 +53,9 @@
         <ion-icon slot="start" name="settings-outline"></ion-icon>
         Configuración
       </ion-button>
-      <ion-button expand="block"  class="btn" size="small">
+      <ion-button *ngIf="login && rol === 'funcionario'" expand="block"  class="btn" size="small" [routerLink]="['/historia-pacientes']">
         <ion-icon slot="start" name="heart-outline"></ion-icon>
-        Mis visitas
+        Historial de pacientes
       </ion-button>
       <ion-button expand="block"  class="btn" size="small">
         <ion-icon slot="start" name="document-text-outline"></ion-icon>

@@ -109,36 +109,36 @@ export class GoogleMapsService {
   }
 
   addCustomMarker(lat: number, lng: number, photoURL: string, nombre: string) {
-    const image = {
-      url: photoURL,
-      scaledSize: new window['google'].maps.Size(50, 50), // Tamaño de la imagen
-      origin: new window['google'].maps.Point(0, 0), // Origen de la imagen
-      anchor: new window['google'].maps.Point(25, 25), // Punto de anclaje
-    };
-  
-    const marker = new window['google'].maps.Marker({
-      position: new window['google'].maps.LatLng(lat, lng),
-      map: this.map,
-      icon: image,
-    });
-  
-    // Crear un infowindow para mostrar el nombre del usuario
-    const infoWindow = new window['google'].maps.InfoWindow({
-      content: `<div><strong>${nombre}</strong></div>`
-    });
-  
-    // Mostrar el infowindow al hacer clic en el marcador
-    marker.addListener('click', () => {
-      infoWindow.open(this.map, marker);
-    });
-  
-    // Guardar el marcador para futuras referencias o limpieza
-    if (!this.map.markers) {
-      this.map.markers = [];
-    }
-    this.map.markers.push(marker);
+  const image = {
+    url: photoURL,
+    scaledSize: new window['google'].maps.Size(50, 50), // Tamaño de la imagen
+    origin: new window['google'].maps.Point(0, 0), // Origen de la imagen
+    anchor: new window['google'].maps.Point(25, 25), // Punto de anclaje
+  };
+
+  const marker = new window['google'].maps.Marker({
+    position: new window['google'].maps.LatLng(lat, lng),
+    map: this.map,
+    icon: image,
+  });
+
+  // Crear un infowindow para mostrar el nombre del usuario
+  const infoWindow = new window['google'].maps.InfoWindow({
+    content: `<div><strong>${nombre}</strong></div>`
+  });
+
+  // Mostrar el infowindow al hacer clic en el marcador
+  marker.addListener('click', () => {
+    infoWindow.open(this.map, marker);
+  });
+
+  // Guardar el marcador para futuras referencias o limpieza
+  if (!this.map.markers) {
+    this.map.markers = [];
   }
-  
+  this.map.markers.push(marker);
+}
+
 clearMarkers() {
   if (this.map) {
     this.map.markers.forEach(marker => marker.setMap(null));

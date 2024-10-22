@@ -46,7 +46,21 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
     if (consultaData) {
       this.consulta = JSON.parse(consultaData);
     }
+  }
+  ionViewDidEnter() {
     this.loadMap();
+  }
+
+  loadMap() {
+    const mapElement = document.getElementById('map');
+    this.googleMapsService
+      .loadGoogleMaps(this.googleMapsApiKey)
+      .then(() => {
+        this.googleMapsService.initMap(mapElement, -33.447487, -70.673676);
+      })
+      .catch(error => {
+        console.error('Error cargando el mapa:', error);
+      });
   }
 
   goToHistoriaPacientes() {
@@ -76,14 +90,6 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
     });
   }
 
-  loadMap() {
-    const mapElement = document.getElementById('map');
-    this.googleMapsService
-      .loadGoogleMaps(this.googleMapsApiKey)
-      .then(() => {
-        this.googleMapsService.initMap(mapElement, -33.447487, -70.673676);
-      });
-  }
 
   aceptarOferta() {
     if (this.consulta && this.consulta.direccionUsuario) {

@@ -48,8 +48,22 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
     }
   }
   ionViewDidEnter() {
-    this.loadMap();
+    // Verifica si la página se ha recargado dos veces
+    const reloadCount = Number(sessionStorage.getItem('reloadCount') || 0);
+
+    if (reloadCount < 2) {
+      // Incrementa el contador y recarga la página
+      sessionStorage.setItem('reloadCount', (reloadCount + 1).toString());
+      location.reload();
+      
+    } else {
+      // Restablece el contador después de dos recargas
+      sessionStorage.removeItem('reloadCount');
+      this.loadMap();
+    }
   }
+
+
 
   loadMap() {
     const mapElement = document.getElementById('map');

@@ -65,23 +65,20 @@ export class ProfesionalesBusquedaPage implements OnInit {
     });
   }
 
- // Agregar marcadores en el mapa con nombres
-addMarkersToMap() {
-  this.usuariosFuncionarios.forEach(usuario => {
-    if (usuario.direccion && usuario.photoURL) {
-      // Convertir la dirección a coordenadas usando un servicio real de geocodificación
-      this.convertirDireccionACoordenadas(usuario.direccion).then(latLng => {
-        if (latLng) {
-          // Generar una posición aleatoria dentro de un radio de 500 metros
-          const randomLatLng = this.generarPosicionAleatoria(latLng.lat, latLng.lng, 1000);
-          
-          // Agregar el marcador al mapa con nombre del usuario
-          this.googleMapsService.addCustomMarker(randomLatLng.lat, randomLatLng.lng, usuario.photoURL, usuario.nombre);
-        }
-      });
-    }
-  });
-}
+  addMarkersToMap() {
+    this.usuariosFuncionarios.forEach(usuario => {
+      if (usuario.direccion && usuario.photoURL) {
+        this.convertirDireccionACoordenadas(usuario.direccion).then(latLng => {
+          if (latLng) {
+            const randomLatLng = this.generarPosicionAleatoria(latLng.lat, latLng.lng, 1000);
+            // Llamar al método con la `uid`
+            this.googleMapsService.addCustomMarker(randomLatLng.lat, randomLatLng.lng, usuario.photoURL, usuario.nombre, usuario.uid);
+          }
+        });
+      }
+    });
+  }
+  
 // Función para generar una posición aleatoria en un radio especificado (en metros)
 generarPosicionAleatoria(lat: number, lng: number, radio: number) {
   const r = radio / 111320; // Convertir metros a grados (aproximado)
@@ -126,6 +123,7 @@ buscarPorDireccion(event: any) {
   }
 }
 
+
 filtrarProfesionales(event: any) {
   this.filtroNombreProfesional = event.target.value.toLowerCase();
   this.filtrarMarcadores();
@@ -146,7 +144,7 @@ filtrarMarcadores() {
       this.convertirDireccionACoordenadas(usuario.direccion).then(latLng => {
         if (latLng) {
           this.googleMapsService.updateCurrentPosition(latLng.lat, latLng.lng); // Centrar el mapa
-          this.googleMapsService.addCustomMarker(latLng.lat, latLng.lng, usuario.photoURL, usuario.nombre); // Agregar marcador
+          this.googleMapsService.addCustomMarker(latLng.lat, latLng.lng, usuario.photoURL, usuario.nombre, usuario.uid); // Agregar marcador
         }
       });
     });

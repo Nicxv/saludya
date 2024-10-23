@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class GoogleMapsService {
   private carMarker: any; // Marcador del vehículo
   private currentPositionMarker: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   // Inicializar los servicios de Google Maps (autocompletar)
   initAutocomplete(input: HTMLInputElement, onSelect: (place: any) => void) {
@@ -108,36 +109,42 @@ export class GoogleMapsService {
     }
   }
 
-  addCustomMarker(lat: number, lng: number, photoURL: string, nombre: string) {
-  const image = {
-    url: photoURL,
-    scaledSize: new window['google'].maps.Size(50, 50), // Tamaño de la imagen
-    origin: new window['google'].maps.Point(0, 0), // Origen de la imagen
-    anchor: new window['google'].maps.Point(25, 25), // Punto de anclaje
-  };
-
-  const marker = new window['google'].maps.Marker({
-    position: new window['google'].maps.LatLng(lat, lng),
-    map: this.map,
-    icon: image,
-  });
-
-  // Crear un infowindow para mostrar el nombre del usuario
-  const infoWindow = new window['google'].maps.InfoWindow({
-    content: `<div><strong>${nombre}</strong></div>`
-  });
-
-  // Mostrar el infowindow al hacer clic en el marcador
-  marker.addListener('click', () => {
-    infoWindow.open(this.map, marker);
-  });
-
-  // Guardar el marcador para futuras referencias o limpieza
-  if (!this.map.markers) {
-    this.map.markers = [];
+  addCustomMarker(lat: number, lng: number, photoURL: string, nombre: string, uid: string) {
+    const image = {
+      url: photoURL,
+      scaledSize: new window['google'].maps.Size(50, 50), // Tamaño de la imagen
+      origin: new window['google'].maps.Point(0, 0),
+    };
+  
+    const marker = new window['google'].maps.Marker({
+      position: { lat, lng },
+      map: this.map,
+      icon: image,
+      title: nombre,
+    });
+  
+    // Crear un botón emergente
+    const infoWindow = new window['google'].maps.InfoWindow({
+      content: `<button id="contactar-${uid}" style="background-color: #0074BD; color: white; border: none; padding: 10px; border-radius: 5px;">Contactar funcionario</button>`,
+    });
+  
+    // Evento para abrir el InfoWindow al hacer clic en el marcador
+    marker.addListener('click', () => {
+      infoWindow.open(this.map, marker);
+  
+      // Agregar un evento para el botón "Contactar funcionario"
+      setTimeout(() => {
+        const contactButton = document.getElementById(`contactar-${uid}`);
+        if (contactButton) {
+          contactButton.addEventListener('click', () => {
+            // Navegar a la página de mensajes del funcionario con la uid usando Angular Router
+            this.router.navigate(['/msj-funcionario'], { state: { uidFuncionario: uid } });
+          });
+        }
+      }, 0);
+    });
   }
-  this.map.markers.push(marker);
-}
+  
 
 clearMarkers() {
   if (this.map) {

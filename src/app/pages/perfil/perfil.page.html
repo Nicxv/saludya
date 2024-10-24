@@ -57,6 +57,10 @@
         <ion-icon slot="start" name="heart-outline"></ion-icon>
         Historial de pacientes
       </ion-button>
+      <ion-button *ngIf="login && rol === 'paciente'" expand="block"  class="btn" size="small" [routerLink]="['/profesionales-busqueda']">
+        <ion-icon slot="start" name="heart-outline"></ion-icon>
+        Ver mapa
+      </ion-button>
       <ion-button expand="block"  class="btn" size="small">
         <ion-icon slot="start" name="document-text-outline"></ion-icon>
         Mis certificado

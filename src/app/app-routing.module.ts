@@ -13,10 +13,7 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  {
-    path: 'pagina-prueba',
-    loadChildren: () => import('./pages/pagina-prueba/pagina-prueba.module').then( m => m.PaginaPruebaPageModule)
-  },
+ 
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
@@ -104,6 +101,12 @@ const routes: Routes = [
     path: 'profesional-consulta-alerta',
     loadChildren: () => import('./pages/profesional-consulta-alerta/profesional-consulta-alerta.module').then( m => m.ProfesionalConsultaAlertaPageModule),
     canActivate: [funcionarioGuard]
+  },
+  /* La de abajo es la pagina de error, siempre debe ir al ultimo,
+   cuando creen una pagina, deben mover la recien creada arriba de la pag de error*/
+  {
+    path: '**',
+    loadChildren: () => import('./pages/pagina-prueba/pagina-prueba.module').then( m => m.PaginaPruebaPageModule)
   },
 
 

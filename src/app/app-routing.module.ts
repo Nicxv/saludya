@@ -90,7 +90,7 @@ const routes: Routes = [
   {
     path: 'list-fchat',
     loadChildren: () => import('./pages/list-fchat/list-fchat.module').then( m => m.ListFchatPageModule),
-    canActivate: [adminGuard]
+    canActivate: [funcionarioGuard]
   },
   {
     path: 'profesionales-busqueda',

@@ -59,55 +59,19 @@ export class GoogleMapsService {
       center: { lat, lng },
       zoom: 14,
     });
-
+  
     this.directionsService = new window['google'].maps.DirectionsService();
     this.directionsRenderer = new window['google'].maps.DirectionsRenderer();
     this.directionsRenderer.setMap(this.map);
-  }
-
-  showRoute(origin: { lat: number; lng: number }, destination: any) {
-    const request = {
-      origin: new window['google'].maps.LatLng(origin.lat, origin.lng),
-      destination,
-      travelMode: window['google'].maps.TravelMode.DRIVING,
-    };
-
-    this.directionsService.route(request, (result, status) => {
-      if (status === window['google'].maps.DirectionsStatus.OK) {
-        this.directionsRenderer.setDirections(result);
-      } else {
-        console.error('Error mostrando la ruta:', status);
-      }
+    
+    // Marcador para la ubicación del usuario
+    this.currentPositionMarker = new window['google'].maps.Marker({
+      position: { lat, lng },
+      map: this.map,
+      title: "Tu ubicación",
     });
   }
-
-  updateCurrentPosition(lat: number, lng: number) {
-    const position = new window['google'].maps.LatLng(lat, lng);
-
-    if (!this.currentPositionMarker) {
-      this.currentPositionMarker = new window['google'].maps.Marker({
-        position,
-        map: this.map,
-        icon: {
-          url: 'assets/images/auto-icon.png',
-          scaledSize: new window['google'].maps.Size(40, 40),
-        },
-      });
-    } else {
-      this.currentPositionMarker.setPosition(position);
-    }
-
-    this.map.setCenter(position);
-  }
-  clearRoute() {
-    if (this.directionsRenderer) {
-      this.directionsRenderer.setDirections({ routes: [] }); // Limpiar la ruta en el mapa
-    }
-    if (this.currentPositionMarker) {
-      this.currentPositionMarker.setMap(null); // Remover el marcador de posición actual
-      this.currentPositionMarker = null;
-    }
-  }
+  
 
   addCustomMarker(lat: number, lng: number, photoURL: string, nombre: string, uid: string) {
     const image = {
@@ -150,6 +114,41 @@ clearMarkers() {
   if (this.map) {
     this.map.markers.forEach(marker => marker.setMap(null));
     this.map.markers = [];
+  }
+}
+
+trazarRuta(latOrigen: number, lngOrigen: number, direccionDestino: string) {
+  const request = {
+    origin: new window['google'].maps.LatLng(latOrigen, lngOrigen),
+    destination: direccionDestino,
+    travelMode: window['google'].maps.TravelMode.DRIVING,
+  };
+
+  this.directionsService.route(request, (result, status) => {
+    if (status === window['google'].maps.DirectionsStatus.OK) {
+      this.directionsRenderer.setDirections(result);
+    } else {
+      console.error('Error al trazar la ruta: ' + status);
+    }
+  });
+}
+
+
+// En tu archivo GoogleMapsService.ts
+updateCurrentPosition(lat: number, lng: number) {
+  if (this.currentPositionMarker) {
+    // Actualiza la posición del marcador existente
+    this.currentPositionMarker.setPosition({ lat, lng });
+    // También puedes centrar el mapa en la nueva posición
+    this.map.setCenter({ lat, lng });
+  } else {
+    // Si no hay un marcador, puedes crear uno nuevo
+    this.currentPositionMarker = new window['google'].maps.Marker({
+      position: { lat, lng },
+      map: this.map,
+      title: "Tu ubicación",
+    });
+    this.map.setCenter({ lat, lng });
   }
 }
 

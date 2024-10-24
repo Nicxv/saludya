@@ -52,22 +52,22 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="!ofertaAceptada">
+    <ion-row >
       <ion-col class="ion-padding ion-text-center ion-align-self-center">
         <ion-button shape="round" (click)="aceptarOferta()" [ngStyle]="{ '--background': '#4BAADD' }">Aceptar oferta</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <!-- El mapa se muestra siempre -->
+  <!--Aqui le mapa-->
   <ion-row>
     <ion-col>
       <div id="map" style="width: 100%; height: 600px;"></div>
     </ion-col>
   </ion-row>
-  <ion-row *ngIf="ofertaAceptada">
+  <ion-row >
     <ion-col class="ion-padding ion-text-center ion-align-self-center">
-      <ion-button shape="round" (click)="cancelarRuta()" [ngStyle]="{ '--background': '#FF4B4B' }">Cancelar Ruta</ion-button>
+      <ion-button shape="round"  [ngStyle]="{ '--background': '#FF4B4B' }">Cancelar Ruta</ion-button>
     </ion-col>
   </ion-row>
   

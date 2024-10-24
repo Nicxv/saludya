@@ -5,6 +5,8 @@ import { Consultamedica, registroUsuario } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { GoogleMapsService } from 'src/app/services/google-maps.service';
+import { Geolocation } from '@capacitor/geolocation'; // Asegúrate de importar Geolocation
+
 
 @Component({
   selector: 'app-profesional-consulta-alerta',
@@ -12,16 +14,15 @@ import { GoogleMapsService } from 'src/app/services/google-maps.service';
   styleUrls: ['./profesional-consulta-alerta.page.scss'],
 })
 export class ProfesionalConsultaAlertaPage implements OnInit {
-  @ViewChild('map', { static: false }) mapElement: ElementRef;
   login: boolean = false;
   rol: 'paciente' | 'funcionario' | 'admin' = null;
   usuario: registroUsuario = null;
   numeroConsultas: number = 0;
   consulta: Consultamedica;
-  private watchId: number; // Variable para almacenar el ID del seguimiento de geolocalización
-  private googleMapsApiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8';
-  ofertaAceptada: boolean = false;
-
+  latitudUsuario: number;
+  longitudUsuario: number;
+  direccionDestino: string; // Aquí almacenamos la dirección del usuario destino
+  /* private googleMapsApiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8'; */
 
   constructor(
     private auth: AuthService,
@@ -46,36 +47,38 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
     if (consultaData) {
       this.consulta = JSON.parse(consultaData);
     }
+    this.direccionDestino = this.consulta?.direccionUsuario; // Asegúrate de tener esto disponible
   }
-  ionViewDidEnter() {
-    // Verifica si la página se ha recargado dos veces
-    const reloadCount = Number(sessionStorage.getItem('reloadCount') || 0);
+  async aceptarOferta() {
+    try {
+      // Pedir permisos y obtener ubicación
+      const permission = await Geolocation.requestPermissions();
+      if (permission.location === 'granted') {
+        const position = await Geolocation.getCurrentPosition();
+        this.latitudUsuario = position.coords.latitude;
+        this.longitudUsuario = position.coords.longitude;
 
-    if (reloadCount < 2) {
-      // Incrementa el contador y recarga la página
-      sessionStorage.setItem('reloadCount', (reloadCount + 1).toString());
-      location.reload();
-      
-    } else {
-      // Restablece el contador después de dos recargas
-      sessionStorage.removeItem('reloadCount');
-      this.loadMap();
+        // Cargar el script de Google Maps
+        await this.googleMapsService.loadGoogleMaps('AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8');
+
+        // Inicializar el mapa
+        const mapElement = document.getElementById('map');
+        if (mapElement) {
+          this.googleMapsService.initMap(mapElement, this.latitudUsuario, this.longitudUsuario);
+          
+          // Trazar ruta hacia la dirección destino
+          this.googleMapsService.trazarRuta(this.latitudUsuario, this.longitudUsuario, this.direccionDestino);
+        } else {
+          console.error('No se pudo encontrar el elemento del mapa.');
+        }
+      } else {
+        console.error('Permisos de ubicación no concedidos');
+      }
+    } catch (error) {
+      console.error('Error al aceptar la oferta: ', error);
     }
   }
 
-
-
-  loadMap() {
-    const mapElement = document.getElementById('map');
-    this.googleMapsService
-      .loadGoogleMaps(this.googleMapsApiKey)
-      .then(() => {
-        this.googleMapsService.initMap(mapElement, -33.447487, -70.673676);
-      })
-      .catch(error => {
-        console.error('Error cargando el mapa:', error);
-      });
-  }
 
   goToHistoriaPacientes() {
     this.navCtrl.navigateForward('/historia-pacientes');
@@ -103,48 +106,4 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
       }
     });
   }
-
-
-  aceptarOferta() {
-    if (this.consulta && this.consulta.direccionUsuario) {
-      this.ofertaAceptada = true; // La oferta ha sido aceptada
-      this.startRealTimeTracking(); // Iniciar el seguimiento en tiempo real
-    }
-  }
-
-  startRealTimeTracking() {
-    if (navigator.geolocation) {
-      this.watchId = navigator.geolocation.watchPosition(
-        position => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          this.googleMapsService.updateCurrentPosition(lat, lng);
-  
-          // Trazar la ruta desde la ubicación actual hasta el destino
-          const origen = { lat, lng };
-          const destino = this.consulta.direccionUsuario;
-          this.googleMapsService.showRoute(origen, destino);
-        },
-        error => {
-          console.error('Error obteniendo la geolocalización:', error);
-        },
-        { enableHighAccuracy: true }
-      );
-    }
-  }
-  
-  cancelarRuta() {
-    
-    if (navigator.geolocation && this.watchId !== undefined) {
-      navigator.geolocation.clearWatch(this.watchId);
-      this.watchId = undefined;
-      console.log('Seguimiento en tiempo real detenido');
-      this.googleMapsService.clearRoute(); // Método para limpiar la ruta del mapa
-      this.ofertaAceptada = false; // Restablecer el estado de la oferta
-      console.log('Ruta cancelada');
-    }
-    
-    
-  }
-  
 }

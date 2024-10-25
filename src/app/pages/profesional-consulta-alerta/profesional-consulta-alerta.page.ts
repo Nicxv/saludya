@@ -22,6 +22,7 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
   latitudUsuario: number;
   longitudUsuario: number;
   direccionDestino: string; // Aquí almacenamos la dirección del usuario destino
+  ofertaAceptada: boolean = false; // Nueva variable para controlar la visibilidad
   /* private googleMapsApiKey = 'AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8'; */
 
   constructor(
@@ -51,23 +52,19 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
   }
   async aceptarOferta() {
     try {
-      // Pedir permisos y obtener ubicación
       const permission = await Geolocation.requestPermissions();
       if (permission.location === 'granted') {
         const position = await Geolocation.getCurrentPosition();
         this.latitudUsuario = position.coords.latitude;
         this.longitudUsuario = position.coords.longitude;
 
-        // Cargar el script de Google Maps
         await this.googleMapsService.loadGoogleMaps('AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8');
 
-        // Inicializar el mapa
         const mapElement = document.getElementById('map');
         if (mapElement) {
           this.googleMapsService.initMap(mapElement, this.latitudUsuario, this.longitudUsuario);
-          
-          // Trazar ruta hacia la dirección destino
           this.googleMapsService.trazarRuta(this.latitudUsuario, this.longitudUsuario, this.direccionDestino);
+          this.ofertaAceptada = true; // Mostrar botón "Cancelar Ruta" y ocultar "Aceptar oferta"
         } else {
           console.error('No se pudo encontrar el elemento del mapa.');
         }
@@ -77,6 +74,12 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
     } catch (error) {
       console.error('Error al aceptar la oferta: ', error);
     }
+  }
+
+  cancelarRuta() {
+    // Lógica para cancelar la oferta y limpiar el mapa
+    this.googleMapsService.clearRoute(); // Método hipotético para limpiar la ruta en el servicio de Google Maps
+    this.ofertaAceptada = false; // Ocultar botón "Cancelar Ruta" y mostrar "Aceptar oferta"
   }
 
 

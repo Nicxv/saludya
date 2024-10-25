@@ -54,7 +54,7 @@
 
     <ion-row >
       <ion-col class="ion-padding ion-text-center ion-align-self-center">
-        <ion-button shape="round" (click)="aceptarOferta()" [ngStyle]="{ '--background': '#4BAADD' }">Aceptar oferta</ion-button>
+        <ion-button *ngIf="!ofertaAceptada" shape="round" (click)="aceptarOferta()" [ngStyle]="{ '--background': '#4BAADD' }">Aceptar oferta</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -67,7 +67,7 @@
   </ion-row>
   <ion-row >
     <ion-col class="ion-padding ion-text-center ion-align-self-center">
-      <ion-button shape="round"  [ngStyle]="{ '--background': '#FF4B4B' }">Cancelar Ruta</ion-button>
+      <ion-button *ngIf="ofertaAceptada" shape="round" (click)="cancelarRuta()" [ngStyle]="{ '--background': '#FF4B4B' }">Cancelar Ruta</ion-button>
     </ion-col>
   </ion-row>
   

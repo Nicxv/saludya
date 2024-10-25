@@ -151,6 +151,11 @@ updateCurrentPosition(lat: number, lng: number) {
     this.map.setCenter({ lat, lng });
   }
 }
+clearRoute(): void {
+  if (this.directionsRenderer) {
+    this.directionsRenderer.setDirections({ routes: [] }); // Limpiar la ruta del mapa
+  }
+}
 
   
   

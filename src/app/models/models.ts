@@ -65,8 +65,6 @@ export interface Chat {
     direccionUsuario: string; // Nuevo campo para la dirección del usuario
     uidFuncionario: string;
     fotoUsuario: string;
-    latitudFuncionario: number; // Asegúrate de agregar estas propiedades
-  longitudFuncionario: number;
   }
   
   

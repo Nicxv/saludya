@@ -102,12 +102,21 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profesional-consulta-alerta/profesional-consulta-alerta.module').then( m => m.ProfesionalConsultaAlertaPageModule),
     canActivate: [funcionarioGuard]
   },
+  {
+    path: 'map-paciente',
+    loadChildren: () => import('./pages/map-paciente/map-paciente.module').then( m => m.MapPacientePageModule)
+  },
+
+
+  
   /* La de abajo es la pagina de error, siempre debe ir al ultimo,
    cuando creen una pagina, deben mover la recien creada arriba de la pag de error*/
   {
     path: '**',
     loadChildren: () => import('./pages/pagina-prueba/pagina-prueba.module').then( m => m.PaginaPruebaPageModule)
   },
+  
+
 
 
 

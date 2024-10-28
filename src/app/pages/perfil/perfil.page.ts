@@ -46,7 +46,7 @@ export class PerfilPage implements OnInit {
       }
     })
   }
-
+ 
 
 //obtener la id del usuario para mostrar los datos del perfil
 uid: string = null;

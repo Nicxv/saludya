@@ -36,8 +36,6 @@ export interface Mensaje {
     uid: string;
   }
 
-  // models.ts
-
 export interface Chat {
     id_chat: string; // ID único del chat
     asunto: string; // Asunto del mensaje
@@ -67,6 +65,8 @@ export interface Chat {
     direccionUsuario: string; // Nuevo campo para la dirección del usuario
     uidFuncionario: string;
     fotoUsuario: string;
+    latitudFuncionario: number; // Asegúrate de agregar estas propiedades
+  longitudFuncionario: number;
   }
   
   

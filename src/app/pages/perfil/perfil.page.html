@@ -77,6 +77,10 @@
         <ion-icon slot="start" name="call-outline"></ion-icon>
         Contáctanos
       </ion-button>
+      <ion-button expand="block"  class="btn" size="small" [routerLink]="['/map-paciente']" >
+        <ion-icon slot="start" name="call-outline"></ion-icon>
+        ver mapa prueba
+      </ion-button>
   
       <!-- Botón para cerrar sesión si está logueado -->
       <ion-button *ngIf="login == true" expand="block" class="btn" size="small" (click)="logout()">

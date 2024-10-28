@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mapa del Paciente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Foto del paciente -->
+  <div class="profile-container" *ngIf="userPhotoURL">
+    <img [src]="userPhotoURL" alt="Foto del Paciente" class="profile-image">
+  </div>
+
+  <!-- Contenedor del mapa -->
+  <div #mapElement class="map-container"></div>
+</ion-content>

@@ -65,6 +65,8 @@ export interface Chat {
     direccionUsuario: string; // Nuevo campo para la dirección del usuario
     uidFuncionario: string;
     fotoUsuario: string;
+    estado?: 'aceptada'|'en espera',
+    direccionFuncionario?: { lat: number; lng: number };
   }
   
   

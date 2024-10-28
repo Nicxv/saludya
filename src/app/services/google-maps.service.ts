@@ -157,6 +157,49 @@ clearRoute(): void {
   }
 }
 
+trazarRutaMixta(origen: { lat: number; lng: number } | string, destino: { lat: number; lng: number } | string) {
+  // Convertir origen y destino en LatLng si están en formato de texto
+  const obtenerLatLng = (direccion: any): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      if (typeof direccion === 'string') {
+        // Si es una dirección en texto, utiliza Geocoder
+        const geocoder = new window['google'].maps.Geocoder();
+        geocoder.geocode({ address: direccion }, (results, status) => {
+          if (status === window['google'].maps.GeocoderStatus.OK) {
+            resolve(results[0].geometry.location);
+          } else {
+            reject('No se pudo geocodificar la dirección: ' + status);
+          }
+        });
+      } else {
+        // Si es un objeto con lat y lng, devuelve directamente como LatLng
+        resolve(new window['google'].maps.LatLng(direccion.lat, direccion.lng));
+      }
+    });
+  };
+
+  // Obtener lat/lng para origen y destino
+  Promise.all([obtenerLatLng(origen), obtenerLatLng(destino)])
+    .then(([latLngOrigen, latLngDestino]) => {
+      const request = {
+        origin: latLngOrigen,
+        destination: latLngDestino,
+        travelMode: window['google'].maps.TravelMode.DRIVING,
+      };
+
+      // Realiza la ruta con DirectionsService
+      this.directionsService.route(request, (result, status) => {
+        if (status === window['google'].maps.DirectionsStatus.OK) {
+          this.directionsRenderer.setDirections(result);
+        } else {
+          console.error('Error al trazar la ruta: ' + status);
+        }
+      });
+    })
+    .catch((error) => console.error('Error al obtener coordenadas para la ruta:', error));
+}
+
+
   
   
   

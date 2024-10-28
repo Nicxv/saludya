@@ -10,6 +10,14 @@
     <img [src]="userPhotoURL" alt="Foto del Paciente" class="profile-image">
   </div>
 
+  <!-- Botón de Seguimiento de Ruta con notificación -->
+  <div class="route-tracking-button" *ngIf="showRouteButton">
+    <ion-button (click)="mostrarRuta()" color="primary" shape="round">
+      Seguimiento de Ruta
+      <ion-badge color="danger" *ngIf="notificationCount > 0">{{ notificationCount }}</ion-badge>
+    </ion-button>
+  </div>
+
   <!-- Contenedor del mapa -->
   <div #mapElement class="map-container"></div>
 </ion-content>

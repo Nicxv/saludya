@@ -58,15 +58,19 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
         this.latitudUsuario = position.coords.latitude;
         this.longitudUsuario = position.coords.longitude;
 
-        await this.googleMapsService.loadGoogleMaps('AIzaSyAjeDGC_iyfAVa3Q4v4DQkLsKMPIAi9dW8');
+        const direccionFuncionario = `${this.latitudUsuario}, ${this.longitudUsuario}`; // Reemplaza esto con la dirección si tienes el servicio
+        this.ofertaAceptada = true; 
 
+        await this.firestore.updateDoc(
+          { direccionFuncionario, estado: 'aceptada' },
+          'ConsultasMedicas',
+          this.consulta.id_consulta
+        );
+        
         const mapElement = document.getElementById('map');
         if (mapElement) {
           this.googleMapsService.initMap(mapElement, this.latitudUsuario, this.longitudUsuario);
-          this.googleMapsService.trazarRuta(this.latitudUsuario, this.longitudUsuario, this.direccionDestino);
-          this.ofertaAceptada = true; // Mostrar botón "Cancelar Ruta" y ocultar "Aceptar oferta"
-        } else {
-          console.error('No se pudo encontrar el elemento del mapa.');
+          this.googleMapsService.trazarRuta(this.latitudUsuario, this.longitudUsuario, this.consulta.direccionUsuario);
         }
       } else {
         console.error('Permisos de ubicación no concedidos');
@@ -76,11 +80,17 @@ export class ProfesionalConsultaAlertaPage implements OnInit {
     }
   }
 
-  cancelarRuta() {
-    // Lógica para cancelar la oferta y limpiar el mapa
-    this.googleMapsService.clearRoute(); // Método hipotético para limpiar la ruta en el servicio de Google Maps
-    this.ofertaAceptada = false; // Ocultar botón "Cancelar Ruta" y mostrar "Aceptar oferta"
+  async cancelarRuta() {
+    this.googleMapsService.clearRoute();
+    this.ofertaAceptada = false;
+
+    await this.firestore.updateDoc(
+      { estado: 'en espera' },
+      'ConsultasMedicas',
+      this.consulta.id_consulta
+    );
   }
+
 
 
   goToHistoriaPacientes() {

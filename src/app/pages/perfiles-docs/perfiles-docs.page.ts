@@ -16,17 +16,17 @@ export class PerfilesDocsPage implements OnInit {
   valoracionSeleccionada: number = 0;
   valoracionRealizada: boolean = false;
   stars: number[] = [1, 2, 3, 4, 5];
-  promedioValoracion: number = 0; // Para almacenar el promedio
+  promedioValoracion: number = 0;
 
   constructor(private router: Router, private auth: AuthService, private firestore: FirestoreService) {}
 
   ngOnInit() {
     this.usuario = history.state.usuario;
-    // Espera al estado de autenticación del usuario al iniciar
     this.auth.stateUser().subscribe(res => {
       if (res) {
         this.login = true;
-        this.getDatosUser(res.uid); // Obtiene los datos del usuario
+        this.getDatosUser(res.uid);
+        this.calcularPromedioValoracion();
       } else {
         this.login = false;
       }
@@ -42,6 +42,20 @@ export class PerfilesDocsPage implements OnInit {
         this.rol = res.rol;
       }
     });
+  }
+
+  async calcularPromedioValoracion() {
+    const valoraciones = await this.firestore.getAllDocs<Valoracion>('Valoraciones');
+    const valoracionesFuncionario = valoraciones.filter(v => v.uidFuncionario === this.usuario.uid);
+    const totalValoraciones = valoracionesFuncionario.length;
+    const sumaValoraciones = valoracionesFuncionario.reduce((sum, v) => sum + v.valor, 0);
+    
+    this.promedioValoracion = totalValoraciones > 0 ? sumaValoraciones / totalValoraciones : 0;
+  }
+
+  // Método para redondear el promedio de valoración
+  getPromedioValoracionRedondeado(): number {
+    return Math.round(this.promedioValoracion);
   }
 
   contactarFuncionario() {
@@ -60,7 +74,7 @@ export class PerfilesDocsPage implements OnInit {
     this.firestore.getDoc<Valoracion>('Valoraciones', idValoracion).subscribe((valoracionExistente) => {
       if (valoracionExistente) {
         this.valoracionRealizada = true;
-        this.valoracionSeleccionada = valoracionExistente.valor; // Mostrar el valor ya dado
+        this.valoracionSeleccionada = valoracionExistente.valor; 
       }
     });
   }
@@ -89,6 +103,7 @@ export class PerfilesDocsPage implements OnInit {
       .then(() => {
         this.valoracionRealizada = true;
         console.log("Valoración enviada con éxito.");
+        this.calcularPromedioValoracion();
       })
       .catch((error) => {
         console.error("Error al enviar la valoración: ", error);

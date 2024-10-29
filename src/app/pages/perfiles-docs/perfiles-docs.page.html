@@ -34,9 +34,24 @@
     </div>
   </div>
 
-   <!-- Sección de calificaciones -->
-   <div class="ratings-container">
+   <!-- Sección de calificaciones promedio -->
+<div class="average-rating-container">
+   <p class="ion-text-center">Calificación promedio del funcionario:</p>
+  <div class="stars">
+    <ion-icon *ngFor="let star of stars; let i = index"
+              [name]="i < getPromedioValoracionRedondeado() ? 'star' : 'star-outline'"
+              color="warning">
+    </ion-icon>
+  </div>
+  <p class="ion-text-center" *ngIf="promedioValoracion === 0">No hay valoraciones aún.</p>
+
+</div>
+
+  <!-- Sección de calificaciones -->
+  <div class="ratings-container">
+    <p>Tu calificación:</p>
     <div class="stars">
+      
       <ion-icon *ngFor="let star of stars; let i = index"
                 [name]="i < valoracionSeleccionada ? 'star' : 'star-outline'"
                 color="warning"
@@ -44,8 +59,9 @@
       </ion-icon>
     </div>
     <p *ngIf="valoracionRealizada">Ya valoraste a este funcionario con {{ valoracionSeleccionada }} estrellas.</p>
-    <p *ngIf="!valoracionRealizada">Calificaciones promedio de sus pacientes</p>
+    <p *ngIf="!valoracionRealizada">Califica a este funcionario</p>
   </div>
+
 
   <!-- Botón para enviar valoración -->
   <ion-button *ngIf="!valoracionRealizada" (click)="enviarValoracion()" expand="block">

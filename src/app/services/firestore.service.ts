@@ -8,7 +8,7 @@ import { registroUsuario } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class FirestoreService {
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) { }
@@ -75,7 +75,16 @@ export class FirestoreService {
   deleteDocTwo(path: string, id: string): Promise<void> {
     return this.firestore.collection(path).doc(id).delete();
   }
-
+  getDocAsPromise<tipo>(path: string, id: string): Promise<tipo> {
+    const collection = this.firestore.collection<tipo>(path);
+    return collection.doc(id).ref.get().then(doc => doc.exists ? doc.data() as tipo : null);
+  }
+  getAllDocs<tipo>(path: string): Promise<tipo[]> {
+    return this.firestore.collection<tipo>(path).get().toPromise().then(snapshot => {
+      return snapshot.docs.map(doc => doc.data() as tipo);
+    });
+  }
+  
   
 
 }

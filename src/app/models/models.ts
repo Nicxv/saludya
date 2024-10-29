@@ -68,6 +68,14 @@ export interface Chat {
     estado?: 'aceptada'|'en espera',
     direccionFuncionario?: { lat: number; lng: number };
   }
+
+  export interface Valoracion {
+    id_valoricacion: string; //id unico para valorizacion
+    uidUsuario: string; // UID del usuario que realiza la valoración
+    uidFuncionario: string; // UID del funcionario que recibe la valoración
+    valor: number; // Puntuación dada (por ejemplo, 1 a 5)
+  }
+  
   
   
   

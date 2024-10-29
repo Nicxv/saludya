@@ -93,4 +93,18 @@ ion-content {
   .report-button ion-icon {
     margin-right: 5px;
   }
+
+  .stars ion-icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .ratings-container {
+    text-align: center;
+  }
+  
+  .contact-button, .report-button {
+    margin-top: 16px;
+  }
+  
   

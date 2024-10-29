@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { registroUsuario } from '../models/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, first } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 
@@ -11,7 +11,8 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthService {
 
-  constructor(private authfirebase: AngularFireAuth, private firestore: AngularFirestore) { }
+  constructor(private authfirebase: AngularFireAuth, private firestore: AngularFirestore) {
+   }
 
 
 //login
@@ -34,18 +35,21 @@ export class AuthService {
   }
 
   //obtener id del usuario
-  async getUid() {
-
-    const user = await this.authfirebase.currentUser;
-    console.log('AuthService - Current User:', user);
-
-    if (user) {
-      return user.uid; }
-    else {
-      console.warn('No user logged in.');
-      return null; }
-
+  async getUid(): Promise<string | null> {
+    return this.authfirebase.authState.pipe(
+      first(), // Obtener el primer valor emitido
+      map(user => {
+        if (user) {
+          console.log('AuthService - Current User:', user);
+          return user.uid;
+        } else {
+          console.warn('No user logged in.');
+          return null;
+        }
+      })
+    ).toPromise();
   }
+  
 
   async correoExiste(correo: string): Promise<boolean> {
     const usersCollection = this.firestore.collection('Usuarios', ref => ref.where('correo', '==', correo));

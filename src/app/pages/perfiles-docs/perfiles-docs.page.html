@@ -1,4 +1,11 @@
-
+<!-- perfiles-docs.page.html-->
+ <ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Atrás"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+ </ion-header>
 <ion-content [fullscreen]="true">
   <!-- Imagen de la parte superior -->
   <div class="header-image-container">
@@ -14,7 +21,7 @@
   <!-- Sección de estadísticas -->
   <div class="stats-container">
     <div class="stat-item">
-      <h2>+15</h2>
+      <h2>+15</h2> 
       <p>Años de experiencia</p>
     </div>
     <div class="stat-item">
@@ -27,17 +34,24 @@
     </div>
   </div>
 
-  <!-- Sección de calificaciones -->
-  <div class="ratings-container">
+   <!-- Sección de calificaciones -->
+   <div class="ratings-container">
     <div class="stars">
-      <ion-icon name="star" color="warning"></ion-icon>
-      <ion-icon name="star" color="warning"></ion-icon>
-      <ion-icon name="star" color="warning"></ion-icon>
-      <ion-icon name="star" color="warning"></ion-icon>
-      <ion-icon name="star-outline" color="warning"></ion-icon>
+      <ion-icon *ngFor="let star of stars; let i = index"
+                [name]="i < valoracionSeleccionada ? 'star' : 'star-outline'"
+                color="warning"
+                (click)="!valoracionRealizada && seleccionarValoracion(i + 1)">
+      </ion-icon>
     </div>
-    <p>Calificaciones promedio de sus pacientes</p>
+    <p *ngIf="valoracionRealizada">Ya valoraste a este funcionario con {{ valoracionSeleccionada }} estrellas.</p>
+    <p *ngIf="!valoracionRealizada">Calificaciones promedio de sus pacientes</p>
   </div>
+
+  <!-- Botón para enviar valoración -->
+  <ion-button *ngIf="!valoracionRealizada" (click)="enviarValoracion()" expand="block">
+    Valorar
+  </ion-button>
+  <p class="ion-text-center" *ngIf="valoracionRealizada">Gracias por tu valoración.</p>
 
   <!-- Botón para contactar al profesional -->
   <ion-button class="contact-button" (click)="contactarFuncionario()">

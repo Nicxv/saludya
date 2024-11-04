@@ -110,6 +110,10 @@ const routes: Routes = [
     path: 'intro',
     loadChildren: () => import('./pages/intro/intro.module').then( m => m.IntroPageModule)
   },
+  {
+    path: 'mis-certificados',
+    loadChildren: () => import('./pages/mis-certificados/mis-certificados.module').then( m => m.MisCertificadosPageModule)
+  },
 
 
   
@@ -119,6 +123,8 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/pagina-prueba/pagina-prueba.module').then( m => m.PaginaPruebaPageModule)
   },
+  
+
 
   
 

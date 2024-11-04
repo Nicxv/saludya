@@ -24,7 +24,7 @@ export class PerfilPage implements OnInit {
       this.login = true;
       this.getDatosUser(res.uid);
     }else {
-      console.log('No está logeado');
+      console.log('No está logeado'); 
       this.login = false;
     }
   }) 

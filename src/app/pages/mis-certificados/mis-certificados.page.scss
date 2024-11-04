@@ -1,0 +1,37 @@
+ion-content {
+    --background: #f9f9f9; // Color de fondo suave
+  }
+  
+  input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #0074BD; // Borde de entrada
+    border-radius: 5px; // Esquinas redondeadas
+    margin-bottom: 20px; // Espacio debajo del campo
+    font-size: 16px; // Tamaño de fuente
+  }
+  
+  ion-button {
+    margin-top: 10px; // Margen superior para el botón
+    --background: #0074BD; // Color de fondo del botón
+    --color: white; // Color del texto
+  }
+  
+  ion-item {
+    --background: white; // Fondo blanco para los elementos de la lista
+    border-radius: 10px; // Esquinas redondeadas
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Sombra ligera
+    margin-bottom: 10px; // Espacio entre elementos
+  }
+  
+  ion-label h2 {
+    font-size: 18px; // Tamaño de fuente para el título
+    font-weight: bold; // Negrita para el título
+  }
+  
+  ion-label p {
+    font-size: 14px; // Tamaño de fuente para el tipo de archivo
+    color: #777; // Color de texto más claro
+  }
+  

@@ -75,6 +75,13 @@ export interface Chat {
     uidFuncionario: string; // UID del funcionario que recibe la valoración
     valor: number; // Puntuación dada (por ejemplo, 1 a 5)
   }
+  export interface Certificado {
+    idCertificado: string;
+    uid: string;  // UID del usuario
+    nombreArchivo: string;
+    urlArchivo: string;
+    tipoArchivo: 'pdf' | 'imagen';
+  }
   
   
   

@@ -45,6 +45,21 @@ export class FirestoreService {
       })
     );
   }
+  uploadFileAndGetURL(filePath: string, file: any): Observable<string> {
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+  
+    return new Observable<string>(observer => {
+      task.snapshotChanges().pipe(
+        finalize(async () => {
+          const url = await fileRef.getDownloadURL().toPromise();
+          observer.next(url);
+          observer.complete();
+        })
+      ).subscribe();
+    });
+  }
+  
 
   getUsuarios(): Observable<registroUsuario[]> {
     return this.firestore.collection<registroUsuario>('Usuarios').valueChanges();
@@ -62,11 +77,11 @@ export class FirestoreService {
 
   getCollectionWithId<T>(path: string): Observable<T[]> {
     return this.firestore.collection(path).snapshotChanges().pipe(
-      map((actions) =>
-        actions.map((a) => {
+      map(actions =>
+        actions.map(a => {
           const data = a.payload.doc.data() as T;
-          const id_chat = a.payload.doc.id;
-          return { id_chat, ...data };
+          const id = a.payload.doc.id;
+          return { id, ...data };
         })
       )
     );
@@ -84,6 +99,11 @@ export class FirestoreService {
       return snapshot.docs.map(doc => doc.data() as tipo);
     });
   }
+  deleteFile(filePath: string): Promise<void> {
+    const fileRef = this.storage.ref(filePath);
+    return fileRef.delete().toPromise();
+  }
+  
   
   
 

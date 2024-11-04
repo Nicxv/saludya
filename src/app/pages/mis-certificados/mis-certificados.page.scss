@@ -18,20 +18,15 @@ ion-content {
     --color: white; // Color del texto
   }
   
-  ion-item {
-    --background: white; // Fondo blanco para los elementos de la lista
-    border-radius: 10px; // Esquinas redondeadas
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Sombra ligera
-    margin-bottom: 10px; // Espacio entre elementos
-  }
+
   
   ion-label h2 {
-    font-size: 18px; // Tamaño de fuente para el título
+    font-size: 13px; // Tamaño de fuente para el título
     font-weight: bold; // Negrita para el título
   }
   
   ion-label p {
-    font-size: 14px; // Tamaño de fuente para el tipo de archivo
+    font-size: 10px; // Tamaño de fuente para el tipo de archivo
     color: #777; // Color de texto más claro
   }
   

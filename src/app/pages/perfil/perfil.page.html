@@ -61,9 +61,9 @@
         <ion-icon slot="start" name="heart-outline"></ion-icon>
         Ver mapa
       </ion-button>
-      <ion-button expand="block"  class="btn" size="small">
+      <ion-button *ngIf="login == true" expand="block"  class="btn" size="small" [routerLink]="['/mis-certificados']">
         <ion-icon slot="start" name="document-text-outline"></ion-icon>
-        Mis certificado
+        Mis certificados
       </ion-button>
       <ion-button expand="block"  class="btn" size="small">
         <ion-icon slot="start" name="help-outline"></ion-icon>

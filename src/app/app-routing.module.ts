@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'intro',
     pathMatch: 'full'
   },
  
@@ -106,6 +106,10 @@ const routes: Routes = [
     path: 'map-paciente',
     loadChildren: () => import('./pages/map-paciente/map-paciente.module').then( m => m.MapPacientePageModule)
   },
+  {
+    path: 'intro',
+    loadChildren: () => import('./pages/intro/intro.module').then( m => m.IntroPageModule)
+  },
 
 
   
@@ -115,6 +119,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/pagina-prueba/pagina-prueba.module').then( m => m.PaginaPruebaPageModule)
   },
+
   
 
 

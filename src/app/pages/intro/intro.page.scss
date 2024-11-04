@@ -1,0 +1,30 @@
+@keyframes heartbeat {
+    0%, 100% {
+      transform: scale(0.8);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+  
+  .heart-icon {
+    width: 150px;
+    height: 150px;
+    background-image: url('/assets/images/logo.png'); // Cambia esta ruta por la ubicación de tu imagen
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+  
+  .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Esto asegura que ocupe toda la altura de la pantalla
+  }
+  
+  ion-content {
+    --background: rgb(129, 147, 255);
+  }
+  

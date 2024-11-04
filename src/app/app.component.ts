@@ -12,15 +12,5 @@ register();
 export class AppComponent {
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit() {
-    this.authService.stateUser().subscribe(user => {
-      // Esta lógica solo se ejecutará al inicio
-      if (user) {
-        // Usuario autenticado
-        this.router.navigateByUrl('/p-principal');
-      } else {
-        // Usuario no autenticado
-        this.router.navigateByUrl('/home');
-      }
-    });
   }
 }

@@ -30,6 +30,9 @@
         <div class="info-item ion-text-center">
           <span>{{info.direccion}}</span>
         </div>
+        <div class="info-item ion-text-center">
+          <span>{{info.rol}}</span>
+        </div>
       </div>
   
       <!-- Mensaje si no está logueado -->
@@ -65,17 +68,9 @@
         <ion-icon slot="start" name="document-text-outline"></ion-icon>
         Mis certificados
       </ion-button>
-      <ion-button expand="block"  class="btn" size="small">
-        <ion-icon slot="start" name="help-outline"></ion-icon>
-        Preguntas frecuentes
-      </ion-button>
-      <ion-button expand="block"  class="btn" size="small">
-        <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
-        Centro de soporte
-      </ion-button>
       <ion-button expand="block"  class="btn" size="small" [routerLink]="['/contactanos']" >
         <ion-icon slot="start" name="call-outline"></ion-icon>
-        Contáctanos
+        Centro de soporte
       </ion-button>
       <ion-button *ngIf="login && rol == 'paciente'" expand="block"  class="btn" size="small" [routerLink]="['/map-paciente']" >
         <ion-icon slot="start" name="map-outline"></ion-icon>

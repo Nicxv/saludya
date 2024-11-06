@@ -14,6 +14,6 @@ export class IntroPage implements OnInit {
     // Redirigir a la página 'home' después de 3 segundos
     setTimeout(() => {
       this.router.navigate(['/home']);
-    }, 3000); // Cambia 3000 por el tiempo en milisegundos que desees
+    }, 4000); // Cambia 3000 por el tiempo en milisegundos que desees
   }
 }

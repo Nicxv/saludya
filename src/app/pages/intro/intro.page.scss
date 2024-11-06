@@ -1,30 +1,54 @@
 @keyframes heartbeat {
-    0%, 100% {
-      transform: scale(0.8);
-    }
-    50% {
-      transform: scale(1);
-    }
+  0%, 100% {
+    transform: scale(0.8);
   }
-  
-  .heart-icon {
-    width: 150px;
-    height: 150px;
-    background-image: url('/assets/images/logo.png'); // Cambia esta ruta por la ubicación de tu imagen
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    animation: heartbeat 1.5s ease-in-out infinite;
+  50% {
+    transform: scale(1);
   }
-  
-  .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; // Esto asegura que ocupe toda la altura de la pantalla
+}
+
+@keyframes cardiogram-move {
+  0% {
+    stroke-dashoffset: 100; // Comienza el desplazamiento desde fuera del corazón
   }
-  
-  ion-content {
-    --background: rgb(129, 147, 255);
+  100% {
+    stroke-dashoffset: 0; // Termina justo en el borde derecho del corazón
   }
-  
+}
+
+.heart-icon {
+  width: 150px;
+  height: 150px;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.heart-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.heart-shape {
+  transform-origin: center;
+  fill: rgb(84, 147, 199); // Cambié el color del corazón a azul
+  stroke: black;
+  stroke-width: 1;
+}
+
+.cardiogram-line {
+  stroke: white;
+  stroke-width: 1.5;
+  stroke-dasharray: 100; // Largo suficiente para cubrir toda la línea del cardiograma
+  stroke-dashoffset: 100;
+  animation: cardiogram-move 1.5s linear infinite; // Dura 3 segundos, y se repite en bucle
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+ion-content {
+  --background: rgb(129, 147, 255);
+}

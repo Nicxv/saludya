@@ -74,9 +74,17 @@
     Contactar
   </ion-button>
 
-  <!-- Enlace para reportar al profesional -->
-  <ion-button fill="clear" color="medium" class="report-button">
-    <ion-icon name="alert-circle-outline"></ion-icon>
-    Reportar al profesional
-  </ion-button> 
+ <!-- Botón para abrir el menú de reporte -->
+<ion-button fill="clear" color="medium" class="report-button" (click)="mostrarOpcionesReporte()">
+  <ion-icon name="alert-circle-outline"></ion-icon>
+  Reportar al profesional
+</ion-button>
+
+<!-- Selector de opciones de reporte -->
+<ion-select [(ngModel)]="tipoReporteSeleccionado" placeholder="Selecciona un motivo de reporte" *ngIf="mostrarSelectReporte" (ionChange)="enviarReporte()">
+  <ion-select-option value="No se presentó en la cita">No se presentó en la cita</ion-select-option>
+  <ion-select-option value="Actitud inapropiada">Actitud inapropiada</ion-select-option>
+  <ion-select-option value="No cumplió con el servicio solicitado">No cumplió con el servicio solicitado</ion-select-option>
+</ion-select>
 </ion-content>
+ 

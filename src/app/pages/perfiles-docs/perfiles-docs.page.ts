@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { registroUsuario, Valoracion } from 'src/app/models/models';
+import { registroUsuario, Reporte, Valoracion } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
@@ -17,6 +17,10 @@ export class PerfilesDocsPage implements OnInit {
   valoracionRealizada: boolean = false;
   stars: number[] = [1, 2, 3, 4, 5];
   promedioValoracion: number = 0;
+  mostrarSelectReporte = false;
+  tipoReporteSeleccionado: string;
+  reporteRealizado: boolean = false; // Nueva propiedad para verificar si el usuario ya reportó
+
 
   constructor(private router: Router, private auth: AuthService, private firestore: FirestoreService) {}
 
@@ -27,6 +31,7 @@ export class PerfilesDocsPage implements OnInit {
         this.login = true;
         this.getDatosUser(res.uid);
         this.calcularPromedioValoracion();
+        this.checkReporteRealizado(); // Verifica si ya existe un reporte al iniciar
       } else {
         this.login = false;
       }
@@ -109,4 +114,66 @@ export class PerfilesDocsPage implements OnInit {
         console.error("Error al enviar la valoración: ", error);
       });
   }
+
+  mostrarOpcionesReporte() {
+    if (!this.reporteRealizado) { // Solo muestra el selector si no se ha hecho un reporte
+      this.mostrarSelectReporte = !this.mostrarSelectReporte;
+    } else {
+      console.log("Ya has reportado a este funcionario.");
+    }
+  }
+
+  async checkReporteRealizado() {
+    const uidUsuario = await this.auth.getUid();
+    if (!uidUsuario) return;
+
+    const idReporte = `${uidUsuario}_${this.usuario.uid}`;
+    this.firestore.getDoc<Reporte>('Reportes', idReporte).subscribe((reporteExistente) => {
+      if (reporteExistente) {
+        this.reporteRealizado = true; // Marca que ya existe un reporte
+      }
+    });
+  }
+
+  async enviarReporte() {
+    if (!this.tipoReporteSeleccionado) return;
+
+    const uidUsuario = await this.auth.getUid();
+    if (!uidUsuario) {
+      console.error("UID de usuario no disponible");
+      return;
+    }
+
+    const idReporte = `${uidUsuario}_${this.usuario.uid}`;
+
+    // Verifica si ya existe un reporte antes de guardarlo
+    if (this.reporteRealizado) {
+      console.log("Ya has reportado a este funcionario.");
+      return;
+    }
+
+    const reporte: Reporte = {
+      id_reporte: idReporte,
+      nombreFuncionario: this.usuario.nombre,
+      apellidoFuncionario: this.usuario.apellido,
+      rutFuncionario: this.usuario.rut || '',
+      uidReportador: uidUsuario,
+      tipoReporte: this.tipoReporteSeleccionado,
+      fechaReporte: new Date(),
+    };
+
+    // Guarda el reporte en Firestore
+    this.firestore.createDoc(reporte, 'Reportes', idReporte)
+      .then(() => {
+        console.log("Reporte guardado con éxito.");
+        this.reporteRealizado = true; // Marca como realizado
+        this.mostrarSelectReporte = false; // Oculta el select
+        this.tipoReporteSeleccionado = ''; // Limpia la selección
+      })
+      .catch((error) => {
+        console.error("Error al guardar el reporte: ", error);
+      });
+  }
+
 }
+ 

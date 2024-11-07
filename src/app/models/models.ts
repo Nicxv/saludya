@@ -82,6 +82,17 @@ export interface Chat {
     urlArchivo: string;
     tipoArchivo: 'pdf' | 'imagen';
   }
+
+  export interface Reporte {
+    id_reporte: string;
+    nombreFuncionario: string;
+    apellidoFuncionario: string;
+    rutFuncionario: string;
+    uidReportador: string;
+    tipoReporte: string;
+    fechaReporte: Date;
+  }
+  
   
   
   

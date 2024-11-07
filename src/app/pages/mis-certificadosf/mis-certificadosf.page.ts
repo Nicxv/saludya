@@ -4,11 +4,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
-  selector: 'app-mis-certificados',
-  templateUrl: './mis-certificados.page.html',
-  styleUrls: ['./mis-certificados.page.scss'],
+  selector: 'app-mis-certificadosf',
+  templateUrl: './mis-certificadosf.page.html',
+  styleUrls: ['./mis-certificadosf.page.scss'],
 })
-export class MisCertificadosPage implements OnInit {
+export class MisCertificadosfPage implements OnInit {
   login: boolean = false;
   rol: 'paciente' | 'funcionario' | 'admin' = null;
   certificados: Certificado[] = [];
@@ -117,8 +117,7 @@ export class MisCertificadosPage implements OnInit {
   }
   
 
-
   ngOnInit() {
   }
-  
+
 }

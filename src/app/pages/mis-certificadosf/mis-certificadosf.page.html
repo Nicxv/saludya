@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Mis Documentos Médicos</ion-title>
+    <ion-title>Mis Certificados</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,10 +14,12 @@
     <ion-card-content>
       <p>Por favor, sube los siguientes documentos:</p>
       <ul>
-        <li>Foto del carnet - parte delantera</li>
-        <li>Foto del carnet - reverso</li>
-        <li>Órdenes médicas (varias)</li>
-        <li>Exámenes o informes médicos (varios)</li>
+        <li>Carnet - Parte Delantera</li>
+        <li>Carnet - Reverso</li>
+        <li>Certificado de inscripción en el registro nacional de prestadores individuales de salud</li>
+        <li>Certificado de título (varios)</li>
+        <li>Certificado de cursos</li>
+        <li>Certificado de inhabilidades para trabajar con menores de edad</li>
       </ul>
     </ion-card-content>
   </ion-card>
@@ -34,10 +36,12 @@
       <ion-item>
         <ion-label>Tipo de Documento</ion-label>
         <ion-select placeholder="Selecciona tipo" [(ngModel)]="tipoDocumentoSeleccionado">
-          <ion-select-option value="carnet-delantera">Carnet - Delantera</ion-select-option>
+          <ion-select-option value="carnet-delantera">Carnet - Parte Delantera</ion-select-option>
           <ion-select-option value="carnet-reverso">Carnet - Reverso</ion-select-option>
-          <ion-select-option value="orden-medica">Orden Médica</ion-select-option>
-          <ion-select-option value="examen-medico">Examen o Informe Médico</ion-select-option>
+          <ion-select-option value="registro-prestadores">Certificado de inscripción en el registro nacional de prestadores</ion-select-option>
+          <ion-select-option value="certificado-titulo">Certificado de título</ion-select-option>
+          <ion-select-option value="certificado-cursos">Certificado de cursos</ion-select-option>
+          <ion-select-option value="certificado-inhabilidad">Certificado de inhabilidades para trabajar con menores de edad</ion-select-option>
         </ion-select>
       </ion-item>
 

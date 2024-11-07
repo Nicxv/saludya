@@ -64,7 +64,11 @@
         <ion-icon slot="start" name="heart-outline"></ion-icon>
         Ver mapa
       </ion-button>
-      <ion-button *ngIf="login == true" expand="block"  class="btn" size="small" [routerLink]="['/mis-certificados']">
+      <ion-button *ngIf="login && rol == 'paciente'" expand="block"  class="btn" size="small" [routerLink]="['/mis-certificados']">
+        <ion-icon slot="start" name="document-text-outline"></ion-icon>
+        Mis certificados
+      </ion-button>
+      <ion-button *ngIf="login && rol == 'funcionario'" expand="block"  class="btn" size="small" [routerLink]="['/mis-certificadosf']">
         <ion-icon slot="start" name="document-text-outline"></ion-icon>
         Mis certificados
       </ion-button>

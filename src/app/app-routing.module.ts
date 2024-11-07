@@ -118,6 +118,11 @@ const routes: Routes = [
     path: 'lista-reportes',
     loadChildren: () => import('./pages/lista-reportes/lista-reportes.module').then( m => m.ListaReportesPageModule)
   },
+  {
+    path: 'mis-certificadosf',
+    loadChildren: () => import('./pages/mis-certificadosf/mis-certificadosf.module').then( m => m.MisCertificadosfPageModule)
+  },
+
 
 
   
@@ -127,6 +132,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/pagina-prueba/pagina-prueba.module').then( m => m.PaginaPruebaPageModule)
   },
+  
 ];
 
 @NgModule({

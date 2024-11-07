@@ -81,6 +81,7 @@ export interface Chat {
     nombreArchivo: string;
     urlArchivo: string;
     tipoArchivo: 'pdf' | 'imagen';
+    tipoDocumento: string;
   }
 
   export interface Reporte {

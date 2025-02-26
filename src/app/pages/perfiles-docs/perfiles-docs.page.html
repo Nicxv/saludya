@@ -36,7 +36,7 @@
 
    <!-- Sección de calificaciones promedio -->
 <div class="average-rating-container">
-   <p class="ion-text-center">Calificación promedio del funcionario:</p>
+   <p class="ion-text-center titulo">Calificación promedio del funcionario:</p>
   <div class="stars">
     <ion-icon *ngFor="let star of stars; let i = index"
               [name]="i < getPromedioValoracionRedondeado() ? 'star' : 'star-outline'"
@@ -49,7 +49,7 @@
 
   <!-- Sección de calificaciones -->
   <div class="ratings-container">
-    <p>Tu calificación:</p>
+    <p class="titulo">Tu calificación:</p>
     <div class="stars">
       
       <ion-icon *ngFor="let star of stars; let i = index"
@@ -59,7 +59,7 @@
       </ion-icon>
     </div>
     <p *ngIf="valoracionRealizada">Ya valoraste a este funcionario con {{ valoracionSeleccionada }} estrellas.</p>
-    <p *ngIf="!valoracionRealizada">Califica a este funcionario</p>
+    <p class="titulo" *ngIf="!valoracionRealizada">Califica a este funcionario</p>
   </div>
 
 

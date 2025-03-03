@@ -77,17 +77,19 @@ ion-content {
   }
   
   .services-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+    gap: 20px; /* Espacio entre las cajas */
+    margin: 0 auto; /* Centra el contenedor de los servicios */
+    max-width: 500px; /* Ancho máximo para el contenedor */
+    padding: 20px; /* Espaciado alrededor del contenedor */
   }
   
   .service-box {
     background-color: #E5EFFF;
     border: 1px solid #0074BD;
     border-radius: 10px;
-    width: 80px;
+    width: 100%;
     height: 80px;
     display: flex;
     flex-direction: column;

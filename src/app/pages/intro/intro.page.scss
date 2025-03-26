@@ -9,7 +9,7 @@
 
 @keyframes cardiogram-move {
   0% {
-    stroke-dashoffset: 100; // Comienza el desplazamiento desde fuera del corazón
+    stroke-dashoffset: 150; // Comienza el desplazamiento desde fuera del corazón
   }
   100% {
     stroke-dashoffset: 0; // Termina justo en el borde derecho del corazón

@@ -100,7 +100,7 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
   calcularCostoConsulta() {
     const ivaPorcentaje = 0.19;
     this.consulta.iva = this.consulta.subtotal * ivaPorcentaje;
-    this.consulta.costoConsulta = this.consulta.subtotal + this.consulta.iva;
+    this.consulta.costoConsulta = Math.round(this.consulta.subtotal + this.consulta.iva);
   }
   onSelectChange(event: any) {
     const funcionarioSeleccionado = event.detail.value;

@@ -93,8 +93,12 @@ export interface Chat {
     tipoReporte: string;
     fechaReporte: Date;
   }
-  
-  
+  export interface Especialidad {
+    idEspecialidad: string;
+    nombre: string; //id unico para valorizacion
+    descripcion: string; // UID del usuario que realiza la valoración
+    valor: number; // Puntuación dada (por ejemplo, 1 a 5)
+  }
   
   
   

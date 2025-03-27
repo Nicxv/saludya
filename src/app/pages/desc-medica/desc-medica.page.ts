@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { loadStripe } from '@stripe/stripe-js';
 import { finalize } from 'rxjs';
 import { PaymentModalComponent } from 'src/app/componentes/payment-modal/payment-modal.component';
-import { Consultamedica, registroUsuario } from 'src/app/models/models';
+import { Consultamedica, registroUsuario, Especialidad } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { PaymentService } from 'src/app/services/payment.service';
@@ -18,6 +18,7 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
   mostrarModal = false;
   login: boolean = false;
   funcionarios: registroUsuario[] = [];
+  especialidades: Especialidad[] = [];
   consulta: Consultamedica = {
     id_consulta: '',
     nombreFuncionario: '',
@@ -58,6 +59,7 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.calcularCostoConsulta();
+    this.obtenerEspecialidades();
   }
 
   ngAfterViewInit() {
@@ -103,7 +105,20 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
   onSelectChange(event: any) {
     const funcionarioSeleccionado = event.detail.value;
     this.consulta.nombreFuncionario = funcionarioSeleccionado.nombre;
-    this.consulta.uidFuncionario = funcionarioSeleccionado.uid; // Asignar la uid del funcionario
+    this.consulta.uidFuncionario = funcionarioSeleccionado.uid;
+  
+    // Buscar la especialidad del funcionario
+    const especialidadFuncionario = funcionarioSeleccionado.especialidad; 
+  
+    // Obtener el costo de la especialidad
+    const especialidadEncontrada = this.especialidades.find(e => e.nombre === especialidadFuncionario);
+    if (especialidadEncontrada) {
+      this.consulta.subtotal = especialidadEncontrada.valor;
+    } else {
+      this.consulta.subtotal = 50000; // Valor por defecto si no se encuentra
+    }
+  
+    this.calcularCostoConsulta(); // Recalcular costo con el nuevo subtotal
   }
 
   async guardarConsulta() {
@@ -156,5 +171,11 @@ export class DescMedicaPage implements OnInit, AfterViewInit {
       }
     });
     return await modal.present();
+  }
+  obtenerEspecialidades() {
+    this.firestore.getCollection<Especialidad>('Especialidades').subscribe(res => {
+      this.especialidades = res;
+      console.log(this.especialidades); // Verifica que se obtuvieron los datos
+    });
   }
 }
